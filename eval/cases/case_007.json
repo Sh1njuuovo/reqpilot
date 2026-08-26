@@ -9,7 +9,9 @@
     "required_groups": ["target_users", "functional_requirements", "constraints", "permissions", "acceptance_criteria", "exception_flows"],
     "issues": [
       {"role": "frontend", "category": "interaction"},
-      {"role": "test", "category": "data"}
+      {"role": "test", "category": "data"},
+      {"role": "test", "category": "logic"},
+      {"role": "backend", "category": "logic"}
     ]
   }
 }

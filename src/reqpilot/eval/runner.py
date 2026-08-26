@@ -35,6 +35,7 @@ class CaseResult:
     golden: list[tuple[str, str]] = field(default_factory=list)
     raw_issue_count: int = 0
     final_issue_count: int = 0
+    issue_details: list[dict] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return {
@@ -50,6 +51,7 @@ class CaseResult:
             "golden": [list(g) for g in sorted(self.golden)],
             "raw_issue_count": self.raw_issue_count,
             "final_issue_count": self.final_issue_count,
+            "issue_details": self.issue_details,
         }
 
 
@@ -156,6 +158,15 @@ def evaluate_one(case: Case, provider_name: str, retriever_backend: str = "keywo
         golden=sorted(case.golden_issues),
         raw_issue_count=raw,
         final_issue_count=len(result.issues),
+        issue_details=[
+            {
+                "role": i.role,
+                "category": i.category,
+                "severity": i.severity,
+                "title": i.title,
+            }
+            for i in result.issues
+        ],
     )
 
 

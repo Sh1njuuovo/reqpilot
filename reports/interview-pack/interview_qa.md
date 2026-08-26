@@ -27,8 +27,8 @@
 ## 9. 原型生成器为什么是单 HTML？怎么验证？
 一个 HTML 里按 page section 生成所有页面，导航切换 + 每页多状态区块 + 表单校验 JS + 深浅色切换，契合"快速探索多方案"的产品诉求，避免多文件工程成本。测试断言 HTML 结构、页面 id、状态区块，并用 `<script>` 注入用例验证转义，防 XSS。
 
-## 10. 评测指标怎么算的？为什么召回/精确率是 100%？
-12 条 golden 样例各带"必须抽到的字段组"和"预期问题标签 (role, category)"。字段完整性 = 命中 golden 字段组比例；问题召回 = 检出标签 ∩ golden / golden；精确率 = 命中 / 检出；去重率 = (原始-最终)/原始。100% 是因为 MockProvider 是确定性规则且 golden 与规则一一对齐——这衡量的是"规则实现与标注一致性"，口径必须讲清楚；换真实 LLM 后指标会变化，必须重跑再报数。
+## 10. 评测指标怎么算的？为什么 mock 和 LLM 数字差这么多？
+12 条 golden 样例各带"必须抽到的字段组"和"预期问题标签 (role, category)"，标签按真人评审视角撰写（产品/前端/后端/测试会提的问题），和 mock 规则解耦。字段完整性 = 命中 golden 字段组比例；问题召回 = 检出 ∩ golden / golden；精确率 = 命中 / 检出；去重率 = (原始-最终)/原始。实测：LLM 完整性 100%（mock 86.1%）、召回 79.6%（mock 38.1%）、精确率 17.9%（mock 91.7%）。这个差距正好是项目想表达的设计：LLM 覆盖广但会过度标注，确定性规则精准但覆盖窄，评测把它们量化成了可讨论的取舍。
 
 ## 11. 真实 LLM 接入怎么考虑成本与延迟？
 Provider 抽象下，LLM 只负责 parse/review/generate_prd 三个 JSON 输出，temperature 0.2、单次修复上限、超时 60s、失败回退 mock。生产可以加缓存（同输入 hash 命中）、并发控制、按角色批处理。当前评测 6ms 是 mock 的 CPU 数字，不代表 LLM 延迟。
@@ -48,8 +48,8 @@ Provider 抽象下，LLM 只负责 parse/review/generate_prd 三个 JSON 输出�
 ## 16. 为什么状态用内存 + JSON 快照，不用数据库？
 一期目标是本地可跑、可演示、可复现，数据库会抬高部署门槛；AgentRun 全量 JSON 快照已经满足审计与回放。生产演进路径写明换 PostgreSQL。主动讲这个取舍比被追问时支吾好。
 
-## 17. 简历里"字段完整性 86.1%"怎么复现？
-`uv sync --extra dev && uv run reqpilot eval`，报告写在 reports/eval/eval_mock_latest.md。86.1% 是 12 条 golden 字段组命中率的平均，case-011（纯背景描述）为 0% 是设计内的"坏输入样例"。
+## 17. 简历里的数字怎么复现？
+`uv sync --extra dev && uv run reqpilot eval`（mock/keyword，报告在 reports/eval/eval_mock_keyword_latest.md）；`DEEPSEEK_API_KEY=... uv run reqpilot eval --provider llm`（LLM，eval_llm_keyword_latest.md）。完整性是 12 条 golden 字段组命中率平均；case-011（纯背景描述）为 0% 是设计内的"坏输入样例"。
 
 ## 18. 如果让你一个月把它做成产品，优先级？
 先补版本差异与人工确认闭环（已留 interrupt 节点），再接 MCP 写回 Jira/GitLab 与 Playwright 截图，最后做领域知识库治理和真实 LLM 评测矩阵。原则：先保证"人审得住"，再谈自动化程度。

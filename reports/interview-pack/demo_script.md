@@ -14,8 +14,8 @@
 ## 15-22 分钟：PRD + 原型（reports/demo/prd.md / prototype.html）
 打开 prototype.html：讲单 HTML 多页面、空/错误/加载状态切换、表单必填校验、深浅色。回到 prd.md 讲"结构化数据 → 模板渲染"，页面信息架构与功能需求一一对应。
 
-## 22-27 分钟：任务拆分 + 评测（reports/demo/tasks.md / reports/eval/eval_mock_latest.md）
-tasks.md 讲依赖关系（backend → frontend → test）。评测页讲口径：12 条 golden 样例、成功率 100%、完整性 86.1%、召回/精确率 100%、6ms/条，强调"这些数字是 mock 与标注集的一致性命中，接 LLM 必须重跑"。
+## 22-27 分钟：任务拆分 + 评测（reports/demo/tasks.md / reports/eval/eval_mock_keyword_latest.md）
+tasks.md 讲依赖关系（backend → frontend → test）。评测页讲双 provider 对照表：12 条 golden（人工评审视角、与规则解耦）下，LLM 完整性 100%/召回 79.6%，mock 精确率 91.7%/5ms；再举 case-001 实证：mock 0 条、LLM 12 条（超时转派、金额边界、附件字段）。强调"LLM 负责广度、规则负责精度，表格量化了取舍"。
 
 ## 27-30 分钟：架构图 + 收尾
 画 LangGraph 节点链与并行审查，讲一个失败 case（Send 必须走 conditional edge），收尾讲生产路径（pgvector/MCP/人工确认）与下一步（版本差异、真实 LLM 评测矩阵）。

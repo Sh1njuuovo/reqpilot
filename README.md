@@ -105,33 +105,33 @@ uv run reqpilot serve
 
 ## Evaluation
 
-`reqpilot eval` runs the pipeline over a curated 12-case set with golden labels
-and measures schema completeness, review-issue recall/precision, and dedup
-effectiveness. Results are written to `reports/eval/` as JSON + Markdown.
-Latest measured numbers (mock provider, 2026-08-26):
+`reqpilot eval` runs the pipeline over a curated 12-case set and measures schema
+completeness, review-issue recall/precision, and dedup effectiveness. Golden
+labels are written from a **human-reviewer perspective** (what a PM / frontend /
+backend / QA would flag for that requirement), not derived from the mock rules,
+so both providers are judged against the same external standard. Results are
+written to `reports/eval/` as JSON + Markdown. Measured 2026-08-26:
 
-- Pipeline success rate: 100% (12/12)
-- Average field completeness: 86.1%
-- Issue-label recall: 100%
-- Issue-label precision: 100%
-- Average dedup rate: 5.6% (cross-role duplicate merging)
-- Average end-to-end latency: 6 ms/case (CPU, mock provider)
+| Metric | `mock` (rule baseline) | `llm` (DeepSeek-chat) |
+| --- | ---: | ---: |
+| Pipeline success rate | 100% (12/12) | 100% (12/12) |
+| Field completeness | 86.1% | 100% |
+| Issue recall | 38.1% | 79.6% |
+| Issue precision | 91.7% | 17.9% |
+| Dedup rate | 5.6% | 5.5% |
+| Avg end-to-end latency | 5 ms/case (CPU) | 21.9 s/case (network) |
 
-All numbers are produced by running `reqpilot eval`; regenerate them any time
-with `uv run reqpilot eval`.
+The contrast is the point: the LLM provider wins decisively on coverage
+(completeness, recall) but over-flags (low precision); the deterministic mock
+baseline is narrow but precise and instant. The product shape is "LLM for
+breadth + deterministic/guardrail layers for precision", and this table is what
+makes that tradeoff measurable instead of anecdotal. Example from `case-001`
+(expense approval): `mock` returns 0 issues while `llm` flags 12 concrete ones
+(e.g. 审批超时转人工机制未定义、金额精度与范围校验缺失、缺少发票附件字段).
 
-Measured numbers with the real LLM provider (DeepSeek-chat, 2026-08-26):
-
-- Pipeline success rate: 100% (12/12)
-- Average field completeness: 100%
-- Issue-label recall: 91.7%
-- Issue-label precision: 6.7% (the LLM over-flags; the deterministic rules
-  behind `mock` trade coverage for precision)
-- Average end-to-end latency: 20.8 s/case (network-bound)
-
-The mock/LLM contrast is intentional: both providers share one schema and one
-evaluation pipeline, so the precision gap is measurable instead of anecdotal.
-Vector-retriever results match the keyword run (`eval_mock_vector_latest.md`).
+Vector-retriever results match the keyword run on the same golden set
+(`eval_mock_vector_latest.md`). Regenerate any report with
+`uv run reqpilot eval` / `--provider llm` / `--retriever vector`.
 
 ## Project layout
 
