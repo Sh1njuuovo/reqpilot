@@ -1,17 +1,20 @@
-"""MCP stdio server exposing ReqPilot tools to external agents."""
+"""MCP stdio server exposing ReqPilot tools to external agents (mcp 2.x)."""
 
 from __future__ import annotations
 
 import json
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server import MCPServer
 
 from reqpilot.pipeline import run_pipeline
 
-mcp = FastMCP("reqpilot")
+server = MCPServer(
+    name="reqpilot",
+    description="Requirements engineering agent: natural language in, PRD + multi-role review + dev tasks out.",
+)
 
 
-@mcp.tool()
+@server.tool()
 def analyze_requirement(text: str, domain: str = "generic") -> str:
     """Run the ReqPilot pipeline and return a JSON summary of PRD, issues, and tasks."""
 
@@ -29,7 +32,7 @@ def analyze_requirement(text: str, domain: str = "generic") -> str:
     )
 
 
-@mcp.tool()
+@server.tool()
 def export_tasks(text: str, domain: str = "generic", provider: str = "mock") -> str:
     """Run the pipeline and return development tasks as Markdown."""
 
@@ -38,7 +41,7 @@ def export_tasks(text: str, domain: str = "generic", provider: str = "mock") -> 
 
 
 def main() -> None:
-    mcp.run()
+    server.run(transport="stdio")
 
 
 if __name__ == "__main__":

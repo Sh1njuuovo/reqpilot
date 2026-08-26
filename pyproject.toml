@@ -47,7 +47,6 @@ target-version = "py311"
 
 [tool.coverage.run]
 source = ["reqpilot"]
-omit = ["src/reqpilot/mcp_server.py"]
 
 [tool.coverage.report]
 show_missing = true
