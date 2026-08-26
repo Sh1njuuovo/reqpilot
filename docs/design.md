@@ -82,7 +82,7 @@ PRD 采用"结构化数据 → 模板渲染"：先产出稳定的需求 JSON，�
 | 前端 | 静态 HTML 原型（Tailwind 风格，单文件多页面） |
 | 后端 | FastAPI |
 | Agent 编排 | LangGraph |
-| 模型接入 | OpenAI-compatible API（可选，本地默认 mock） |
+| 模型接入 | OpenAI-compatible API（DeepSeek 等；测试用确定性替身） |
 | 结构化输出 | Pydantic、JSON Schema |
 | 领域检索 | 可插拔后端：本地关键词/向量；生产 pgvector |
 | 状态与版本 | 内存 + JSON 快照；生产 PostgreSQL |

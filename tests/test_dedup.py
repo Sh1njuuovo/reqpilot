@@ -1,5 +1,5 @@
 from reqpilot.models import ReviewIssue
-from reqpilot.review.dedup import deduplicate, finalize_issues
+from reqpilot.review.dedup import deduplicate, finalize_issues, prune_issues
 
 
 def _issue(role, title, category="completeness", severity="major"):
@@ -32,3 +32,14 @@ def test_finalize_assigns_ids_and_sorts():
     assert [i.id for i in merged] == ["ISSUE-001", "ISSUE-002"]
     assert merged[0].severity == "critical"
     assert merged[1].roles == ["test"]
+
+
+def test_prune_issues_caps_per_role_by_severity():
+    issues = [
+        _issue("product", f"P{i}", severity="minor" if i < 7 else "critical")
+        for i in range(8)
+    ]
+    pruned = prune_issues(issues, max_per_role=5)
+    assert len(pruned) == 5
+    assert sum(1 for i in pruned if i.severity == "critical") == 1
+    assert sum(1 for i in pruned if i.severity == "minor") == 4

@@ -8,6 +8,7 @@ from fastapi.responses import HTMLResponse, PlainTextResponse
 from reqpilot.cli import _summary
 from reqpilot.models import ProviderName, RequirementInput
 from reqpilot.pipeline import PipelineResult, run_pipeline
+from reqpilot.providers import ProviderError
 
 app = FastAPI(title="ReqPilot API", version="0.1.0", description="Requirements engineering agent")
 
@@ -15,7 +16,7 @@ STORE: dict[str, PipelineResult] = {}
 
 
 class RequirementRequest(RequirementInput):
-    provider: ProviderName = "mock"
+    provider: ProviderName = "llm"
     retriever_backend: str = "keyword"
 
 
@@ -28,12 +29,15 @@ def _get(run_id: str) -> PipelineResult:
 
 @app.post("/requirements", status_code=201)
 def create_requirement(req: RequirementRequest) -> dict:
-    result = run_pipeline(
-        req.text,
-        domain=req.domain,
-        provider_name=req.provider,
-        retriever_backend=req.retriever_backend,
-    )
+    try:
+        result = run_pipeline(
+            req.text,
+            domain=req.domain,
+            provider_name=req.provider,
+            retriever_backend=req.retriever_backend,
+        )
+    except ProviderError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     STORE[result.run.id] = result
     summary = _summary(result)
     summary["links"] = {

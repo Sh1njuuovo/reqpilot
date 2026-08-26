@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from collections import defaultdict
 
 from reqpilot.models import ReviewIssue, Severity
 
@@ -52,3 +53,17 @@ def finalize_issues(issues: list[ReviewIssue]) -> tuple[list[ReviewIssue], int]:
         if not issue.roles:
             issue.roles = [issue.role]
     return merged, removed
+
+
+def prune_issues(issues: list[ReviewIssue], max_per_role: int = 5) -> list[ReviewIssue]:
+    """Keep the top-N most severe issues per role (LLM output guardrail)."""
+
+    by_role: dict[str, list[ReviewIssue]] = defaultdict(list)
+    for issue in issues:
+        by_role[issue.role].append(issue)
+    pruned: list[ReviewIssue] = []
+    for role_issues in by_role.values():
+        role_issues.sort(key=lambda i: (SEVERITY_ORDER[i.severity], i.title))
+        pruned.extend(role_issues[:max_per_role])
+    pruned.sort(key=lambda i: (SEVERITY_ORDER[i.severity], i.role, i.title))
+    return pruned

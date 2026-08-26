@@ -171,7 +171,7 @@ def evaluate_one(case: Case, provider_name: str, retriever_backend: str = "keywo
 
 
 def run_eval(
-    provider_name: str = "mock",
+    provider_name: str = "llm",
     retriever_backend: str = "keyword",
     cases_dir: str | Path | None = None,
     out_dir: str | Path | None = None,

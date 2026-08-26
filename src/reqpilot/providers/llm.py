@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import time
 
 import httpx
 from pydantic import ValidationError
@@ -38,7 +39,8 @@ ROLE_SYSTEM: dict[str, str] = {
     "test": "你是测试审查 Agent。检查边界条件、异常路径、可测试性与字段级校验用例，输出问题列表。",
 }
 
-ISSUE_SCHEMA_HINT = """输出 JSON 对象：{"issues": [{"category": "interaction|logic|permission|data|completeness|consistency", "severity": "critical|major|minor|suggestion", "title": "简短标题", "description": "问题说明", "evidence": ["依据原文"], "suggestion": "修复建议"}]}
+ISSUE_SCHEMA_HINT = """只输出最重要的、确有依据的问题：同类问题合并为一条，每个角色最多 5 条，宁缺毋滥，避免泛泛而谈。
+输出 JSON 对象：{"issues": [{"category": "interaction|logic|permission|data|completeness|consistency", "severity": "critical|major|minor|suggestion", "title": "简短标题", "description": "问题说明", "evidence": ["依据原文"], "suggestion": "修复建议"}]}
 """
 
 
@@ -67,18 +69,29 @@ class OpenAICompatibleProvider:
             "response_format": {"type": "json_object"},
             "max_tokens": max_tokens,
         }
-        try:
-            resp = httpx.post(
-                f"{self.settings.llm_base_url.rstrip('/')}/chat/completions",
-                headers={"Authorization": f"Bearer {self.settings.llm_api_key}"},
-                json=payload,
-                timeout=self.settings.llm_timeout_seconds,
-            )
-            resp.raise_for_status()
-            content = resp.json()["choices"][0]["message"]["content"]
-            return json.loads(_strip_fences(content))
-        except (httpx.HTTPError, KeyError, json.JSONDecodeError) as exc:
-            raise ProviderError(f"LLM request failed: {exc}") from exc
+        last_exc: Exception | None = None
+        for attempt in range(3):
+            try:
+                resp = httpx.post(
+                    f"{self.settings.llm_base_url.rstrip('/')}/chat/completions",
+                    headers={"Authorization": f"Bearer {self.settings.llm_api_key}"},
+                    json=payload,
+                    timeout=self.settings.llm_timeout_seconds,
+                )
+                if resp.status_code in (429, 500, 502, 503, 504):
+                    last_exc = httpx.HTTPStatusError(
+                        f"LLM transient error {resp.status_code}", request=resp.request, response=resp
+                    )
+                    time.sleep(2 * (attempt + 1))
+                    continue
+                resp.raise_for_status()
+                content = resp.json()["choices"][0]["message"]["content"]
+                return json.loads(_strip_fences(content))
+            except (httpx.HTTPError, json.JSONDecodeError, KeyError) as exc:
+                last_exc = exc
+                if attempt < 2:
+                    time.sleep(2 * (attempt + 1))
+        raise ProviderError(f"LLM request failed after retries: {last_exc}") from last_exc
 
     def parse(self, text: str, domain: str) -> ParsedRequirement:
         messages = [

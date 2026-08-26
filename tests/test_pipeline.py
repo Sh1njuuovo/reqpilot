@@ -1,3 +1,5 @@
+import pytest
+
 from reqpilot.config import Settings
 from reqpilot.models import AgentRun, RequirementInput
 from reqpilot.pipeline import SAMPLE_REQUIREMENT, PipelineBuilder, PipelineState, run_pipeline
@@ -23,16 +25,14 @@ def test_pipeline_deterministic_fingerprint():
     assert a.run.id != b.run.id
 
 
-def test_pipeline_llm_without_key_falls_back_to_mock():
+def test_pipeline_llm_without_key_raises():
     settings = Settings(llm_api_key=None)
-    result = run_pipeline(SAMPLE_REQUIREMENT, provider_name="llm", settings=settings)
-    assert result.run.provider == "mock"
-    assert result.run.status == "succeeded"
-    assert any("provider" in f for f in result.run.fallbacks)
+    with pytest.raises(ProviderError):
+        run_pipeline(SAMPLE_REQUIREMENT, provider_name="llm", settings=settings)
 
 
 def test_pipeline_human_confirm_interrupts():
-    result = run_pipeline(SAMPLE_REQUIREMENT, human_confirm=True)
+    result = run_pipeline(SAMPLE_REQUIREMENT, provider_name="mock", human_confirm=True)
     assert result.run.status == "needs_confirmation"
     assert result.tasks == []
 
@@ -50,8 +50,8 @@ class FailingProvider:
         return MockProvider().generate_prd(parsed, domain, context)
 
 
-def test_review_failure_falls_back():
-    builder = PipelineBuilder(FailingProvider(), fallback=MockProvider())
+def test_review_failure_records_error_without_fallback():
+    builder = PipelineBuilder(FailingProvider())
     graph = builder.build()
     initial: PipelineState = {
         "run": AgentRun(),
@@ -66,6 +66,7 @@ def test_review_failure_falls_back():
         "raw_issue_count": 0,
     }
     final = graph.invoke(initial)
-    assert final["run"].status == "succeeded"
-    assert any(t.fallback_used for t in final["step_traces"] if t.step.startswith("review"))
-    assert final["issues"]
+    assert final["run"].status == "failed"
+    assert any(t.step.startswith("review") and not t.ok for t in final["step_traces"])
+    assert any("review:" in e for e in final["errors"])
+    assert final["issues"] == []

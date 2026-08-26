@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import operator
+import os
 import time
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -26,9 +27,9 @@ from reqpilot.models import (
 )
 from reqpilot.prd import render_markdown
 from reqpilot.prototype import generate_prototype
-from reqpilot.providers import MockProvider, ProviderError, get_provider
+from reqpilot.providers import get_provider
 from reqpilot.rag import KnowledgeRetriever, build_retriever
-from reqpilot.review.dedup import finalize_issues
+from reqpilot.review.dedup import finalize_issues, prune_issues
 from reqpilot.tasks import export_csv, export_json, export_markdown, split_tasks
 
 SAMPLE_REQUIREMENT = """现有业务审批流程依赖线下沟通，效率低。系统面向审批管理员与普通业务人员，支持在线提交审批申请、多级审批流转、审批进度查询与历史记录导出。角色权限：管理员可配置审批流并查看全部数据，普通用户只能查看自己提交的记录。字段包括申请单编号、申请人、金额、审批状态、提交日期。必须支持幂等提交，防止重复申请；提交失败时自动重试；列表查询需要分页，超过 100 条分批加载。验收标准：管理员可完成审批流配置并生效，用户提交后可查询到进度，重复点击提交不会产生重复单据。"""
@@ -80,12 +81,10 @@ class PipelineBuilder:
     def __init__(
         self,
         provider,
-        fallback: MockProvider | None = None,
         retriever: KnowledgeRetriever | None = None,
         human_confirm: bool = False,
     ):
         self.provider = provider
-        self.fallback = fallback or MockProvider()
         self.retriever = retriever
         self.human_confirm = human_confirm
 
@@ -164,7 +163,6 @@ class PipelineBuilder:
         return self._run_step(
             "parse",
             lambda: self.provider.parse(text, domain),
-            lambda: self.fallback.parse(text, domain),
             key="parsed",
         )
 
@@ -224,44 +222,31 @@ class PipelineBuilder:
             )
             return {"raw_issue_parts": [issues], "step_traces": [trace]}
         except Exception as exc:  # noqa: BLE001
-            try:
-                issues = self.fallback.review(role, parsed, context)
-                return {
-                    "raw_issue_parts": [issues],
-                    "step_traces": [
-                        StepTrace(
-                            step=f"review:{role}",
-                            provider=self.provider.name,
-                            ok=True,
-                            duration_ms=_duration(start),
-                            fallback_used=True,
-                            error=str(exc),
-                        )
-                    ],
-                    "fallbacks": [f"review:{role}: {exc}"],
-                }
-            except Exception as exc2:  # noqa: BLE001
-                return {
-                    "raw_issue_parts": [[]],
-                    "step_traces": [
-                        StepTrace(
-                            step=f"review:{role}",
-                            provider=self.provider.name,
-                            ok=False,
-                            duration_ms=_duration(start),
-                            error=f"{exc}; fallback: {exc2}",
-                        )
-                    ],
-                    "errors": [f"review:{role}: {exc} (fallback failed: {exc2})"],
-                }
+            return {
+                "raw_issue_parts": [[]],
+                "step_traces": [
+                    StepTrace(
+                        step=f"review:{role}",
+                        provider=self.provider.name,
+                        ok=False,
+                        duration_ms=_duration(start),
+                        error=str(exc),
+                    )
+                ],
+                "errors": [f"review:{role}: {exc}"],
+            }
 
     def merge_reviews(self, state: PipelineState) -> dict[str, Any]:
         parts = state.get("raw_issue_parts", [])
         raw = [issue for part in parts for issue in part]
         merged, removed = finalize_issues(raw)
+        max_per_role = int(os.environ.get("REQPILOT_MAX_ISSUES_PER_ROLE", "5"))
+        pruned = prune_issues(merged, max_per_role=max_per_role)
+        for idx, issue in enumerate(pruned, start=1):
+            issue.id = f"ISSUE-{idx:03d}"
         return {
-            "issues": merged,
-            "issues_removed": removed,
+            "issues": pruned,
+            "issues_removed": removed + (len(merged) - len(pruned)),
             "raw_issue_count": len(raw),
         }
 
@@ -272,7 +257,6 @@ class PipelineBuilder:
         return self._run_step(
             "generate_prd",
             lambda: self.provider.generate_prd(parsed, domain, context),
-            lambda: self.fallback.generate_prd(parsed, domain, context),
             key="prd",
         )
 
@@ -361,7 +345,7 @@ class PipelineBuilder:
 def run_pipeline(
     text: str,
     domain: str = SAMPLE_DOMAIN,
-    provider_name: str = "mock",
+    provider_name: str = "llm",
     retriever_backend: str = "keyword",
     retriever: KnowledgeRetriever | None = None,
     knowledge_dir=None,
@@ -373,13 +357,7 @@ def run_pipeline(
     settings = settings or Settings.from_env()
     provider_name = provider_name if provider_name in ("mock", "llm") else "mock"
     run = AgentRun(provider=provider_name, input_text_hash=AgentRun.digest(text))  # type: ignore[arg-type]
-    fallbacks: list[str] = []
-    try:
-        provider = get_provider(provider_name, settings)
-    except ProviderError as exc:
-        provider = MockProvider()
-        run.provider = "mock"
-        fallbacks.append(f"provider:{exc}")
+    provider = get_provider(provider_name, settings)
 
     if retriever is None:
         retriever = build_retriever(
@@ -388,7 +366,7 @@ def run_pipeline(
             vector_model=settings.vector_model,
         )
 
-    builder = PipelineBuilder(provider, fallback=MockProvider(), retriever=retriever, human_confirm=human_confirm)
+    builder = PipelineBuilder(provider, retriever=retriever, human_confirm=human_confirm)
     graph = builder.build()
     initial: PipelineState = {
         "run": run,
@@ -404,7 +382,6 @@ def run_pipeline(
     }
     final = graph.invoke(initial, config={"configurable": {"thread_id": run.id}})
     run = final["run"]
-    run.fallbacks = list(dict.fromkeys(run.fallbacks + fallbacks))
     if human_confirm:
         run.status = "needs_confirmation"
     return PipelineResult(
