@@ -6,8 +6,9 @@
     "avg_recall": 1.0,
     "avg_precision": 1.0,
     "avg_dedup_rate": 0.0556,
-    "avg_duration_ms": 6.0,
-    "total_duration_ms": 72
+    "avg_duration_ms": 5.3333,
+    "total_duration_ms": 64,
+    "retriever_backend": "keyword"
   },
   "cases": [
     {
@@ -18,7 +19,7 @@
       "issue_recall": 1.0,
       "issue_precision": 1.0,
       "dedup_rate": 0.0,
-      "duration_ms": 11,
+      "duration_ms": 10,
       "produced": [],
       "golden": [],
       "raw_issue_count": 0,
@@ -32,7 +33,7 @@
       "issue_recall": 1.0,
       "issue_precision": 1.0,
       "dedup_rate": 0.5,
-      "duration_ms": 6,
+      "duration_ms": 5,
       "produced": [
         [
           "product",
@@ -64,7 +65,7 @@
       "issue_recall": 1.0,
       "issue_precision": 1.0,
       "dedup_rate": 0.0,
-      "duration_ms": 6,
+      "duration_ms": 5,
       "produced": [
         [
           "backend",
@@ -88,7 +89,7 @@
       "issue_recall": 1.0,
       "issue_precision": 1.0,
       "dedup_rate": 0.0,
-      "duration_ms": 6,
+      "duration_ms": 5,
       "produced": [
         [
           "backend",
@@ -192,7 +193,7 @@
       "issue_recall": 1.0,
       "issue_precision": 1.0,
       "dedup_rate": 0.0,
-      "duration_ms": 6,
+      "duration_ms": 5,
       "produced": [
         [
           "frontend",
@@ -216,7 +217,7 @@
       "issue_recall": 1.0,
       "issue_precision": 1.0,
       "dedup_rate": 0.0,
-      "duration_ms": 6,
+      "duration_ms": 5,
       "produced": [
         [
           "product",
@@ -240,7 +241,7 @@
       "issue_recall": 1.0,
       "issue_precision": 1.0,
       "dedup_rate": 0.0,
-      "duration_ms": 6,
+      "duration_ms": 5,
       "produced": [
         [
           "backend",
@@ -272,7 +273,7 @@
       "issue_recall": 1.0,
       "issue_precision": 1.0,
       "dedup_rate": 0.1667,
-      "duration_ms": 5,
+      "duration_ms": 4,
       "produced": [
         [
           "backend",

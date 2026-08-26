@@ -113,8 +113,13 @@ def load_cases(cases_dir: str | Path) -> list[Case]:
     return cases
 
 
-def evaluate_one(case: Case, provider_name: str) -> CaseResult:
-    result = run_pipeline(case.text, domain=case.domain, provider_name=provider_name)
+def evaluate_one(case: Case, provider_name: str, retriever_backend: str = "keyword") -> CaseResult:
+    result = run_pipeline(
+        case.text,
+        domain=case.domain,
+        provider_name=provider_name,
+        retriever_backend=retriever_backend,
+    )
     duration = (
         int((result.run.completed_at - result.run.created_at).total_seconds() * 1000)
         if result.run.completed_at
@@ -156,6 +161,7 @@ def evaluate_one(case: Case, provider_name: str) -> CaseResult:
 
 def run_eval(
     provider_name: str = "mock",
+    retriever_backend: str = "keyword",
     cases_dir: str | Path | None = None,
     out_dir: str | Path | None = None,
 ) -> EvalSummary:
@@ -163,7 +169,7 @@ def run_eval(
     cases_dir = Path(cases_dir or (root / "eval" / "cases"))
     out_dir = Path(out_dir or (root / "reports" / "eval"))
     cases = load_cases(cases_dir)
-    results = [evaluate_one(c, provider_name) for c in cases]
+    results = [evaluate_one(c, provider_name, retriever_backend) for c in cases]
     n = len(results)
     aggregate = {
         "success_rate": sum(1 for r in results if r.success) / n,
@@ -175,18 +181,20 @@ def run_eval(
         "total_duration_ms": sum(r.duration_ms for r in results),
     }
     summary = EvalSummary(provider=provider_name, out_dir=out_dir, cases=results, aggregate=aggregate)
+    summary.aggregate["retriever_backend"] = retriever_backend
     out_dir.mkdir(parents=True, exist_ok=True)
     ts = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
-    (out_dir / f"eval_{provider_name}_{ts}.json").write_text(
+    stem = f"eval_{provider_name}_{retriever_backend}"
+    (out_dir / f"{stem}_{ts}.json").write_text(
         json.dumps(summary.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    (out_dir / f"eval_{provider_name}_{ts}.md").write_text(
+    (out_dir / f"{stem}_{ts}.md").write_text(
         summary.render_markdown(), encoding="utf-8"
     )
-    (out_dir / f"eval_{provider_name}_latest.json").write_text(
+    (out_dir / f"{stem}_latest.json").write_text(
         json.dumps(summary.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    (out_dir / f"eval_{provider_name}_latest.md").write_text(
+    (out_dir / f"{stem}_latest.md").write_text(
         summary.render_markdown(), encoding="utf-8"
     )
     return summary

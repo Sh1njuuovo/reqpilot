@@ -110,7 +110,12 @@ def _print_summary(summary: dict) -> None:
 
 def cmd_smoke(args: argparse.Namespace) -> int:
     out = Path(args.out)
-    result = run_pipeline(SAMPLE_REQUIREMENT, domain=SAMPLE_DOMAIN, provider_name=args.provider)
+    result = run_pipeline(
+        SAMPLE_REQUIREMENT,
+        domain=SAMPLE_DOMAIN,
+        provider_name=args.provider,
+        retriever_backend=args.retriever,
+    )
     summary = _summary(result)
     _print_summary(summary)
     path = _write_bundle(out, result)
@@ -124,7 +129,12 @@ def cmd_smoke(args: argparse.Namespace) -> int:
 
 def cmd_demo(args: argparse.Namespace) -> int:
     out = Path(args.out)
-    result = run_pipeline(SAMPLE_REQUIREMENT, domain=SAMPLE_DOMAIN, provider_name=args.provider)
+    result = run_pipeline(
+        SAMPLE_REQUIREMENT,
+        domain=SAMPLE_DOMAIN,
+        provider_name=args.provider,
+        retriever_backend=args.retriever,
+    )
     path = _write_bundle(out, result)
     _print_summary(_summary(result))
     print(f"\ndemo bundle -> {path.parent}")
@@ -150,7 +160,11 @@ def cmd_serve(args: argparse.Namespace) -> int:
 def cmd_eval(args: argparse.Namespace) -> int:
     from reqpilot.eval.runner import run_eval
 
-    result = run_eval(provider_name=args.provider, out_dir=Path(args.out))
+    result = run_eval(
+        provider_name=args.provider,
+        retriever_backend=args.retriever,
+        out_dir=Path(args.out),
+    )
     print(result.render_markdown())
     print(f"\neval report -> {result.out_dir}")
     return 0
@@ -163,11 +177,13 @@ def build_parser() -> argparse.ArgumentParser:
     p_smoke = sub.add_parser("smoke", help="run the sample requirement end-to-end and assert success")
     p_smoke.add_argument("--out", default=str(project_root() / "reports" / "smoke"))
     p_smoke.add_argument("--provider", default="mock", choices=["mock", "llm"])
+    p_smoke.add_argument("--retriever", default="keyword", choices=["keyword", "vector"])
     p_smoke.set_defaults(func=cmd_smoke)
 
     p_demo = sub.add_parser("demo", help="produce a demo bundle from the sample requirement")
     p_demo.add_argument("--out", default=str(project_root() / "reports" / "demo"))
     p_demo.add_argument("--provider", default="mock", choices=["mock", "llm"])
+    p_demo.add_argument("--retriever", default="keyword", choices=["keyword", "vector"])
     p_demo.set_defaults(func=cmd_demo)
 
     p_serve = sub.add_parser("serve", help="start the FastAPI service")
@@ -177,6 +193,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_eval = sub.add_parser("eval", help="run the evaluation suite over eval/cases")
     p_eval.add_argument("--provider", default="mock", choices=["mock", "llm"])
+    p_eval.add_argument("--retriever", default="keyword", choices=["keyword", "vector"])
     p_eval.add_argument("--out", default=str(project_root() / "reports" / "eval"))
     p_eval.set_defaults(func=cmd_eval)
     return parser

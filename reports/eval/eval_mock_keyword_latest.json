@@ -1,0 +1,341 @@
+{
+  "provider": "mock",
+  "aggregate": {
+    "success_rate": 1.0,
+    "avg_completeness": 0.8611,
+    "avg_recall": 1.0,
+    "avg_precision": 1.0,
+    "avg_dedup_rate": 0.0556,
+    "avg_duration_ms": 5.3333,
+    "total_duration_ms": 64,
+    "retriever_backend": "keyword"
+  },
+  "cases": [
+    {
+      "case_id": "case-001",
+      "title": "完整报销审批需求",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 10,
+      "produced": [],
+      "golden": [],
+      "raw_issue_count": 0,
+      "final_issue_count": 0
+    },
+    {
+      "case_id": "case-002",
+      "title": "缺少验收标准",
+      "success": true,
+      "completeness": 0.8333,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.5,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "test",
+          "completeness"
+        ]
+      ],
+      "golden": [
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "test",
+          "completeness"
+        ]
+      ],
+      "raw_issue_count": 2,
+      "final_issue_count": 1
+    },
+    {
+      "case_id": "case-003",
+      "title": "缺少权限模型",
+      "success": true,
+      "completeness": 0.8333,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "backend",
+          "permission"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "permission"
+        ]
+      ],
+      "raw_issue_count": 1,
+      "final_issue_count": 1
+    },
+    {
+      "case_id": "case-004",
+      "title": "写操作缺少幂等性",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "backend",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 1,
+      "final_issue_count": 1
+    },
+    {
+      "case_id": "case-005",
+      "title": "缺少数据字段定义",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "backend",
+          "data"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "data"
+        ]
+      ],
+      "raw_issue_count": 1,
+      "final_issue_count": 1
+    },
+    {
+      "case_id": "case-006",
+      "title": "缺少异常路径",
+      "success": true,
+      "completeness": 0.8333,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 1,
+      "final_issue_count": 1
+    },
+    {
+      "case_id": "case-007",
+      "title": "表单缺少校验规则",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "test",
+          "data"
+        ]
+      ],
+      "golden": [
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "test",
+          "data"
+        ]
+      ],
+      "raw_issue_count": 2,
+      "final_issue_count": 2
+    },
+    {
+      "case_id": "case-008",
+      "title": "列表缺少空态与异常态",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "frontend",
+          "interaction"
+        ]
+      ],
+      "golden": [
+        [
+          "frontend",
+          "interaction"
+        ]
+      ],
+      "raw_issue_count": 1,
+      "final_issue_count": 1
+    },
+    {
+      "case_id": "case-009",
+      "title": "缺少目标用户",
+      "success": true,
+      "completeness": 0.8333,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "product",
+          "completeness"
+        ]
+      ],
+      "golden": [
+        [
+          "product",
+          "completeness"
+        ]
+      ],
+      "raw_issue_count": 1,
+      "final_issue_count": 1
+    },
+    {
+      "case_id": "case-010",
+      "title": "列表缺少分页上限",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 2,
+      "final_issue_count": 2
+    },
+    {
+      "case_id": "case-011",
+      "title": "纯背景描述无功能需求",
+      "success": true,
+      "completeness": 0.0,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.1667,
+      "duration_ms": 4,
+      "produced": [
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "test",
+          "completeness"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "test",
+          "completeness"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 6,
+      "final_issue_count": 5
+    },
+    {
+      "case_id": "case-012",
+      "title": "缺少需求背景",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 1.0,
+      "dedup_rate": 0.0,
+      "duration_ms": 5,
+      "produced": [
+        [
+          "product",
+          "completeness"
+        ]
+      ],
+      "golden": [
+        [
+          "product",
+          "completeness"
+        ]
+      ],
+      "raw_issue_count": 1,
+      "final_issue_count": 1
+    }
+  ]
+}

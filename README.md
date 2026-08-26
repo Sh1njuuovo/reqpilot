@@ -61,11 +61,23 @@ with the mock provider (no API key needed) and writes artifacts under
 ```bash
 export DEEPSEEK_API_KEY=sk-...
 uv run reqpilot demo --provider llm
+uv run reqpilot eval --provider llm
 ```
 
 Any OpenAI-compatible endpoint works via `REQPILOT_LLM_BASE_URL`,
 `REQPILOT_LLM_MODEL`, or `OPENAI_API_KEY`. Without a key, every step falls back
 to the deterministic mock provider and records the fallback in the run trace.
+
+### Optional vector retriever
+
+```bash
+uv sync --extra dev --extra vector
+uv run reqpilot eval --retriever vector
+```
+
+The vector backend embeds the knowledge base with `all-MiniLM-L6-v2` and ranks
+by cosine similarity. The retriever is pluggable: swap `keyword` for `vector` in
+`smoke` / `demo` / `eval` / the API without touching the pipeline.
 
 ## CLI
 
@@ -75,6 +87,8 @@ to the deterministic mock provider and records the fallback in the run trace.
 | `reqpilot demo` | Same pipeline, writes a demo bundle (`PRD.md`, `prototype.html`, `tasks.md`) |
 | `reqpilot serve` | Start the FastAPI service (see API below) |
 | `reqpilot eval` | Run the evaluation suite over `eval/cases/`, write measured metrics to `reports/eval/` |
+
+`smoke` / `demo` / `eval` accept `--provider mock|llm` and `--retriever keyword|vector`.
 
 ## HTTP API
 
@@ -105,6 +119,19 @@ Latest measured numbers (mock provider, 2026-08-26):
 
 All numbers are produced by running `reqpilot eval`; regenerate them any time
 with `uv run reqpilot eval`.
+
+Measured numbers with the real LLM provider (DeepSeek-chat, 2026-08-26):
+
+- Pipeline success rate: 100% (12/12)
+- Average field completeness: 100%
+- Issue-label recall: 91.7%
+- Issue-label precision: 6.7% (the LLM over-flags; the deterministic rules
+  behind `mock` trade coverage for precision)
+- Average end-to-end latency: 20.8 s/case (network-bound)
+
+The mock/LLM contrast is intentional: both providers share one schema and one
+evaluation pipeline, so the precision gap is measurable instead of anecdotal.
+Vector-retriever results match the keyword run (`eval_mock_vector_latest.md`).
 
 ## Project layout
 

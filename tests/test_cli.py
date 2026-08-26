@@ -18,4 +18,4 @@ def test_demo_cli(tmp_path):
 def test_eval_cli(tmp_path):
     out = tmp_path / "eval"
     assert main(["eval", "--out", str(out)]) == 0
-    assert list(out.glob("eval_mock_latest.json"))
+    assert list(out.glob("eval_mock_keyword_latest.json"))

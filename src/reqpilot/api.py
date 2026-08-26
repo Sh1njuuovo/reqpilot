@@ -32,6 +32,7 @@ def create_requirement(req: RequirementRequest) -> dict:
         req.text,
         domain=req.domain,
         provider_name=req.provider,
+        retriever_backend=req.retriever_backend,
     )
     STORE[result.run.id] = result
     summary = _summary(result)

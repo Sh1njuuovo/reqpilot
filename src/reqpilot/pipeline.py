@@ -362,6 +362,7 @@ def run_pipeline(
     text: str,
     domain: str = SAMPLE_DOMAIN,
     provider_name: str = "mock",
+    retriever_backend: str = "keyword",
     retriever: KnowledgeRetriever | None = None,
     knowledge_dir=None,
     human_confirm: bool = False,
@@ -382,7 +383,9 @@ def run_pipeline(
 
     if retriever is None:
         retriever = build_retriever(
-            "keyword", knowledge_dir=knowledge_dir or settings.resolve_knowledge_dir()
+            retriever_backend,
+            knowledge_dir=knowledge_dir or settings.resolve_knowledge_dir(),
+            vector_model=settings.vector_model,
         )
 
     builder = PipelineBuilder(provider, fallback=MockProvider(), retriever=retriever, human_confirm=human_confirm)
