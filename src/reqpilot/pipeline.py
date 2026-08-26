@@ -27,7 +27,7 @@ from reqpilot.models import (
 )
 from reqpilot.prd import render_markdown
 from reqpilot.prototype import generate_prototype
-from reqpilot.providers import get_provider
+from reqpilot.providers import ProviderError, get_provider
 from reqpilot.rag import KnowledgeRetriever, build_retriever
 from reqpilot.review.dedup import finalize_issues, prune_issues
 from reqpilot.tasks import export_csv, export_json, export_markdown, split_tasks
@@ -88,13 +88,7 @@ class PipelineBuilder:
         self.retriever = retriever
         self.human_confirm = human_confirm
 
-    def _run_step(
-        self,
-        step_name: str,
-        fn,
-        fallback_fn=None,
-        key: str | None = None,
-    ) -> dict[str, Any]:
+    def _run_step(self, step_name: str, fn, key: str | None = None) -> dict[str, Any]:
         start = time.monotonic()
         try:
             result = fn()
@@ -111,39 +105,7 @@ class PipelineBuilder:
             if key:
                 updates[key] = result
             return updates
-        except Exception as exc:  # noqa: BLE001 - fallback path is intentional
-            if fallback_fn is not None:
-                try:
-                    result = fallback_fn()
-                    updates = {
-                        "step_traces": [
-                            StepTrace(
-                                step=step_name,
-                                provider=self.provider.name,
-                                ok=True,
-                                duration_ms=_duration(start),
-                                fallback_used=True,
-                                error=str(exc),
-                            )
-                        ],
-                        "fallbacks": [f"{step_name}: {exc}"],
-                    }
-                    if key:
-                        updates[key] = result
-                    return updates
-                except Exception as exc2:  # noqa: BLE001
-                    return {
-                        "step_traces": [
-                            StepTrace(
-                                step=step_name,
-                                provider=self.provider.name,
-                                ok=False,
-                                duration_ms=_duration(start),
-                                error=f"{exc}; fallback: {exc2}",
-                            )
-                        ],
-                        "errors": [f"{step_name}: {exc} (fallback failed: {exc2})"],
-                    }
+        except Exception as exc:  # noqa: BLE001
             return {
                 "step_traces": [
                     StepTrace(
@@ -355,7 +317,8 @@ def run_pipeline(
     """Run the full pipeline and return the result envelope."""
 
     settings = settings or Settings.from_env()
-    provider_name = provider_name if provider_name in ("mock", "llm") else "mock"
+    if provider_name not in ("mock", "llm"):
+        raise ProviderError(f"unknown provider: {provider_name}")
     run = AgentRun(provider=provider_name, input_text_hash=AgentRun.digest(text))  # type: ignore[arg-type]
     provider = get_provider(provider_name, settings)
 

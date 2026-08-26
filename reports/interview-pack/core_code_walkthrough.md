@@ -40,7 +40,7 @@ OpenAI-compatible 调用：三个 JSON 任务（parse/review/generate_prd），r
 
 ## 6. 测试、评测、CI
 
-- 39 个测试、90% 行覆盖率：schema、提示词结果校验、去重收敛、原型转义、RAG 引用、任务拆分、端到端、API、CLI、重试/失败路径。
+- 42 个测试、90% 行覆盖率：schema、提示词结果校验、去重收敛、原型转义、RAG 引用、任务拆分、端到端、API、CLI、重试/失败路径。
 - `reqpilot eval`：12 条人工评审标准样例，DeepSeek 实测成功率 100%、完整性 100%、召回 86.5%，JSON+MD 落盘并附逐条问题明细。
 - CI：pytest 常跑；LLM smoke/eval 在配置 key 时运行（env guard）。
 

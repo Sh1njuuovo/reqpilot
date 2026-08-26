@@ -3,7 +3,7 @@
     "id": "T-001",
     "type": "database",
     "title": "核心数据表设计与索引",
-    "description": "根据数据模型建立 核心业务数据 相关数据表、字段约束与查询索引。",
+    "description": "根据数据模型建立 申请单 相关数据表、字段约束与查询索引。",
     "dependencies": [],
     "acceptance_criteria": [
       "表结构覆盖数据模型中全部字段",
@@ -11,21 +11,21 @@
     ],
     "effort": "M",
     "prd_refs": [
-      "核心业务数据"
+      "申请单"
     ]
   },
   {
     "id": "T-002",
     "type": "backend",
-    "title": "支持在线提交审批申请：后端接口",
-    "description": "实现 支持在线提交审批申请 对应的接口、校验与权限控制。",
+    "title": "在线提交审批申请：后端接口",
+    "description": "实现 在线提交审批申请 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
     "acceptance_criteria": [
       "FR-1 描述的能力可经 API 调用验证"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-1"
     ]
@@ -33,8 +33,8 @@
   {
     "id": "T-003",
     "type": "frontend",
-    "title": "支持在线提交审批申请：页面实现",
-    "description": "实现 支持在线提交审批申请 页面及多状态展示。",
+    "title": "在线提交审批申请：页面实现",
+    "description": "实现 在线提交审批申请 页面及多状态展示。",
     "dependencies": [
       "T-002"
     ],
@@ -42,7 +42,7 @@
       "页面与原型信息架构一致",
       "空/错误状态可见"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-1"
     ]
@@ -50,8 +50,8 @@
   {
     "id": "T-004",
     "type": "test",
-    "title": "支持在线提交审批申请：测试用例",
-    "description": "为 支持在线提交审批申请 编写功能、边界与异常用例。",
+    "title": "在线提交审批申请：测试用例",
+    "description": "为 在线提交审批申请 编写功能、边界与异常用例。",
     "dependencies": [
       "T-002",
       "T-003"
@@ -60,7 +60,7 @@
       "覆盖正常路径与异常路径",
       "用例通过率达到验收标准"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-1"
     ]
@@ -76,7 +76,7 @@
     "acceptance_criteria": [
       "FR-2 描述的能力可经 API 调用验证"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-2"
     ]
@@ -93,7 +93,7 @@
       "页面与原型信息架构一致",
       "空/错误状态可见"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-2"
     ]
@@ -111,7 +111,7 @@
       "覆盖正常路径与异常路径",
       "用例通过率达到验收标准"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-2"
     ]
@@ -119,8 +119,8 @@
   {
     "id": "T-008",
     "type": "backend",
-    "title": "审批进度查询与历史记录导出：后端接口",
-    "description": "实现 审批进度查询与历史记录导出 对应的接口、校验与权限控制。",
+    "title": "审批进度查询：后端接口",
+    "description": "实现 审批进度查询 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
@@ -135,8 +135,8 @@
   {
     "id": "T-009",
     "type": "frontend",
-    "title": "审批进度查询与历史记录导出：页面实现",
-    "description": "实现 审批进度查询与历史记录导出 页面及多状态展示。",
+    "title": "审批进度查询：页面实现",
+    "description": "实现 审批进度查询 页面及多状态展示。",
     "dependencies": [
       "T-008"
     ],
@@ -152,8 +152,8 @@
   {
     "id": "T-010",
     "type": "test",
-    "title": "审批进度查询与历史记录导出：测试用例",
-    "description": "为 审批进度查询与历史记录导出 编写功能、边界与异常用例。",
+    "title": "审批进度查询：测试用例",
+    "description": "为 审批进度查询 编写功能、边界与异常用例。",
     "dependencies": [
       "T-008",
       "T-009"
@@ -170,15 +170,15 @@
   {
     "id": "T-011",
     "type": "backend",
-    "title": "审批状态：后端接口",
-    "description": "实现 审批状态 对应的接口、校验与权限控制。",
+    "title": "历史记录导出：后端接口",
+    "description": "实现 历史记录导出 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
     "acceptance_criteria": [
       "FR-4 描述的能力可经 API 调用验证"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-4"
     ]
@@ -186,8 +186,8 @@
   {
     "id": "T-012",
     "type": "frontend",
-    "title": "审批状态：页面实现",
-    "description": "实现 审批状态 页面及多状态展示。",
+    "title": "历史记录导出：页面实现",
+    "description": "实现 历史记录导出 页面及多状态展示。",
     "dependencies": [
       "T-011"
     ],
@@ -195,7 +195,7 @@
       "页面与原型信息架构一致",
       "空/错误状态可见"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-4"
     ]
@@ -203,8 +203,8 @@
   {
     "id": "T-013",
     "type": "test",
-    "title": "审批状态：测试用例",
-    "description": "为 审批状态 编写功能、边界与异常用例。",
+    "title": "历史记录导出：测试用例",
+    "description": "为 历史记录导出 编写功能、边界与异常用例。",
     "dependencies": [
       "T-011",
       "T-012"
@@ -213,7 +213,7 @@
       "覆盖正常路径与异常路径",
       "用例通过率达到验收标准"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-4"
     ]
@@ -221,15 +221,15 @@
   {
     "id": "T-014",
     "type": "backend",
-    "title": "提交日期：后端接口",
-    "description": "实现 提交日期 对应的接口、校验与权限控制。",
+    "title": "审批流配置：后端接口",
+    "description": "实现 审批流配置 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
     "acceptance_criteria": [
       "FR-5 描述的能力可经 API 调用验证"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-5"
     ]
@@ -237,8 +237,8 @@
   {
     "id": "T-015",
     "type": "frontend",
-    "title": "提交日期：页面实现",
-    "description": "实现 提交日期 页面及多状态展示。",
+    "title": "审批流配置：页面实现",
+    "description": "实现 审批流配置 页面及多状态展示。",
     "dependencies": [
       "T-014"
     ],
@@ -246,7 +246,7 @@
       "页面与原型信息架构一致",
       "空/错误状态可见"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-5"
     ]
@@ -254,8 +254,8 @@
   {
     "id": "T-016",
     "type": "test",
-    "title": "提交日期：测试用例",
-    "description": "为 提交日期 编写功能、边界与异常用例。",
+    "title": "审批流配置：测试用例",
+    "description": "为 审批流配置 编写功能、边界与异常用例。",
     "dependencies": [
       "T-014",
       "T-015"
@@ -264,7 +264,7 @@
       "覆盖正常路径与异常路径",
       "用例通过率达到验收标准"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-5"
     ]
@@ -272,15 +272,15 @@
   {
     "id": "T-017",
     "type": "backend",
-    "title": "列表查询需要分页：后端接口",
-    "description": "实现 列表查询需要分页 对应的接口、校验与权限控制。",
+    "title": "幂等提交：后端接口",
+    "description": "实现 幂等提交 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
     "acceptance_criteria": [
       "FR-6 描述的能力可经 API 调用验证"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-6"
     ]
@@ -288,8 +288,8 @@
   {
     "id": "T-018",
     "type": "frontend",
-    "title": "列表查询需要分页：页面实现",
-    "description": "实现 列表查询需要分页 页面及多状态展示。",
+    "title": "幂等提交：页面实现",
+    "description": "实现 幂等提交 页面及多状态展示。",
     "dependencies": [
       "T-017"
     ],
@@ -297,7 +297,7 @@
       "页面与原型信息架构一致",
       "空/错误状态可见"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-6"
     ]
@@ -305,8 +305,8 @@
   {
     "id": "T-019",
     "type": "test",
-    "title": "列表查询需要分页：测试用例",
-    "description": "为 列表查询需要分页 编写功能、边界与异常用例。",
+    "title": "幂等提交：测试用例",
+    "description": "为 幂等提交 编写功能、边界与异常用例。",
     "dependencies": [
       "T-017",
       "T-018"
@@ -315,7 +315,7 @@
       "覆盖正常路径与异常路径",
       "用例通过率达到验收标准"
     ],
-    "effort": "S",
+    "effort": "M",
     "prd_refs": [
       "FR-6"
     ]
@@ -323,8 +323,8 @@
   {
     "id": "T-020",
     "type": "backend",
-    "title": "用户提交后可查询到进度：后端接口",
-    "description": "实现 用户提交后可查询到进度 对应的接口、校验与权限控制。",
+    "title": "提交失败自动重试：后端接口",
+    "description": "实现 提交失败自动重试 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
@@ -339,8 +339,8 @@
   {
     "id": "T-021",
     "type": "frontend",
-    "title": "用户提交后可查询到进度：页面实现",
-    "description": "实现 用户提交后可查询到进度 页面及多状态展示。",
+    "title": "提交失败自动重试：页面实现",
+    "description": "实现 提交失败自动重试 页面及多状态展示。",
     "dependencies": [
       "T-020"
     ],
@@ -356,8 +356,8 @@
   {
     "id": "T-022",
     "type": "test",
-    "title": "用户提交后可查询到进度：测试用例",
-    "description": "为 用户提交后可查询到进度 编写功能、边界与异常用例。",
+    "title": "提交失败自动重试：测试用例",
+    "description": "为 提交失败自动重试 编写功能、边界与异常用例。",
     "dependencies": [
       "T-020",
       "T-021"
@@ -374,8 +374,8 @@
   {
     "id": "T-023",
     "type": "backend",
-    "title": "重复点击提交不会产生重复单据：后端接口",
-    "description": "实现 重复点击提交不会产生重复单据 对应的接口、校验与权限控制。",
+    "title": "列表分页加载：后端接口",
+    "description": "实现 列表分页加载 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
@@ -390,8 +390,8 @@
   {
     "id": "T-024",
     "type": "frontend",
-    "title": "重复点击提交不会产生重复单据：页面实现",
-    "description": "实现 重复点击提交不会产生重复单据 页面及多状态展示。",
+    "title": "列表分页加载：页面实现",
+    "description": "实现 列表分页加载 页面及多状态展示。",
     "dependencies": [
       "T-023"
     ],
@@ -407,8 +407,8 @@
   {
     "id": "T-025",
     "type": "test",
-    "title": "重复点击提交不会产生重复单据：测试用例",
-    "description": "为 重复点击提交不会产生重复单据 编写功能、边界与异常用例。",
+    "title": "列表分页加载：测试用例",
+    "description": "为 列表分页加载 编写功能、边界与异常用例。",
     "dependencies": [
       "T-023",
       "T-024"

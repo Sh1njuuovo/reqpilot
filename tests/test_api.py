@@ -1,12 +1,19 @@
 from fastapi.testclient import TestClient
 
+import reqpilot.api as api_module
 from reqpilot.api import app
 from reqpilot.pipeline import SAMPLE_REQUIREMENT
+from reqpilot.pipeline import run_pipeline as real_run_pipeline
 
 
-def test_create_requirement_and_read_back():
+def test_create_requirement_and_read_back(monkeypatch):
+    monkeypatch.setattr(
+        api_module,
+        "run_pipeline",
+        lambda *a, **kw: real_run_pipeline(*a, **{**kw, "provider_name": "mock"}),
+    )
     client = TestClient(app)
-    resp = client.post("/requirements", json={"text": SAMPLE_REQUIREMENT, "provider": "mock"})
+    resp = client.post("/requirements", json={"text": SAMPLE_REQUIREMENT})
     assert resp.status_code == 201
     data = resp.json()
     run_id = data["run_id"]

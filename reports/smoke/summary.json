@@ -1,37 +1,38 @@
 {
-  "run_id": "6e70b7d1018c",
-  "provider": "mock",
+  "run_id": "0eee6e47c05b",
+  "provider": "llm",
   "status": "succeeded",
-  "duration_ms": 10,
+  "duration_ms": 17361,
   "input_hash": "db780052c7c71641",
-  "fingerprint": "c757e0dd2ce4b96215d097ac1561ef99",
+  "fingerprint": "7a46f55ad25c90d424251af8bea3f87e",
   "citations": 5,
   "parsed": {
     "functional_requirements": 8,
-    "permissions": 1,
-    "data_fields": 4,
+    "permissions": 2,
+    "data_fields": 5,
     "constraints": 3,
-    "exception_flows": 1,
-    "acceptance_criteria": 1
+    "exception_flows": 2,
+    "acceptance_criteria": 3
   },
   "issues": {
-    "total": 5,
-    "raw": 5,
-    "dedup_removed": 0,
+    "total": 18,
+    "raw": 20,
+    "dedup_removed": 2,
     "by_severity": {
-      "major": 1,
-      "minor": 3,
-      "suggestion": 1
+      "critical": 4,
+      "major": 9,
+      "minor": 5
     },
     "by_role": {
-      "frontend": 2,
-      "test": 2,
-      "product": 1
+      "backend": 4,
+      "product": 5,
+      "test": 4,
+      "frontend": 5
     }
   },
   "prd": {
-    "title": "支持在线提交审批申请需求说明书",
-    "pages": 8
+    "title": "审批管理系统",
+    "pages": 4
   },
   "tasks": {
     "total": 25,

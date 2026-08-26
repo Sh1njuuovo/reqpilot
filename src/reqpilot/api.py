@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
 from reqpilot.cli import _summary
-from reqpilot.models import ProviderName, RequirementInput
+from reqpilot.models import RequirementInput
 from reqpilot.pipeline import PipelineResult, run_pipeline
 from reqpilot.providers import ProviderError
 
@@ -16,7 +18,7 @@ STORE: dict[str, PipelineResult] = {}
 
 
 class RequirementRequest(RequirementInput):
-    provider: ProviderName = "llm"
+    provider: Literal["llm"] = "llm"
     retriever_backend: str = "keyword"
 
 

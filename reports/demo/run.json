@@ -1,22 +1,22 @@
 {
-  "id": "642361542804",
+  "id": "e19e1fb3e35e",
   "status": "succeeded",
-  "provider": "mock",
-  "created_at": "2026-08-26T11:47:10.924390Z",
-  "completed_at": "2026-08-26T11:47:10.934519Z",
+  "provider": "llm",
+  "created_at": "2026-08-26T13:06:37.973336Z",
+  "completed_at": "2026-08-26T13:06:55.106643Z",
   "input_text_hash": "db780052c7c71641",
   "steps": [
     {
       "step": "parse",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 1,
+      "duration_ms": 2684,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "retrieve",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
       "duration_ms": 0,
       "fallback_used": false,
@@ -24,41 +24,41 @@
     },
     {
       "step": "review:product",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 6402,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "review:frontend",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 6244,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "review:backend",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 5218,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "review:test",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 6410,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "generate_prd",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 8020,
       "fallback_used": false,
       "error": null
     },
@@ -108,5 +108,5 @@
   ],
   "errors": [],
   "fallbacks": [],
-  "fingerprint": "c757e0dd2ce4b96215d097ac1561ef99"
+  "fingerprint": "27594d307408e478ad48a1749531d8b6"
 }

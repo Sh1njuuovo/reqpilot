@@ -139,7 +139,7 @@ class AgentRun(BaseModel):
 
     id: str = Field(default_factory=lambda: uuid.uuid4().hex[:12])
     status: Literal["running", "succeeded", "failed", "needs_confirmation"] = "running"
-    provider: ProviderName = "mock"
+    provider: ProviderName = "llm"
     created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
     completed_at: datetime | None = None
     input_text_hash: str = ""

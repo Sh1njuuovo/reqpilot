@@ -1,22 +1,22 @@
 {
-  "id": "6e70b7d1018c",
+  "id": "0eee6e47c05b",
   "status": "succeeded",
-  "provider": "mock",
-  "created_at": "2026-08-26T12:05:47.372446Z",
-  "completed_at": "2026-08-26T12:05:47.382621Z",
+  "provider": "llm",
+  "created_at": "2026-08-26T13:05:07.937699Z",
+  "completed_at": "2026-08-26T13:05:25.299625Z",
   "input_text_hash": "db780052c7c71641",
   "steps": [
     {
       "step": "parse",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 1,
+      "duration_ms": 3482,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "retrieve",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
       "duration_ms": 0,
       "fallback_used": false,
@@ -24,41 +24,41 @@
     },
     {
       "step": "review:product",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 7107,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "review:frontend",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 5644,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "review:backend",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 5495,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "review:test",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 5975,
       "fallback_used": false,
       "error": null
     },
     {
       "step": "generate_prd",
-      "provider": "mock",
+      "provider": "llm",
       "ok": true,
-      "duration_ms": 0,
+      "duration_ms": 6757,
       "fallback_used": false,
       "error": null
     },
@@ -108,5 +108,5 @@
   ],
   "errors": [],
   "fallbacks": [],
-  "fingerprint": "c757e0dd2ce4b96215d097ac1561ef99"
+  "fingerprint": "7a46f55ad25c90d424251af8bea3f87e"
 }

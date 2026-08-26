@@ -8,10 +8,7 @@ from reqpilot.models import ParsedRequirement, PRDDocument, ReviewIssue
 
 
 class ProviderError(RuntimeError):
-    """Raised when a provider cannot produce a valid result.
-
-    The pipeline catches this and falls back to the deterministic mock provider.
-    """
+    """Raised when a provider cannot produce a valid result or is unavailable."""
 
 
 @runtime_checkable

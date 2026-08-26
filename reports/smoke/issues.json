@@ -1,45 +1,52 @@
 [
   {
     "id": "ISSUE-001",
-    "role": "frontend",
+    "role": "backend",
     "roles": [
-      "frontend"
+      "backend"
     ],
-    "category": "interaction",
-    "severity": "major",
-    "title": "表单缺少校验规则",
-    "description": "存在表单录入但未定义必填、格式或长度校验。",
-    "evidence": [],
-    "suggestion": "定义必填项与格式校验",
-    "dedup_key": "interaction:表单缺少校验规则"
+    "category": "data",
+    "severity": "critical",
+    "title": "申请单编号生成规则未定义",
+    "description": "申请单编号是必填字段，但未定义生成规则，可能导致重复或不可用。",
+    "evidence": [
+      "字段包括申请单编号，必填"
+    ],
+    "suggestion": "明确编号生成策略，如使用数据库自增、UUID或业务规则（如日期+序列），并确保唯一性。",
+    "dedup_key": "data:申请单编号生成规则未定义"
   },
   {
     "id": "ISSUE-002",
-    "role": "frontend",
+    "role": "product",
     "roles": [
-      "frontend"
+      "product"
     ],
-    "category": "permission",
-    "severity": "minor",
-    "title": "页面缺少按角色差异展示说明",
-    "description": "存在多角色但未说明各角色看到的页面差异。",
-    "evidence": [],
-    "suggestion": "补充角色差异展示规则",
-    "dedup_key": "permission:页面缺少按角色差异展示说明"
+    "category": "logic",
+    "severity": "critical",
+    "title": "多级审批流转规则未定义",
+    "description": "需求提到支持多级审批流转，但未说明审批层级数量、每级审批人如何确定、审批顺序、会签或或签等规则，导致流程无法实现。",
+    "evidence": [
+      "系统支持多级审批流转"
+    ],
+    "suggestion": "明确多级审批的层级数、审批人确定规则（如按角色、按部门、按金额）、审批顺序（串行/并行）以及会签/或签逻辑。",
+    "dedup_key": "logic:多级审批流转规则未定义"
   },
   {
     "id": "ISSUE-003",
-    "role": "test",
+    "role": "product",
     "roles": [
-      "test"
+      "product"
     ],
-    "category": "logic",
-    "severity": "minor",
-    "title": "缺少分页/批量边界用例",
-    "description": "存在分页或批量场景但未定义边界。",
-    "evidence": [],
-    "suggestion": "补充边界值用例",
-    "dedup_key": "logic:缺少分页/批量边界用例"
+    "category": "completeness",
+    "severity": "critical",
+    "title": "审批流配置功能缺少流程定义细节",
+    "description": "需求仅提及管理员可配置审批流，但未定义审批流的组成要素（如节点、条件、审批人指定方式）、配置界面、生效机制及版本管理，导致无法评估配置功能的完整性和可测试性。",
+    "evidence": [
+      "系统支持审批流配置",
+      "管理员可完成审批流配置并生效"
+    ],
+    "suggestion": "补充审批流配置的具体规则，包括节点类型、审批人设置（角色/人员/动态）、条件分支、超时处理、版本控制等，并明确配置后的生效时机。",
+    "dedup_key": "completeness:审批流配置功能缺少流程定义细节"
   },
   {
     "id": "ISSUE-004",
@@ -48,25 +55,250 @@
       "test"
     ],
     "category": "data",
-    "severity": "minor",
-    "title": "缺少字段级校验用例",
-    "description": "有数据字段但未定义字段校验用例。",
-    "evidence": [],
-    "suggestion": "补充必填/格式/长度用例",
-    "dedup_key": "data:缺少字段级校验用例"
+    "severity": "critical",
+    "title": "金额字段缺少边界与精度校验",
+    "description": "金额为必填数字，但未定义取值范围、精度（如小数位数）及负数处理，可能导致无效数据进入流程。",
+    "evidence": [
+      "字段包括申请单编号、申请人、金额、审批状态、提交日期",
+      "金额：type: number, required: true"
+    ],
+    "suggestion": "明确金额必须为正数，限制小数位数（如最多两位），并添加范围校验（如不超过系统上限）。",
+    "dedup_key": "data:金额字段缺少边界与精度校验"
   },
   {
     "id": "ISSUE-005",
+    "role": "backend",
+    "roles": [
+      "backend"
+    ],
+    "category": "permission",
+    "severity": "major",
+    "title": "普通用户查看自己提交的记录，但未定义审批人权限",
+    "description": "多级审批流转中，审批人需要查看待审批记录，但权限模型未包含审批人角色。",
+    "evidence": [
+      "普通用户只能查看自己提交的记录",
+      "系统支持多级审批流转"
+    ],
+    "suggestion": "增加审批人角色，并定义审批人可查看和操作待审批记录的权限。",
+    "dedup_key": "permission:普通用户查看自己提交的记录但未定义审批人权限"
+  },
+  {
+    "id": "ISSUE-006",
+    "role": "backend",
+    "roles": [
+      "backend"
+    ],
+    "category": "logic",
+    "severity": "major",
+    "title": "自动重试机制缺乏幂等性保障",
+    "description": "提交失败自动重试时，若未使用幂等键，可能导致重复提交。",
+    "evidence": [
+      "提交失败时自动重试",
+      "必须支持幂等提交"
+    ],
+    "suggestion": "重试时携带相同的幂等键（如申请单编号或客户端生成的唯一ID），服务端根据幂等键去重。",
+    "dedup_key": "logic:自动重试机制缺乏幂等性保障"
+  },
+  {
+    "id": "ISSUE-007",
+    "role": "frontend",
+    "roles": [
+      "frontend"
+    ],
+    "category": "data",
+    "severity": "major",
+    "title": "列表分页加载超过100条分批加载，但未说明加载方式",
+    "description": "需求仅说明超过100条分批加载，但未明确是自动加载还是手动点击加载更多，可能影响用户体验。",
+    "evidence": [
+      "列表查询需要分页，超过100条分批加载"
+    ],
+    "suggestion": "明确分批加载的交互方式，如滚动加载或点击按钮，并给出加载状态提示。",
+    "dedup_key": "data:列表分页加载超过100条分批加载但未说明加载方式"
+  },
+  {
+    "id": "ISSUE-008",
+    "role": "frontend",
+    "roles": [
+      "frontend"
+    ],
+    "category": "interaction",
+    "severity": "major",
+    "title": "提交失败自动重试可能导致重复提交",
+    "description": "自动重试机制与幂等提交存在冲突，若重试逻辑未正确处理幂等键，可能产生重复申请单。",
+    "evidence": [
+      "系统支持幂等提交，防止重复申请",
+      "提交失败时自动重试"
+    ],
+    "suggestion": "确保重试时携带相同的幂等键，并在服务端校验，若已存在则返回原申请单。",
+    "dedup_key": "interaction:提交失败自动重试可能导致重复提交"
+  },
+  {
+    "id": "ISSUE-009",
+    "role": "frontend",
+    "roles": [
+      "frontend"
+    ],
+    "category": "permission",
+    "severity": "major",
+    "title": "普通用户只能查看自己提交的记录，但未说明是否可查看审批进度详情",
+    "description": "需求中普通用户可查询审批进度，但权限限制只能查看自己提交的记录，需明确进度查询是否包含审批节点详情。",
+    "evidence": [
+      "普通用户只能查看自己提交的记录",
+      "用户提交后可查询到进度"
+    ],
+    "suggestion": "明确普通用户可查看的进度信息范围，如当前节点、审批历史等。",
+    "dedup_key": "permission:普通用户只能查看自己提交的记录但未说明是否可查看"
+  },
+  {
+    "id": "ISSUE-010",
+    "role": "product",
+    "roles": [
+      "product",
+      "backend",
+      "test"
+    ],
+    "category": "data",
+    "severity": "major",
+    "title": "审批状态枚举值未定义",
+    "description": "数据字段中审批状态为枚举类型，但未列出具体状态值（如待审批、已通过、已驳回等），影响流程流转和查询统计。",
+    "evidence": [
+      "审批状态：enum",
+      "审批状态，类型为enum",
+      "字段包括申请单编号、申请人、金额、审批状态、提交日期",
+      "审批状态：type: enum, required: true"
+    ],
+    "suggestion": "定义审批状态的完整枚举值，并说明各状态之间的转换关系。；定义审批状态枚举，如：待审批、审批中、已通过、已驳回、已撤销等。；明确审批状态的所有可能值，并定义状态流转规则。",
+    "dedup_key": "data:审批状态枚举值未定义"
+  },
+  {
+    "id": "ISSUE-011",
     "role": "product",
     "roles": [
       "product"
     ],
+    "category": "permission",
+    "severity": "major",
+    "title": "普通用户查看自己提交的记录权限边界不清晰",
+    "description": "需求仅说明普通用户只能查看自己提交的记录，但未明确是否可查看审批过程中的中间意见、附件等，以及是否可查看已删除或归档的记录。",
+    "evidence": [
+      "普通用户只能查看自己提交的记录"
+    ],
+    "suggestion": "明确普通用户可查看的数据范围，包括审批意见、附件、操作日志等，并定义数据保留和归档策略。",
+    "dedup_key": "permission:普通用户查看自己提交的记录权限边界不清晰"
+  },
+  {
+    "id": "ISSUE-012",
+    "role": "test",
+    "roles": [
+      "test"
+    ],
+    "category": "data",
+    "severity": "major",
+    "title": "提交日期缺少格式与默认值说明",
+    "description": "提交日期为必填日期，但未指定格式（如YYYY-MM-DD）和是否自动生成，可能导致用户输入错误或遗漏。",
+    "evidence": [
+      "字段包括申请单编号、申请人、金额、审批状态、提交日期",
+      "提交日期：type: date, required: true"
+    ],
+    "suggestion": "明确日期格式，建议由系统自动生成提交日期，避免用户手动输入。",
+    "dedup_key": "data:提交日期缺少格式与默认值说明"
+  },
+  {
+    "id": "ISSUE-013",
+    "role": "test",
+    "roles": [
+      "test"
+    ],
+    "category": "data",
+    "severity": "major",
+    "title": "申请单编号格式与唯一性约束缺失",
+    "description": "申请单编号为必填字符串，但未定义格式（如长度、字符集）和唯一性校验，可能导致编号冲突或无法识别。",
+    "evidence": [
+      "字段包括申请单编号、申请人、金额、审批状态、提交日期",
+      "申请单编号：type: string, required: true"
+    ],
+    "suggestion": "定义编号生成规则（如自动生成、前缀+日期+序号），并强制唯一索引。",
+    "dedup_key": "data:申请单编号格式与唯一性约束缺失"
+  },
+  {
+    "id": "ISSUE-014",
+    "role": "backend",
+    "roles": [
+      "backend"
+    ],
     "category": "completeness",
-    "severity": "suggestion",
-    "title": "建议补充用户故事",
-    "description": "功能需求存在但没有用户故事视角。",
-    "evidence": [],
-    "suggestion": "用'作为X，我想要Y'补充",
-    "dedup_key": "completeness:建议补充用户故事"
+    "severity": "minor",
+    "title": "审批流配置的生效机制未明确",
+    "description": "验收标准提到管理员可完成审批流配置并生效，但未说明配置如何生效（如实时生效或版本控制）。",
+    "evidence": [
+      "管理员可完成审批流配置并生效"
+    ],
+    "suggestion": "明确审批流配置的生效时机，建议采用版本管理，新配置在下一次提交时生效。",
+    "dedup_key": "completeness:审批流配置的生效机制未明确"
+  },
+  {
+    "id": "ISSUE-015",
+    "role": "frontend",
+    "roles": [
+      "frontend"
+    ],
+    "category": "consistency",
+    "severity": "minor",
+    "title": "审批状态枚举值未定义",
+    "description": "数据字段中审批状态为枚举类型，但未列出具体枚举值，导致前端展示不一致。",
+    "evidence": [
+      "审批状态：enum"
+    ],
+    "suggestion": "定义审批状态的枚举值，如待审批、已通过、已驳回等，并统一前端展示。",
+    "dedup_key": "consistency:审批状态枚举值未定义"
+  },
+  {
+    "id": "ISSUE-016",
+    "role": "frontend",
+    "roles": [
+      "frontend"
+    ],
+    "category": "completeness",
+    "severity": "minor",
+    "title": "缺少审批流配置的界面交互说明",
+    "description": "管理员可配置审批流，但未说明配置界面的具体交互，如节点设置、条件分支等。",
+    "evidence": [
+      "管理员可配置审批流并生效"
+    ],
+    "suggestion": "补充审批流配置的交互设计，包括节点类型、审批人设置、条件规则等。",
+    "dedup_key": "completeness:缺少审批流配置的界面交互说明"
+  },
+  {
+    "id": "ISSUE-017",
+    "role": "product",
+    "roles": [
+      "product"
+    ],
+    "category": "interaction",
+    "severity": "minor",
+    "title": "提交失败自动重试机制缺少用户反馈",
+    "description": "需求要求提交失败时自动重试，但未说明重试次数、间隔、失败后的用户提示方式，以及重试期间用户界面状态，可能导致用户困惑。",
+    "evidence": [
+      "提交失败时自动重试"
+    ],
+    "suggestion": "定义重试策略（次数、间隔）、重试期间的界面提示（如进度条、禁用按钮）以及最终失败后的错误提示和用户操作指引。",
+    "dedup_key": "interaction:提交失败自动重试机制缺少用户反馈"
+  },
+  {
+    "id": "ISSUE-018",
+    "role": "test",
+    "roles": [
+      "test"
+    ],
+    "category": "data",
+    "severity": "minor",
+    "title": "申请人字段缺少长度与格式校验",
+    "description": "申请人字段为必填字符串，但未限制长度或格式，可能导致超长输入或非法字符。",
+    "evidence": [
+      "字段包括申请单编号、申请人、金额、审批状态、提交日期",
+      "申请人：type: string, required: true"
+    ],
+    "suggestion": "限制申请人字段长度（如50字符），并校验不允许为空字符串。",
+    "dedup_key": "data:申请人字段缺少长度与格式校验"
   }
 ]

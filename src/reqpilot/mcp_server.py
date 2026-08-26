@@ -15,10 +15,10 @@ server = MCPServer(
 
 
 @server.tool()
-def analyze_requirement(text: str, domain: str = "generic") -> str:
+def analyze_requirement(text: str, domain: str = "generic", provider: str = "llm") -> str:
     """Run the ReqPilot pipeline and return a JSON summary of PRD, issues, and tasks."""
 
-    result = run_pipeline(text, domain=domain, provider_name="mock")
+    result = run_pipeline(text, domain=domain, provider_name=provider)
     return json.dumps(
         {
             "run_id": result.run.id,
@@ -33,7 +33,7 @@ def analyze_requirement(text: str, domain: str = "generic") -> str:
 
 
 @server.tool()
-def export_tasks(text: str, domain: str = "generic", provider: str = "mock") -> str:
+def export_tasks(text: str, domain: str = "generic", provider: str = "llm") -> str:
     """Run the pipeline and return development tasks as Markdown."""
 
     result = run_pipeline(text, domain=domain, provider_name=provider)

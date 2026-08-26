@@ -15,7 +15,7 @@
 1. 独立设计并实现 LLM 驱动的垂直领域需求工程 Agent ReqPilot，用 LangGraph 状态机编排"需求解析 → 领域知识检索 → 产品/前端/后端/测试四角色并行审查 → 去重与严重度收敛 → 结构化 PRD → 单文件交互原型 → 任务拆分"全链路。
 2. 以 Pydantic/JSON Schema 约束 LLM 输出，实现一次 schema 修复 + 指数退避重试 + typed error 追踪，失败时明确标记 run 为 failed、不产出伪结果；每步写入 AgentRun 追踪、知识引用与输出指纹，支持人工确认中断。
 3. 面向 LLM 输出设计收敛护栏：跨角色同质问题去重 + 每角色按严重度保留 Top-5，解决模型过度标注，让审查列表保持可人工审阅；RAG 检索可插拔（关键词/向量），带来源引用追踪。
-4. 构建 12 条人工评审视角样例评测集：DeepSeek 实测管线成功率 100%、字段完整性 100%、问题召回 86.5%、单条平均 18.9s；39 个测试、90% 行覆盖率、GitHub Actions CI 全绿。
+4. 构建 12 条人工评审视角样例评测集：DeepSeek 实测管线成功率 100%、字段完整性 100%、问题召回 86.5%、单条平均 18.9s；42 个测试、90% 行覆盖率、GitHub Actions CI 全绿。
 5. 提供 FastAPI 服务与 MCP stdio server（analyze_requirement / export_tasks），全流程真实 LLM 可跑通演示。
 
 ## 版本二（后端工程侧重）
