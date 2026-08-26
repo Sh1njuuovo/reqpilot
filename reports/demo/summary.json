@@ -1,8 +1,8 @@
 {
-  "run_id": "74b65a86f7ec",
+  "run_id": "642361542804",
   "provider": "mock",
   "status": "succeeded",
-  "duration_ms": 9,
+  "duration_ms": 10,
   "input_hash": "db780052c7c71641",
   "fingerprint": "c757e0dd2ce4b96215d097ac1561ef99",
   "citations": 5,
