@@ -1,0 +1,57 @@
+{
+  "background": "现有业务审批流程依赖线下沟通；效率低",
+  "target_users": [
+    "审批管理员与普通业务人员"
+  ],
+  "user_stories": [],
+  "functional_requirements": [
+    "支持在线提交审批申请",
+    "多级审批流转",
+    "审批进度查询与历史记录导出",
+    "审批状态",
+    "提交日期",
+    "列表查询需要分页",
+    "用户提交后可查询到进度",
+    "重复点击提交不会产生重复单据"
+  ],
+  "constraints": [
+    "普通用户只能查看自己提交的记录",
+    "必须支持幂等提交",
+    "超过 100 条分批加载"
+  ],
+  "permissions": [
+    "角色权限：管理员可配置审批流并查看全部数据"
+  ],
+  "data_fields": [
+    {
+      "name": "申请单编号",
+      "type": "string",
+      "required": true,
+      "note": null
+    },
+    {
+      "name": "查看自己提交的记录申请人金额",
+      "type": "number",
+      "required": true,
+      "note": null
+    },
+    {
+      "name": "审批状态提交日期",
+      "type": "date",
+      "required": true,
+      "note": null
+    },
+    {
+      "name": "金额",
+      "type": "number",
+      "required": true,
+      "note": null
+    }
+  ],
+  "exception_flows": [
+    "提交失败时自动重试"
+  ],
+  "acceptance_criteria": [
+    "验收标准：管理员可完成审批流配置并生效"
+  ]
+}

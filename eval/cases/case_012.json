@@ -1,0 +1,14 @@
+{
+  "id": "case-012",
+  "title": "缺少需求背景",
+  "input": {
+    "text": "系统面向客服人员，支持创建工单并提交。权限：客服只能查看自己的工单，管理员可查看全部，按角色展示不同工单列表。作为客服，我想要创建工单。字段包括工单编号、客户名称、问题描述、状态、创建日期，工单编号必填。提交必须支持幂等，异常自动重试；列表分页每页最多 20 条；验收标准：工单创建成功后可查询。",
+    "domain": "support"
+  },
+  "golden": {
+    "required_groups": ["target_users", "functional_requirements", "constraints", "permissions", "acceptance_criteria", "exception_flows"],
+    "issues": [
+      {"role": "product", "category": "completeness"}
+    ]
+  }
+}

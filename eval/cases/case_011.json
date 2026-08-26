@@ -1,0 +1,17 @@
+{
+  "id": "case-011",
+  "title": "纯背景描述无功能需求",
+  "input": {
+    "text": "目前公司审批流程复杂，多级审批链条长，业务反馈周期长，现有流程依赖线下沟通。",
+    "domain": "approval"
+  },
+  "golden": {
+    "required_groups": ["target_users", "functional_requirements", "constraints", "permissions", "acceptance_criteria", "exception_flows"],
+    "issues": [
+      {"role": "product", "category": "completeness"},
+      {"role": "test", "category": "completeness"},
+      {"role": "backend", "category": "permission"},
+      {"role": "test", "category": "logic"}
+    ]
+  }
+}

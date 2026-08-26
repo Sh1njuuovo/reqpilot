@@ -1,0 +1,14 @@
+{
+  "id": "case-006",
+  "title": "缺少异常路径",
+  "input": {
+    "text": "目前系统面向运营人员，支持批量导入数据与导出报表。权限：管理员可导入导出，普通用户只能查看，按角色展示不同菜单。字段包括记录编号、记录名称、导入日期、状态，记录编号必填且为 20 位数字。列表支持空态展示，分页每页最多 50 条；验收标准：导入完成后统计条数正确。作为运营人员，我想要批量导入数据。",
+    "domain": "operations"
+  },
+  "golden": {
+    "required_groups": ["target_users", "functional_requirements", "constraints", "permissions", "acceptance_criteria", "exception_flows"],
+    "issues": [
+      {"role": "test", "category": "logic"}
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "run_id": "74b65a86f7ec",
+  "provider": "mock",
+  "status": "succeeded",
+  "duration_ms": 9,
+  "input_hash": "db780052c7c71641",
+  "fingerprint": "c757e0dd2ce4b96215d097ac1561ef99",
+  "citations": 5,
+  "parsed": {
+    "functional_requirements": 8,
+    "permissions": 1,
+    "data_fields": 4,
+    "constraints": 3,
+    "exception_flows": 1,
+    "acceptance_criteria": 1
+  },
+  "issues": {
+    "total": 5,
+    "raw": 5,
+    "dedup_removed": 0,
+    "by_severity": {
+      "major": 1,
+      "minor": 3,
+      "suggestion": 1
+    },
+    "by_role": {
+      "frontend": 2,
+      "test": 2,
+      "product": 1
+    }
+  },
+  "prd": {
+    "title": "支持在线提交审批申请需求说明书",
+    "pages": 8
+  },
+  "tasks": {
+    "total": 25,
+    "by_type": {
+      "database": 1,
+      "backend": 8,
+      "frontend": 8,
+      "test": 8
+    }
+  },
+  "fallbacks": 0,
+  "errors": []
+}

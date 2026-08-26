@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>支持在线提交审批申请需求说明书 - 交互原型</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+<header class="bg-white dark:bg-gray-800 border-b dark:border-gray-700 px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+  <div>
+    <h1 class="text-lg font-bold">支持在线提交审批申请需求说明书</h1>
+    <p class="text-xs text-gray-500 dark:text-gray-400">单文件多页面交互原型 · 共 8 个页面</p>
+  </div>
+  <button type="button" id="theme-toggle" class="px-3 py-1 text-sm rounded border">深色/浅色</button>
+</header>
+<nav class="bg-white dark:bg-gray-800 border-b dark:border-gray-700 px-4 py-2 flex gap-2 overflow-x-auto">
+  <button type="button" class="nav-btn px-3 py-2 text-sm rounded hover:bg-blue-50 dark:hover:bg-blue-900/30" data-page="page-1">支持在线提交审批申请</button><button type="button" class="nav-btn px-3 py-2 text-sm rounded hover:bg-blue-50 dark:hover:bg-blue-900/30" data-page="page-2">多级审批流转</button><button type="button" class="nav-btn px-3 py-2 text-sm rounded hover:bg-blue-50 dark:hover:bg-blue-900/30" data-page="page-3">审批进度查询与历史记录导出</button><button type="button" class="nav-btn px-3 py-2 text-sm rounded hover:bg-blue-50 dark:hover:bg-blue-900/30" data-page="page-4">审批状态</button><button type="button" class="nav-btn px-3 py-2 text-sm rounded hover:bg-blue-50 dark:hover:bg-blue-900/30" data-page="page-5">提交日期</button><button type="button" class="nav-btn px-3 py-2 text-sm rounded hover:bg-blue-50 dark:hover:bg-blue-900/30" data-page="page-6">列表查询需要分页</button><button type="button" class="nav-btn px-3 py-2 text-sm rounded hover:bg-blue-50 dark:hover:bg-blue-900/30" data-page="page-7">用户提交后可查询到进度</button><button type="button" class="nav-btn px-3 py-2 text-sm rounded hover:bg-blue-50 dark:hover:bg-blue-900/30" data-page="page-8">重复点击提交不会产生重复单据</button>
+</nav>
+<main class="max-w-4xl mx-auto p-4">
+  
+<section id="page-1" class="page hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+    <h2 class="text-xl font-semibold mb-1">支持在线提交审批申请</h2>
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">支持在线提交审批申请</p>
+    
+  </div>
+  
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">表单</h3>
+  <form id="form-page-1" onsubmit="return validateForm('page-1')" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-1_申请单编号">
+        申请单编号 <span class="text-red-500">*</span>
+      </label>
+      <input type="text" id="page-1_申请单编号" name="申请单编号" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-1_查看自己提交的记录申请人金额">
+        查看自己提交的记录申请人金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-1_查看自己提交的记录申请人金额" name="查看自己提交的记录申请人金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-1_审批状态提交日期">
+        审批状态提交日期 <span class="text-red-500">*</span>
+      </label>
+      <input type="date" id="page-1_审批状态提交日期" name="审批状态提交日期" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-1_金额">
+        金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-1_金额" name="金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div class="md:col-span-2 flex gap-2">
+      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">提交</button>
+      <button type="reset" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">重置</button>
+    </div>
+  </form>
+  <p id="error-page-1" class="hidden text-red-600 text-sm mt-2"></p>
+</div>
+  <div class="mb-4"><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">表单校验</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">提交成功/失败提示</span></div>
+</section>
+<section id="page-2" class="page hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+    <h2 class="text-xl font-semibold mb-1">多级审批流转</h2>
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">多级审批流转</p>
+    
+  </div>
+  
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">表单</h3>
+  <form id="form-page-2" onsubmit="return validateForm('page-2')" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-2_申请单编号">
+        申请单编号 <span class="text-red-500">*</span>
+      </label>
+      <input type="text" id="page-2_申请单编号" name="申请单编号" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-2_查看自己提交的记录申请人金额">
+        查看自己提交的记录申请人金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-2_查看自己提交的记录申请人金额" name="查看自己提交的记录申请人金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-2_审批状态提交日期">
+        审批状态提交日期 <span class="text-red-500">*</span>
+      </label>
+      <input type="date" id="page-2_审批状态提交日期" name="审批状态提交日期" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-2_金额">
+        金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-2_金额" name="金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div class="md:col-span-2 flex gap-2">
+      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">提交</button>
+      <button type="reset" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">重置</button>
+    </div>
+  </form>
+  <p id="error-page-2" class="hidden text-red-600 text-sm mt-2"></p>
+</div>
+  <div class="mb-4"><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">表单校验</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">提交成功/失败提示</span></div>
+</section>
+<section id="page-3" class="page hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+    <h2 class="text-xl font-semibold mb-1">审批进度查询与历史记录导出</h2>
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">审批进度查询与历史记录导出</p>
+    <button type="button" class="state-btn text-xs px-2 py-1 rounded border mr-1" data-page="page-3" data-state="empty">empty</button><button type="button" class="state-btn text-xs px-2 py-1 rounded border mr-1" data-page="page-3" data-state="error">error</button><button type="button" class="state-btn text-xs px-2 py-1 rounded border mr-1" data-page="page-3" data-state="loading">loading</button>
+  </div>
+  
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">表单</h3>
+  <form id="form-page-3" onsubmit="return validateForm('page-3')" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-3_申请单编号">
+        申请单编号 <span class="text-red-500">*</span>
+      </label>
+      <input type="text" id="page-3_申请单编号" name="申请单编号" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-3_查看自己提交的记录申请人金额">
+        查看自己提交的记录申请人金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-3_查看自己提交的记录申请人金额" name="查看自己提交的记录申请人金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-3_审批状态提交日期">
+        审批状态提交日期 <span class="text-red-500">*</span>
+      </label>
+      <input type="date" id="page-3_审批状态提交日期" name="审批状态提交日期" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-3_金额">
+        金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-3_金额" name="金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div class="md:col-span-2 flex gap-2">
+      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">提交</button>
+      <button type="reset" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">重置</button>
+    </div>
+  </form>
+  <p id="error-page-3" class="hidden text-red-600 text-sm mt-2"></p>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">列表</h3>
+  <table class="w-full text-sm border-collapse">
+    <thead><tr><th class="border px-3 py-2 text-left">名称</th><th class="border px-3 py-2 text-left">日期</th><th class="border px-3 py-2 text-left">状态</th></tr></thead>
+    <tbody><tr><td class='border px-3 py-2'>示例记录 A</td><td class='border px-3 py-2'>2026-08-01</td><td class='border px-3 py-2'>处理中</td></tr><tr><td class='border px-3 py-2'>示例记录 B</td><td class='border px-3 py-2'>2026-08-12</td><td class='border px-3 py-2'>已完成</td></tr><tr><td class='border px-3 py-2'>示例记录 C</td><td class='border px-3 py-2'>2026-08-20</td><td class='border px-3 py-2'>待确认</td></tr></tbody>
+  </table>
+  <div class="state-empty hidden text-center py-8 text-gray-500">暂无数据</div>
+  <div class="state-error hidden text-center py-8 text-red-500">加载失败，请稍后重试</div>
+  <div class="state-loading hidden text-center py-8 text-gray-500">加载中…</div>
+</div>
+  <div class="mb-4"><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">表单校验</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">提交成功/失败提示</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">列表查询与分页</span></div>
+</section>
+<section id="page-4" class="page hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+    <h2 class="text-xl font-semibold mb-1">审批状态</h2>
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">审批状态</p>
+    
+  </div>
+  
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">表单</h3>
+  <form id="form-page-4" onsubmit="return validateForm('page-4')" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-4_申请单编号">
+        申请单编号 <span class="text-red-500">*</span>
+      </label>
+      <input type="text" id="page-4_申请单编号" name="申请单编号" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-4_查看自己提交的记录申请人金额">
+        查看自己提交的记录申请人金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-4_查看自己提交的记录申请人金额" name="查看自己提交的记录申请人金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-4_审批状态提交日期">
+        审批状态提交日期 <span class="text-red-500">*</span>
+      </label>
+      <input type="date" id="page-4_审批状态提交日期" name="审批状态提交日期" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-4_金额">
+        金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-4_金额" name="金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div class="md:col-span-2 flex gap-2">
+      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">提交</button>
+      <button type="reset" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">重置</button>
+    </div>
+  </form>
+  <p id="error-page-4" class="hidden text-red-600 text-sm mt-2"></p>
+</div>
+  <div class="mb-4"><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">表单校验</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">提交成功/失败提示</span></div>
+</section>
+<section id="page-5" class="page hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+    <h2 class="text-xl font-semibold mb-1">提交日期</h2>
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">提交日期</p>
+    
+  </div>
+  
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">表单</h3>
+  <form id="form-page-5" onsubmit="return validateForm('page-5')" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-5_申请单编号">
+        申请单编号 <span class="text-red-500">*</span>
+      </label>
+      <input type="text" id="page-5_申请单编号" name="申请单编号" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-5_查看自己提交的记录申请人金额">
+        查看自己提交的记录申请人金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-5_查看自己提交的记录申请人金额" name="查看自己提交的记录申请人金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-5_审批状态提交日期">
+        审批状态提交日期 <span class="text-red-500">*</span>
+      </label>
+      <input type="date" id="page-5_审批状态提交日期" name="审批状态提交日期" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-5_金额">
+        金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-5_金额" name="金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div class="md:col-span-2 flex gap-2">
+      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">提交</button>
+      <button type="reset" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">重置</button>
+    </div>
+  </form>
+  <p id="error-page-5" class="hidden text-red-600 text-sm mt-2"></p>
+</div>
+  <div class="mb-4"><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">表单校验</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">提交成功/失败提示</span></div>
+</section>
+<section id="page-6" class="page hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+    <h2 class="text-xl font-semibold mb-1">列表查询需要分页</h2>
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">列表查询需要分页</p>
+    <button type="button" class="state-btn text-xs px-2 py-1 rounded border mr-1" data-page="page-6" data-state="empty">empty</button><button type="button" class="state-btn text-xs px-2 py-1 rounded border mr-1" data-page="page-6" data-state="error">error</button><button type="button" class="state-btn text-xs px-2 py-1 rounded border mr-1" data-page="page-6" data-state="loading">loading</button>
+  </div>
+  
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">列表</h3>
+  <table class="w-full text-sm border-collapse">
+    <thead><tr><th class="border px-3 py-2 text-left">名称</th><th class="border px-3 py-2 text-left">日期</th><th class="border px-3 py-2 text-left">状态</th></tr></thead>
+    <tbody><tr><td class='border px-3 py-2'>示例记录 A</td><td class='border px-3 py-2'>2026-08-01</td><td class='border px-3 py-2'>处理中</td></tr><tr><td class='border px-3 py-2'>示例记录 B</td><td class='border px-3 py-2'>2026-08-12</td><td class='border px-3 py-2'>已完成</td></tr><tr><td class='border px-3 py-2'>示例记录 C</td><td class='border px-3 py-2'>2026-08-20</td><td class='border px-3 py-2'>待确认</td></tr></tbody>
+  </table>
+  <div class="state-empty hidden text-center py-8 text-gray-500">暂无数据</div>
+  <div class="state-error hidden text-center py-8 text-red-500">加载失败，请稍后重试</div>
+  <div class="state-loading hidden text-center py-8 text-gray-500">加载中…</div>
+</div>
+  <div class="mb-4"><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">表单校验</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">提交成功/失败提示</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">列表查询与分页</span></div>
+</section>
+<section id="page-7" class="page hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+    <h2 class="text-xl font-semibold mb-1">用户提交后可查询到进度</h2>
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">用户提交后可查询到进度</p>
+    <button type="button" class="state-btn text-xs px-2 py-1 rounded border mr-1" data-page="page-7" data-state="empty">empty</button><button type="button" class="state-btn text-xs px-2 py-1 rounded border mr-1" data-page="page-7" data-state="error">error</button><button type="button" class="state-btn text-xs px-2 py-1 rounded border mr-1" data-page="page-7" data-state="loading">loading</button>
+  </div>
+  
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">表单</h3>
+  <form id="form-page-7" onsubmit="return validateForm('page-7')" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-7_申请单编号">
+        申请单编号 <span class="text-red-500">*</span>
+      </label>
+      <input type="text" id="page-7_申请单编号" name="申请单编号" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-7_查看自己提交的记录申请人金额">
+        查看自己提交的记录申请人金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-7_查看自己提交的记录申请人金额" name="查看自己提交的记录申请人金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-7_审批状态提交日期">
+        审批状态提交日期 <span class="text-red-500">*</span>
+      </label>
+      <input type="date" id="page-7_审批状态提交日期" name="审批状态提交日期" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-7_金额">
+        金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-7_金额" name="金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div class="md:col-span-2 flex gap-2">
+      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">提交</button>
+      <button type="reset" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">重置</button>
+    </div>
+  </form>
+  <p id="error-page-7" class="hidden text-red-600 text-sm mt-2"></p>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">列表</h3>
+  <table class="w-full text-sm border-collapse">
+    <thead><tr><th class="border px-3 py-2 text-left">名称</th><th class="border px-3 py-2 text-left">日期</th><th class="border px-3 py-2 text-left">状态</th></tr></thead>
+    <tbody><tr><td class='border px-3 py-2'>示例记录 A</td><td class='border px-3 py-2'>2026-08-01</td><td class='border px-3 py-2'>处理中</td></tr><tr><td class='border px-3 py-2'>示例记录 B</td><td class='border px-3 py-2'>2026-08-12</td><td class='border px-3 py-2'>已完成</td></tr><tr><td class='border px-3 py-2'>示例记录 C</td><td class='border px-3 py-2'>2026-08-20</td><td class='border px-3 py-2'>待确认</td></tr></tbody>
+  </table>
+  <div class="state-empty hidden text-center py-8 text-gray-500">暂无数据</div>
+  <div class="state-error hidden text-center py-8 text-red-500">加载失败，请稍后重试</div>
+  <div class="state-loading hidden text-center py-8 text-gray-500">加载中…</div>
+</div>
+  <div class="mb-4"><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">表单校验</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">提交成功/失败提示</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">列表查询与分页</span></div>
+</section>
+<section id="page-8" class="page hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+    <h2 class="text-xl font-semibold mb-1">重复点击提交不会产生重复单据</h2>
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">重复点击提交不会产生重复单据</p>
+    
+  </div>
+  
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-4">
+  <h3 class="font-medium mb-3">表单</h3>
+  <form id="form-page-8" onsubmit="return validateForm('page-8')" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-8_申请单编号">
+        申请单编号 <span class="text-red-500">*</span>
+      </label>
+      <input type="text" id="page-8_申请单编号" name="申请单编号" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-8_查看自己提交的记录申请人金额">
+        查看自己提交的记录申请人金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-8_查看自己提交的记录申请人金额" name="查看自己提交的记录申请人金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-8_审批状态提交日期">
+        审批状态提交日期 <span class="text-red-500">*</span>
+      </label>
+      <input type="date" id="page-8_审批状态提交日期" name="审批状态提交日期" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="page-8_金额">
+        金额 <span class="text-red-500">*</span>
+      </label>
+      <input type="number" id="page-8_金额" name="金额" required class="w-full rounded border px-3 py-2 bg-white dark:bg-gray-900 dark:border-gray-600">
+    </div>
+    <div class="md:col-span-2 flex gap-2">
+      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">提交</button>
+      <button type="reset" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">重置</button>
+    </div>
+  </form>
+  <p id="error-page-8" class="hidden text-red-600 text-sm mt-2"></p>
+</div>
+  <div class="mb-4"><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">表单校验</span><span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-2 py-1 rounded mr-1 mb-1">提交成功/失败提示</span></div>
+</section>
+</main>
+<script>
+const pages = document.querySelectorAll('.page');
+const navBtns = document.querySelectorAll('.nav-btn');
+function showPage(id) {
+  pages.forEach(p => p.classList.add('hidden'));
+  const target = document.getElementById(id);
+  if (target) target.classList.remove('hidden');
+  navBtns.forEach(b => b.classList.toggle('bg-blue-100', b.dataset.page === id));
+}
+if (navBtns.length > 0) showPage(navBtns[0].dataset.page);
+navBtns.forEach(b => b.addEventListener('click', () => showPage(b.dataset.page)));
+
+function validateForm(pageId) {
+  const form = document.getElementById('form-' + pageId);
+  const err = document.getElementById('error-' + pageId);
+  const missing = Array.from(form.querySelectorAll('[required]')).filter(i => !i.value || i.value.trim() === '');
+  if (missing.length > 0) {
+    err.textContent = '请填写必填项：' + missing.map(i => i.name || i.id).join('、');
+    err.classList.remove('hidden');
+    return false;
+  }
+  err.classList.add('hidden');
+  alert('提交成功（原型演示）');
+  return false;
+}
+
+document.querySelectorAll('.state-btn').forEach(b => b.addEventListener('click', () => {
+  const wrap = b.closest('section');
+  wrap.querySelectorAll('.state-empty,.state-error,.state-loading').forEach(e => e.classList.add('hidden'));
+  const target = wrap.querySelector('.state-' + b.dataset.state);
+  if (target) target.classList.toggle('hidden');
+}));
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+});
+</script>
+</body>
+</html>

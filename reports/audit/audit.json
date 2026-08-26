@@ -1,0 +1,304 @@
+{
+  "name": "reqpilot",
+  "repo_path": "/Users/shinjuu/intern/ReqPilot",
+  "generated_at": "2026-08-26T11:42:02.242636+00:00",
+  "summary": {
+    "file_count_scanned": 88,
+    "approx_total_bytes": 1071017,
+    "top_extensions": [
+      [
+        ".py",
+        35
+      ],
+      [
+        ".json",
+        31
+      ],
+      [
+        ".md",
+        11
+      ],
+      [
+        "[no extension]",
+        4
+      ],
+      [
+        ".html",
+        2
+      ],
+      [
+        ".csv",
+        2
+      ],
+      [
+        ".toml",
+        1
+      ],
+      [
+        ".lock",
+        1
+      ],
+      [
+        ".yml",
+        1
+      ]
+    ],
+    "language_counts": [
+      [
+        "Other",
+        51
+      ],
+      [
+        "Python",
+        35
+      ],
+      [
+        "TOML",
+        1
+      ],
+      [
+        "YAML",
+        1
+      ]
+    ]
+  },
+  "readme_files": [
+    "README.md"
+  ],
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "notebooks": [],
+  "docker_files": [],
+  "test_files": [
+    "reports/eval/eval_mock_latest.json",
+    "reports/eval/eval_mock_latest.md",
+    "tests/test_api.py",
+    "tests/test_cli.py",
+    "tests/test_dedup.py",
+    "tests/test_mock_parse.py",
+    "tests/test_models.py",
+    "tests/test_pipeline.py",
+    "tests/test_prd.py",
+    "tests/test_prototype.py",
+    "tests/test_rag.py",
+    "tests/test_review_rules.py",
+    "tests/test_tasks.py"
+  ],
+  "signals": {
+    "api_backend": [
+      "eval/knowledge/domain.json",
+      "src/reqpilot/__main__.py",
+      "src/reqpilot/api.py",
+      "src/reqpilot/mcp_server.py",
+      "tests/test_api.py"
+    ],
+    "async_jobs": [
+      "reports/demo/tasks.csv",
+      "reports/demo/tasks.json",
+      "reports/demo/tasks.md",
+      "reports/smoke/tasks.csv",
+      "reports/smoke/tasks.json",
+      "reports/smoke/tasks.md",
+      "src/reqpilot/tasks.py",
+      "tests/test_tasks.py"
+    ],
+    "config": [
+      "src/reqpilot/config.py"
+    ],
+    "database_state": [
+      "src/reqpilot/models.py",
+      "tests/test_models.py"
+    ],
+    "devops_deploy": [
+      ".github/workflows/ci.yml",
+      "reports/demo/citations.json",
+      "reports/smoke/citations.json",
+      "src/reqpilot/pipeline.py",
+      "tests/test_pipeline.py"
+    ],
+    "evaluation": [
+      "eval/cases/case_001.json",
+      "eval/cases/case_002.json",
+      "eval/cases/case_003.json",
+      "eval/cases/case_004.json",
+      "eval/cases/case_005.json",
+      "eval/cases/case_006.json",
+      "eval/cases/case_007.json",
+      "eval/cases/case_008.json",
+      "eval/cases/case_009.json",
+      "eval/cases/case_010.json",
+      "eval/cases/case_011.json",
+      "eval/cases/case_012.json",
+      "eval/knowledge/domain.json",
+      "reports/eval/eval_mock_20260826_114005.json",
+      "reports/eval/eval_mock_20260826_114005.md",
+      "reports/eval/eval_mock_20260826_114113.json",
+      "reports/eval/eval_mock_20260826_114113.md",
+      "reports/eval/eval_mock_20260826_114144.json",
+      "reports/eval/eval_mock_20260826_114144.md",
+      "reports/eval/eval_mock_latest.json",
+      "reports/eval/eval_mock_latest.md",
+      "src/reqpilot/eval/__init__.py",
+      "src/reqpilot/eval/runner.py",
+      "tests/test_api.py",
+      "tests/test_cli.py",
+      "tests/test_dedup.py",
+      "tests/test_mock_parse.py",
+      "tests/test_models.py",
+      "tests/test_pipeline.py",
+      "tests/test_prd.py",
+      "tests/test_prototype.py",
+      "tests/test_rag.py",
+      "tests/test_review_rules.py",
+      "tests/test_tasks.py"
+    ],
+    "frontend_mobile": [
+      "src/reqpilot/review/__init__.py",
+      "src/reqpilot/review/dedup.py",
+      "tests/test_review_rules.py"
+    ],
+    "inference_demo": [
+      "reports/demo/citations.json",
+      "reports/demo/issues.json",
+      "reports/demo/parsed.json",
+      "reports/demo/prd.json",
+      "reports/demo/prd.md",
+      "reports/demo/prototype.html",
+      "reports/demo/run.json",
+      "reports/demo/summary.json",
+      "reports/demo/tasks.csv",
+      "reports/demo/tasks.json",
+      "reports/demo/tasks.md",
+      "src/reqpilot/api.py",
+      "src/reqpilot/mcp_server.py",
+      "tests/test_api.py"
+    ],
+    "model": [
+      "src/reqpilot/models.py",
+      "tests/test_models.py"
+    ],
+    "testing_quality": [
+      ".coverage",
+      "reports/eval/eval_mock_20260826_114005.json",
+      "reports/eval/eval_mock_20260826_114005.md",
+      "reports/eval/eval_mock_20260826_114113.json",
+      "reports/eval/eval_mock_20260826_114113.md",
+      "reports/eval/eval_mock_20260826_114144.json",
+      "reports/eval/eval_mock_20260826_114144.md",
+      "reports/eval/eval_mock_latest.json",
+      "reports/eval/eval_mock_latest.md",
+      "src/reqpilot/providers/mock.py",
+      "tests/test_api.py",
+      "tests/test_cli.py",
+      "tests/test_dedup.py",
+      "tests/test_mock_parse.py",
+      "tests/test_models.py",
+      "tests/test_pipeline.py",
+      "tests/test_prd.py",
+      "tests/test_prototype.py",
+      "tests/test_rag.py",
+      "tests/test_review_rules.py",
+      "tests/test_tasks.py"
+    ]
+  },
+  "potential_data_or_model_paths": [],
+  "tree": [
+    "ReqPilot/",
+    "  .github/",
+    "  docs/",
+    "  eval/",
+    "  reports/",
+    "  src/",
+    "  tests/",
+    "  .coverage",
+    "  .gitignore",
+    "  .python-version",
+    "  LICENSE",
+    "  README.md",
+    "  ReqPilot-Agent项目.md",
+    "  pyproject.toml",
+    "  uv.lock",
+    "    workflows/",
+    "      ci.yml",
+    "    design.md",
+    "    cases/",
+    "    knowledge/",
+    "      case_001.json",
+    "      case_002.json",
+    "      case_003.json",
+    "      case_004.json",
+    "      case_005.json",
+    "      case_006.json",
+    "      case_007.json",
+    "      case_008.json",
+    "      case_009.json",
+    "      case_010.json",
+    "      case_011.json",
+    "      case_012.json",
+    "      domain.json",
+    "    demo/",
+    "    eval/",
+    "    smoke/",
+    "      citations.json",
+    "      issues.json",
+    "      parsed.json",
+    "      prd.json",
+    "      prd.md",
+    "      prototype.html",
+    "      run.json",
+    "      summary.json",
+    "      tasks.csv",
+    "      tasks.json",
+    "      tasks.md",
+    "      eval_mock_20260826_114005.json",
+    "      eval_mock_20260826_114005.md",
+    "      eval_mock_20260826_114113.json",
+    "      eval_mock_20260826_114113.md",
+    "      eval_mock_20260826_114144.json",
+    "      eval_mock_20260826_114144.md",
+    "      eval_mock_latest.json",
+    "      eval_mock_latest.md",
+    "      citations.json",
+    "      issues.json",
+    "      parsed.json",
+    "      prd.json",
+    "      prd.md",
+    "      prototype.html",
+    "      run.json",
+    "      summary.json",
+    "      tasks.csv",
+    "      tasks.json",
+    "      tasks.md",
+    "    reqpilot/",
+    "      eval/",
+    "      providers/",
+    "      rag/",
+    "      review/",
+    "      __init__.py",
+    "      __main__.py",
+    "      api.py",
+    "      cli.py",
+    "      config.py",
+    "      mcp_server.py",
+    "      models.py",
+    "      pipeline.py",
+    "      prd.py",
+    "      prototype.py",
+    "      tasks.py",
+    "    test_api.py",
+    "    test_cli.py",
+    "    test_dedup.py",
+    "    test_mock_parse.py",
+    "    test_models.py",
+    "    test_pipeline.py",
+    "    test_prd.py",
+    "    test_prototype.py",
+    "    test_rag.py",
+    "    test_review_rules.py",
+    "    test_tasks.py"
+  ],
+  "readme_samples": {
+    "README.md": "# ReqPilot\n\n> A domain-aware requirements engineering agent: natural language in, structured\n> PRD + multi-role review + interactive prototype + development tasks out.\n\nReqPilot turns meeting notes, chat records, and plain-language requirements into\na structured PRD, a quality-review report produced by product / frontend /\nbackend / test agents, a single-file HTML interactive prototype, and exportable\ndevelopment tasks. It is built around four ideas:\n\n1. **Structured outputs everywhere** — every LLM step returns schema-validated\n   JSON (Pydantic), with one repair attempt and a deterministic safe fallback.\n2. **Observable multi-agent workflow** — the pipeline is a LangGraph state\n   machine with parallel per-role review, deduplication, severity grading, and\n   citation-tracked evidence.\n3. **Domain grounding via RAG** — a pluggable retriever injects domain terms and\n   rules with source citations, reducing hallucinated review issues.\n4. **Local-first, honest evaluation** — the whole pipeline runs without any API\n   key using a rule-based mock provider; an optional OpenAI-compatible provider\n   (DeepSeek etc.) is available, and `reqpilot eval` reports measured numbers.\n\n## Architecture\n\n```mermaid\nflowchart LR\n    IN[\"Requirement text / meeting notes\"] --> P[\"Parse (LLM or mock)\"]\n    P --> R[\"RAG: keyword or vector retriever\"]\n    R --> F[\"Fan-out multi-role review\"]\n    F --> PR[\"Product agent\"]\n    F --> FR[\"Frontend agent\"]\n    F --> BA[\"Backend agent\"]\n    F --> TE[\"Test agent\"]\n    PR --> M[\"Dedup + severity merge\"]\n    FR --> M\n    BA --> M\n    TE --> M\n    M --> PRD[\"Structured PRD\"]\n    PRD --> PROTO[\"Single-file HTML prototype\"]\n    PRD --> TASKS[\"Task split + export\"]\n    M --> RUN[\"AgentRun trace + citations + fingerprint\"]\n```\n\n## Quick start\n\nRequirements: Python 3.11+ and [uv](https://docs.astral.sh/uv/).\n\n```bash\ngit clone https://github.com/Sh1njuuovo/reqpilot.git\ncd reqpilot\nuv sync --extra dev\nuv run reqpilot smoke\nuv run pytest\n```\n\n`reqpilot smoke` runs the built-in sample requirement through the full pipeline\nwith the mock provider (no API key needed) and writes artifacts under\n`reports/smoke/`.\n\n### Optional real-LLM provider\n\n```bash\nexport DEEPSEEK_API_KEY=sk-...\nuv run reqpilot demo --provider llm\n```\n\nAny OpenAI-compatible endpoint works via `REQPILOT_LLM_BASE_URL`,\n`REQPILOT_LLM_MODEL`, or `OPENAI_API_KEY`. Without a key, every step falls back\nto the deterministic mock provider and records the fallback in the run trace.\n\n## CLI\n\n| Command | What it does |\n| --- | --- |\n| `reqpilot smoke` | Run the sample requirement end-to-end (mock), assert success, write artifacts |\n| `reqpilot demo` | Same pipeline, writes a demo bundle (`PRD.md`, `prototype.html`, `tasks.md`) |\n| `reqpilot serve` | Start the FastAPI service (see API below) |\n| `reqpilot eval` | Run the evaluation suite over `eval/cases/`, write measured metrics to `reports/eval/` |\n\n## HTTP API\n\n```bash\nuv run reqpilot serve\n```\n\n- `POST /requirements` — body `{\"tex\n...[truncated]"
+  }
+}

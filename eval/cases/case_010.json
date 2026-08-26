@@ -1,0 +1,15 @@
+{
+  "id": "case-010",
+  "title": "列表缺少分页上限",
+  "input": {
+    "text": "目前系统面向运营人员，支持批量查询审批记录列表。权限：运营只能查看自己提交的记录，管理员可查看全部，按角色展示不同列表。字段包括记录编号、申请人、金额、状态、日期，记录编号必填。提交必须支持幂等，异常自动重试；验收标准：查询结果正确。作为运营人员，我想要查询审批记录。",
+    "domain": "operations"
+  },
+  "golden": {
+    "required_groups": ["target_users", "functional_requirements", "constraints", "permissions", "acceptance_criteria", "exception_flows"],
+    "issues": [
+      {"role": "backend", "category": "logic"},
+      {"role": "test", "category": "logic"}
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "id": "e6294dcc2947",
+  "status": "succeeded",
+  "provider": "mock",
+  "created_at": "2026-08-26T11:44:30.046247Z",
+  "completed_at": "2026-08-26T11:44:30.056791Z",
+  "input_text_hash": "db780052c7c71641",
+  "steps": [
+    {
+      "step": "parse",
+      "provider": "mock",
+      "ok": true,
+      "duration_ms": 1,
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "step": "retrieve",
+      "provider": "mock",
+      "ok": true,
+      "duration_ms": 0,
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "step": "review:product",
+      "provider": "mock",
+      "ok": true,
+      "duration_ms": 0,
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "step": "review:frontend",
+      "provider": "mock",
+      "ok": true,
+      "duration_ms": 0,
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "step": "review:backend",
+      "provider": "mock",
+      "ok": true,
+      "duration_ms": 0,
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "step": "review:test",
+      "provider": "mock",
+      "ok": true,
+      "duration_ms": 0,
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "step": "generate_prd",
+      "provider": "mock",
+      "ok": true,
+      "duration_ms": 0,
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "step": "prototype",
+      "provider": "code",
+      "ok": true,
+      "duration_ms": 0,
+      "fallback_used": false,
+      "error": null
+    },
+    {
+      "step": "tasks",
+      "provider": "code",
+      "ok": true,
+      "duration_ms": 0,
+      "fallback_used": false,
+      "error": null
+    }
+  ],
+  "citations": [
+    {
+      "doc_id": "approval-flow",
+      "section": "多级审批",
+      "chunk": "多级审批按角色顺序流转，每个审批节点可配置审批人；审批动作必须记录操作人与时间，用于审计追踪。"
+    },
+    {
+      "doc_id": "approval-flow",
+      "section": "幂等约定",
+      "chunk": "所有创建类接口必须支持幂等键；重复提交应返回首次结果，不得产生重复单据。"
+    },
+    {
+      "doc_id": "permission-security",
+      "section": "权限模型",
+      "chunk": "系统采用角色-权限模型，普通用户只能访问被授权的数据；列表接口需要按角色过滤数据范围。"
+    },
+    {
+      "doc_id": "interface-conventions",
+      "section": "分页约定",
+      "chunk": "列表接口必须支持分页参数，返回总条数与当前页数据，默认每页 20 条，单页上限 100 条。"
+    },
+    {
+      "doc_id": "interface-conventions",
+      "section": "异常处理",
+      "chunk": "外部依赖调用必须设置超时与重试，重试次数最多 3 次，失败后返回可读错误码。"
+    }
+  ],
+  "errors": [],
+  "fallbacks": [],
+  "fingerprint": "c757e0dd2ce4b96215d097ac1561ef99"
+}

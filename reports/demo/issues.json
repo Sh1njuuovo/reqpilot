@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ISSUE-001",
+    "role": "frontend",
+    "roles": [
+      "frontend"
+    ],
+    "category": "interaction",
+    "severity": "major",
+    "title": "表单缺少校验规则",
+    "description": "存在表单录入但未定义必填、格式或长度校验。",
+    "evidence": [],
+    "suggestion": "定义必填项与格式校验",
+    "dedup_key": "interaction:表单缺少校验规则"
+  },
+  {
+    "id": "ISSUE-002",
+    "role": "frontend",
+    "roles": [
+      "frontend"
+    ],
+    "category": "permission",
+    "severity": "minor",
+    "title": "页面缺少按角色差异展示说明",
+    "description": "存在多角色但未说明各角色看到的页面差异。",
+    "evidence": [],
+    "suggestion": "补充角色差异展示规则",
+    "dedup_key": "permission:页面缺少按角色差异展示说明"
+  },
+  {
+    "id": "ISSUE-003",
+    "role": "test",
+    "roles": [
+      "test"
+    ],
+    "category": "logic",
+    "severity": "minor",
+    "title": "缺少分页/批量边界用例",
+    "description": "存在分页或批量场景但未定义边界。",
+    "evidence": [],
+    "suggestion": "补充边界值用例",
+    "dedup_key": "logic:缺少分页/批量边界用例"
+  },
+  {
+    "id": "ISSUE-004",
+    "role": "test",
+    "roles": [
+      "test"
+    ],
+    "category": "data",
+    "severity": "minor",
+    "title": "缺少字段级校验用例",
+    "description": "有数据字段但未定义字段校验用例。",
+    "evidence": [],
+    "suggestion": "补充必填/格式/长度用例",
+    "dedup_key": "data:缺少字段级校验用例"
+  },
+  {
+    "id": "ISSUE-005",
+    "role": "product",
+    "roles": [
+      "product"
+    ],
+    "category": "completeness",
+    "severity": "suggestion",
+    "title": "建议补充用户故事",
+    "description": "功能需求存在但没有用户故事视角。",
+    "evidence": [],
+    "suggestion": "用'作为X，我想要Y'补充",
+    "dedup_key": "completeness:建议补充用户故事"
+  }
+]

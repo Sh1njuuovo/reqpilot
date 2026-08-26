@@ -1,0 +1,14 @@
+{
+  "id": "case-004",
+  "title": "写操作缺少幂等性",
+  "input": {
+    "text": "目前系统面向内部用户，支持创建审批申请并提交。权限：普通用户只能提交自己的申请，管理员可审批全部，按角色展示不同列表。作为用户，我想要提交申请。字段包括申请编号、申请人、金额、状态、日期，金额必填且为数字，最多两位小数。异常：提交失败自动重试；列表分页，每页最多 10 条；验收标准：提交成功后状态正确。",
+    "domain": "approval"
+  },
+  "golden": {
+    "required_groups": ["target_users", "functional_requirements", "constraints", "permissions", "acceptance_criteria", "exception_flows"],
+    "issues": [
+      {"role": "backend", "category": "logic"}
+    ]
+  }
+}

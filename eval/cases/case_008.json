@@ -1,0 +1,14 @@
+{
+  "id": "case-008",
+  "title": "列表缺少空态与异常态",
+  "input": {
+    "text": "目前系统面向查询用户，支持条件查询审批记录列表，并可按状态筛选。权限：普通用户只能查看自己的记录，管理员可查看全部，按角色展示不同记录列表。字段包括记录编号、申请人、金额、状态、日期，记录编号必填。列表分页每页最多 20 条，查询超时时自动重试；查询必须支持幂等，重复查询不产生副作用；验收标准：查询结果与条件一致。作为用户，我想要查询审批记录。",
+    "domain": "approval"
+  },
+  "golden": {
+    "required_groups": ["target_users", "functional_requirements", "constraints", "permissions", "acceptance_criteria", "exception_flows"],
+    "issues": [
+      {"role": "frontend", "category": "interaction"}
+    ]
+  }
+}

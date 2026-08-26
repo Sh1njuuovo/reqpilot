@@ -1,0 +1,15 @@
+{
+  "id": "case-007",
+  "title": "表单缺少校验规则",
+  "input": {
+    "text": "目前公司面向内部员工，支持在表单中填写报销申请并提交。权限：员工只能提交自己的申请，管理员可审批，按角色展示不同入口。字段包括单据编号、员工姓名、金额、状态、日期。异常：提交失败自动重试；列表分页每页最多 10 条；验收标准：提交后生成单据。作为员工，我想要在表单中填写报销申请。提交必须支持幂等。",
+    "domain": "expense"
+  },
+  "golden": {
+    "required_groups": ["target_users", "functional_requirements", "constraints", "permissions", "acceptance_criteria", "exception_flows"],
+    "issues": [
+      {"role": "frontend", "category": "interaction"},
+      {"role": "test", "category": "data"}
+    ]
+  }
+}

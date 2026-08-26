@@ -1,0 +1,14 @@
+{
+  "id": "case-005",
+  "title": "缺少数据字段定义",
+  "input": {
+    "text": "目前业务面向运营人员，系统支持保存操作记录并支持查询列表。权限：管理员可查看全部记录，运营只能查看自己的，按角色展示不同列表。异常：查询失败自动重试；列表分页每页最多 20 条；验收标准：保存成功后可在列表查到。作为运营人员，我想要保存并查询操作记录。保存必须支持幂等。",
+    "domain": "operations"
+  },
+  "golden": {
+    "required_groups": ["target_users", "functional_requirements", "constraints", "permissions", "acceptance_criteria", "exception_flows"],
+    "issues": [
+      {"role": "backend", "category": "data"}
+    ]
+  }
+}

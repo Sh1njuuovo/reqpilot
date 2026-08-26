@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>reqpilot 项目摸底报告</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; color: #18202a; background: #f6f7f9; }
+    main { max-width: 1080px; margin: 0 auto; padding: 32px 20px 56px; }
+    section { margin-top: 24px; }
+    h1, h2 { color: #111827; line-height: 1.2; }
+    h1 { font-size: 34px; margin: 4px 0 8px; }
+    h2 { font-size: 20px; margin: 0 0 12px; }
+    p, li { line-height: 1.65; }
+    .hero { background: #ffffff; border: 1px solid #d8dee8; border-radius: 8px; padding: 22px; }
+    .eyebrow { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0; color: #2563eb; text-transform: uppercase; }
+    .muted, .empty { color: #5b6778; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .metrics div { background: #ffffff; border: 1px solid #d8dee8; border-radius: 8px; padding: 16px; }
+    .metrics strong { display: block; font-size: 24px; color: #111827; }
+    .metrics span { color: #5b6778; font-size: 13px; }
+    .grid { display: grid; gap: 16px; }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid > div, section:not(.hero):not(.metrics):not(.grid) { background: #ffffff; border: 1px solid #d8dee8; border-radius: 8px; padding: 18px; }
+    table { width: 100%; border-collapse: collapse; background: #ffffff; }
+    th, td { text-align: left; vertical-align: top; border-bottom: 1px solid #e5e9f0; padding: 9px 10px; font-size: 14px; white-space: pre-wrap; word-break: break-word; }
+    th { color: #334155; background: #eef2f7; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #f8fafc; border: 1px solid #d8dee8; border-radius: 8px; padding: 12px; overflow-x: auto; }
+    code { color: #0f172a; }
+    li { margin: 4px 0; }
+    ul { padding-left: 20px; }
+    @media (max-width: 760px) { .metrics, .two, .three { grid-template-columns: 1fr; } main { padding: 18px 12px 36px; } }
+  </style>
+</head>
+<body>
+  <main>
+    
+    <section class="hero">
+      <p class="eyebrow">鼠鼠实习妙妙工具项目摸底报告</p>
+      <h1>reqpilot</h1>
+      <p class="muted">/Users/shinjuu/intern/ReqPilot</p>
+    </section>
+
+    <section class="metrics">
+      <div><strong>88</strong><span>Files scanned</span></div>
+      <div><strong>1071017</strong><span>Approx bytes</span></div>
+      <div><strong>1</strong><span>Dependency clues</span></div>
+      <div><strong>13</strong><span>Test clues</span></div>
+    </section>
+
+    <section>
+      <h2>语言和文件类型</h2>
+      <div class="grid two">
+        <div><table><thead><tr><th>Language</th><th>Files</th></tr></thead><tbody><tr><td>Other</td><td>51</td></tr><tr><td>Python</td><td>35</td></tr><tr><td>TOML</td><td>1</td></tr><tr><td>YAML</td><td>1</td></tr></tbody></table></div>
+        <div><table><thead><tr><th>Extension</th><th>Files</th></tr></thead><tbody><tr><td>.py</td><td>35</td></tr><tr><td>.json</td><td>31</td></tr><tr><td>.md</td><td>11</td></tr><tr><td>[no extension]</td><td>4</td></tr><tr><td>.html</td><td>2</td></tr><tr><td>.csv</td><td>2</td></tr><tr><td>.toml</td><td>1</td></tr><tr><td>.lock</td><td>1</td></tr><tr><td>.yml</td><td>1</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>核心链路线索</h2>
+      <table><thead><tr><th>Category</th><th>Hit Count</th><th>Representative Paths</th></tr></thead><tbody><tr><td>api_backend</td><td>5</td><td>eval/knowledge/domain.json
+src/reqpilot/__main__.py
+src/reqpilot/api.py
+src/reqpilot/mcp_server.py
+tests/test_api.py</td></tr><tr><td>async_jobs</td><td>8</td><td>reports/demo/tasks.csv
+reports/demo/tasks.json
+reports/demo/tasks.md
+reports/smoke/tasks.csv
+reports/smoke/tasks.json
+reports/smoke/tasks.md
+src/reqpilot/tasks.py
+tests/test_tasks.py</td></tr><tr><td>config</td><td>1</td><td>src/reqpilot/config.py</td></tr><tr><td>database_state</td><td>2</td><td>src/reqpilot/models.py
+tests/test_models.py</td></tr><tr><td>devops_deploy</td><td>5</td><td>.github/workflows/ci.yml
+reports/demo/citations.json
+reports/smoke/citations.json
+src/reqpilot/pipeline.py
+tests/test_pipeline.py</td></tr><tr><td>evaluation</td><td>34</td><td>eval/cases/case_001.json
+eval/cases/case_002.json
+eval/cases/case_003.json
+eval/cases/case_004.json
+eval/cases/case_005.json
+eval/cases/case_006.json
+eval/cases/case_007.json
+eval/cases/case_008.json
+eval/cases/case_009.json
+eval/cases/case_010.json</td></tr><tr><td>frontend_mobile</td><td>3</td><td>src/reqpilot/review/__init__.py
+src/reqpilot/review/dedup.py
+tests/test_review_rules.py</td></tr><tr><td>inference_demo</td><td>14</td><td>reports/demo/citations.json
+reports/demo/issues.json
+reports/demo/parsed.json
+reports/demo/prd.json
+reports/demo/prd.md
+reports/demo/prototype.html
+reports/demo/run.json
+reports/demo/summary.json
+reports/demo/tasks.csv
+reports/demo/tasks.json</td></tr><tr><td>model</td><td>2</td><td>src/reqpilot/models.py
+tests/test_models.py</td></tr><tr><td>testing_quality</td><td>21</td><td>.coverage
+reports/eval/eval_mock_20260826_114005.json
+reports/eval/eval_mock_20260826_114005.md
+reports/eval/eval_mock_20260826_114113.json
+reports/eval/eval_mock_20260826_114113.md
+reports/eval/eval_mock_20260826_114144.json
+reports/eval/eval_mock_20260826_114144.md
+reports/eval/eval_mock_latest.json
+reports/eval/eval_mock_latest.md
+src/reqpilot/providers/mock.py</td></tr></tbody></table>
+    </section>
+
+    <section class="grid two">
+      <div>
+        <h2>依赖和环境</h2>
+        <ul><li><code>pyproject.toml</code></li></ul>
+      </div>
+      <div>
+        <h2>README</h2>
+        <ul><li><code>README.md</code></li></ul>
+      </div>
+    </section>
+
+    <section class="grid three">
+      <div>
+        <h2>Notebooks</h2>
+        <p class="empty">无</p>
+      </div>
+      <div>
+        <h2>Docker</h2>
+        <p class="empty">无</p>
+      </div>
+      <div>
+        <h2>Tests</h2>
+        <ul><li><code>reports/eval/eval_mock_latest.json</code></li><li><code>reports/eval/eval_mock_latest.md</code></li><li><code>tests/test_api.py</code></li><li><code>tests/test_cli.py</code></li><li><code>tests/test_dedup.py</code></li><li><code>tests/test_mock_parse.py</code></li><li><code>tests/test_models.py</code></li><li><code>tests/test_pipeline.py</code></li><li><code>tests/test_prd.py</code></li><li><code>tests/test_prototype.py</code></li><li><code>tests/test_rag.py</code></li><li><code>tests/test_review_rules.py</code></li><li><code>tests/test_tasks.py</code></li></ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>潜在数据 / 状态 / 模型 / 资源路径</h2>
+      <p class="empty">无</p>
+    </section>
+
+    <section>
+      <h2>目录树摘要</h2>
+      <pre>ReqPilot/
+  .github/
+  docs/
+  eval/
+  reports/
+  src/
+  tests/
+  .coverage
+  .gitignore
+  .python-version
+  LICENSE
+  README.md
+  ReqPilot-Agent项目.md
+  pyproject.toml
+  uv.lock
+    workflows/
+      ci.yml
+    design.md
+    cases/
+    knowledge/
+      case_001.json
+      case_002.json
+      case_003.json
+      case_004.json
+      case_005.json
+      case_006.json
+      case_007.json
+      case_008.json
+      case_009.json
+      case_010.json
+      case_011.json
+      case_012.json
+      domain.json
+    demo/
+    eval/
+    smoke/
+      citations.json
+      issues.json
+      parsed.json
+      prd.json
+      prd.md
+      prototype.html
+      run.json
+      summary.json
+      tasks.csv
+      tasks.json
+      tasks.md
+      eval_mock_20260826_114005.json
+      eval_mock_20260826_114005.md
+      eval_mock_20260826_114113.json
+      eval_mock_20260826_114113.md
+      eval_mock_20260826_114144.json
+      eval_mock_20260826_114144.md
+      eval_mock_latest.json
+      eval_mock_latest.md
+      citations.json
+      issues.json
+      parsed.json
+      prd.json
+      prd.md
+      prototype.html
+      run.json
+      summary.json
+      tasks.csv
+      tasks.json
+      tasks.md
+    reqpilot/
+      eval/
+      providers/
+      rag/
+      review/
+      __init__.py
+      __main__.py
+      api.py
+      cli.py
+      config.py
+      mcp_server.py
+      models.py
+      pipeline.py
+      prd.py
+      prototype.py
+      tasks.py
+    test_api.py
+    test_cli.py
+    test_dedup.py
+    test_mock_parse.py
+    test_models.py
+    test_pipeline.py
+    test_prd.py
+    test_prototype.py
+    test_rag.py
+    test_review_rules.py
+    test_tasks.py</pre>
+    </section>
+
+    <section>
+      <h2>下一步人工确认</h2>
+      <ul>
+        <li>找到最小可运行命令：API、页面、CLI、worker、测试、训练或 demo 至少一个。</li>
+        <li>确认依赖、环境变量、数据库/数据文件、端口和外部服务。</li>
+        <li>确认 baseline/demo 是否能在本地、Docker、云服务器或 GPU 环境上跑通。</li>
+        <li>确认自己的面试亮点：改造点、demo、测试、报告或实验计划。</li>
+      </ul>
+    </section>
+    
+  </main>
+</body>
+</html>
