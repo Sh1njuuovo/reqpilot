@@ -9,5 +9,11 @@ build/
 *.egg-info/
 .reqpilot/
 reports/runs/
+reports/tuning/runs/
+reports/**/session.jsonl
+reports/**/MEMORY.md
+reports/agent/*
+!reports/agent/summary.json
+!reports/agent/agent-run.json
 .DS_Store
 .env
