@@ -84,11 +84,11 @@ def test_run_command_blocks_escapes_and_writes(sandbox, command):
 
 
 def test_run_command_has_no_shell_so_pipes_are_plain_arguments(sandbox):
-    sandbox.write_text("prd.md", "a\nb\n")
-    result = sandbox.run_command("cat prd.md | wc -l")
-    # 没有 shell，管道符只会被当成 cat 的文件名，命令整体失败而不是真的串起来
-    assert not result.ok
-    assert "a" in result.stdout
+    result = sandbox.run_command("echo hi | wc -l")
+    # 没有 shell，管道符只是 echo 的普通参数，所以原样回显而不是被解释成管道
+    assert result.ok
+    assert "| wc -l" in result.stdout
+    assert result.stdout.strip() != "1"
 
 
 def test_run_command_truncates_long_output(tmp_path):
