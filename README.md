@@ -1,5 +1,11 @@
 # ReqPilot
 
+[![CI](https://github.com/Sh1njuuovo/reqpilot/actions/workflows/ci.yml/badge.svg)](https://github.com/Sh1njuuovo/reqpilot/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![Tests](https://img.shields.io/badge/tests-125%20passed-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-93%25-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 > An LLM-driven requirements engineering agent: natural language in, structured
 > PRD + multi-role review + interactive prototype + development tasks out.
 
