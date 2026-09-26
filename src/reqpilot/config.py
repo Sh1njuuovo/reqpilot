@@ -19,6 +19,8 @@ class Settings:
     llm_timeout_seconds: float = 60.0
     knowledge_dir: Path = Path("eval/knowledge")
     vector_model: str = "all-MiniLM-L6-v2"
+    prompt_variant: str = "baseline"
+    agent_max_tokens: int = 4000
 
     @classmethod
     def from_env(cls) -> Settings:
@@ -31,6 +33,8 @@ class Settings:
             llm_api_key=os.getenv("DEEPSEEK_API_KEY") or os.getenv("OPENAI_API_KEY"),
             knowledge_dir=Path(os.getenv("REQPILOT_KNOWLEDGE_DIR", "eval/knowledge")),
             vector_model=os.getenv("REQPILOT_VECTOR_MODEL", "all-MiniLM-L6-v2"),
+            prompt_variant=os.getenv("REQPILOT_PROMPT_VARIANT", "baseline"),
+            agent_max_tokens=int(os.getenv("REQPILOT_AGENT_MAX_TOKENS", "4000")),
         )
 
     def resolve_knowledge_dir(self) -> Path:

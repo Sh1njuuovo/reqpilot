@@ -1,4 +1,4 @@
-"""Command-line interface: smoke / demo / serve / eval."""
+"""Command-line interface: smoke / demo / agent / serve / eval."""
 
 from __future__ import annotations
 
@@ -8,6 +8,12 @@ import sys
 import time
 from pathlib import Path
 
+from reqpilot.agent import (
+    REVIEW_FIX_GOAL,
+    AgentLoop,
+    WorkspaceSandbox,
+    review_fix_verifier,
+)
 from reqpilot.config import project_root
 from reqpilot.pipeline import SAMPLE_DOMAIN, SAMPLE_REQUIREMENT, PipelineResult, run_pipeline
 from reqpilot.providers import ProviderError
@@ -69,6 +75,7 @@ def _write_bundle(out_dir: Path, result: PipelineResult) -> Path:
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     (out_dir / "run.json").write_text(result.run.model_dump_json(indent=2), encoding="utf-8")
+    (out_dir / "requirement.md").write_text(result.input_text or "", encoding="utf-8")
     if result.parsed:
         (out_dir / "parsed.json").write_text(
             json.dumps(result.parsed.model_dump(), ensure_ascii=False, indent=2), encoding="utf-8"
@@ -166,6 +173,87 @@ def cmd_serve(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_agent(args: argparse.Namespace) -> int:
+    from reqpilot.config import Settings
+    from reqpilot.providers import get_provider
+
+    workspace = Path(args.workspace).expanduser()
+    if not workspace.is_dir():
+        print(f"ERROR: 工作区不存在: {workspace}", file=sys.stderr)
+        return 1
+    if not (workspace / "issues.json").exists():
+        print(
+            f"ERROR: 工作区缺少 issues.json，请先运行 reqpilot demo --out {workspace}",
+            file=sys.stderr,
+        )
+        return 1
+    try:
+        provider = get_provider(args.provider, Settings.from_env())
+    except ProviderError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+
+    sandbox = WorkspaceSandbox(workspace)
+    goal_text = args.goal or REVIEW_FIX_GOAL
+    loop = AgentLoop(
+        provider,
+        sandbox,
+        goal_text,
+        max_steps=args.max_steps,
+        verifier=review_fix_verifier(sandbox),
+    )
+    result = loop.run()
+
+    out_dir = Path(args.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "agent-run.json").write_text(
+        result.run.model_dump_json(indent=2), encoding="utf-8"
+    )
+    (out_dir / "agent-transcript.json").write_text(
+        json.dumps(result.transcript, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    tool_counts: dict[str, int] = {}
+    for trace in result.run.tool_calls:
+        tool_counts[trace.tool] = tool_counts.get(trace.tool, 0) + 1
+    summary = {
+        "run_id": result.run.id,
+        "provider": result.run.provider,
+        "goal": result.goal.text,
+        "status": result.goal.status,
+        "steps_used": result.goal.steps_used,
+        "max_steps": result.goal.max_steps,
+        "completion_claimed": result.goal.completion_claimed,
+        "completion_verified": result.goal.completion_verified,
+        "checks": result.goal.checks,
+        "tool_calls": tool_counts,
+        "fallbacks": result.run.fallbacks,
+        "errors": result.run.errors,
+        "fingerprint": result.run.fingerprint,
+        "workspace": str(sandbox.root),
+    }
+    (out_dir / "summary.json").write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(f"run_id       {summary['run_id']}")
+    print(f"goal         {summary['goal']}")
+    print(f"status       {summary['status']}  (steps {summary['steps_used']}/{summary['max_steps']})")
+    print(f"claimed      {summary['completion_claimed']}")
+    print(f"verified     {summary['completion_verified']}")
+    print(f"tool calls   {summary['tool_calls']}")
+    for check in result.goal.checks:
+        print(f"  - {check}")
+    if result.run.fallbacks:
+        print("fallbacks    " + " | ".join(result.run.fallbacks))
+    if result.run.errors:
+        print("errors       " + " | ".join(result.run.errors))
+    print(f"\nartifacts -> {out_dir}")
+    if not result.goal.completion_verified:
+        print("AGENT GOAL NOT VERIFIED", file=sys.stderr)
+        return 1
+    print("AGENT OK")
+    return 0
+
+
 def cmd_eval(args: argparse.Namespace) -> int:
     from reqpilot.eval.runner import run_eval
 
@@ -180,6 +268,26 @@ def cmd_eval(args: argparse.Namespace) -> int:
         return 1
     print(result.render_markdown())
     print(f"\neval report -> {result.out_dir}")
+    return 0
+
+
+def cmd_tune(args: argparse.Namespace) -> int:
+    from reqpilot.tuning import tune_review_prompt
+
+    variants = [v.strip() for v in args.variants.split(",") if v.strip()]
+    try:
+        report = tune_review_prompt(
+            provider_name=args.provider,
+            retriever_backend=args.retriever,
+            variants=variants,
+            out_dir=Path(args.out),
+            max_final_issues=args.max_final_issues,
+        )
+    except ProviderError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+    print(report.render_markdown())
+    print(f"\ntuning report -> {report.out_dir}")
     return 0
 
 
@@ -199,6 +307,16 @@ def build_parser() -> argparse.ArgumentParser:
     p_demo.add_argument("--retriever", default="keyword", choices=["keyword", "vector"])
     p_demo.set_defaults(func=cmd_demo)
 
+    p_agent = sub.add_parser(
+        "agent", help="run the sandboxed tool-calling agent over a demo workspace"
+    )
+    p_agent.add_argument("--workspace", default=str(project_root() / "reports" / "demo"))
+    p_agent.add_argument("--goal", default="", help="自定义目标；默认处理评审里的阻塞问题")
+    p_agent.add_argument("--max-steps", type=int, default=8)
+    p_agent.add_argument("--provider", default="llm", choices=["llm"])
+    p_agent.add_argument("--out", default=str(project_root() / "reports" / "agent"))
+    p_agent.set_defaults(func=cmd_agent)
+
     p_serve = sub.add_parser("serve", help="start the FastAPI service")
     p_serve.add_argument("--host", default="127.0.0.1")
     p_serve.add_argument("--port", type=int, default=8000)
@@ -209,6 +327,18 @@ def build_parser() -> argparse.ArgumentParser:
     p_eval.add_argument("--retriever", default="keyword", choices=["keyword", "vector"])
     p_eval.add_argument("--out", default=str(project_root() / "reports" / "eval"))
     p_eval.set_defaults(func=cmd_eval)
+
+    p_tune = sub.add_parser(
+        "tune", help="measure review-prompt variants on the golden set and pick one"
+    )
+    p_tune.add_argument(
+        "--variants", default="baseline,evidence_first,coverage_first", help="逗号分隔的变体名"
+    )
+    p_tune.add_argument("--provider", default="llm", choices=["llm"])
+    p_tune.add_argument("--retriever", default="keyword", choices=["keyword", "vector"])
+    p_tune.add_argument("--max-final-issues", type=int, default=20)
+    p_tune.add_argument("--out", default=str(project_root() / "reports" / "tuning"))
+    p_tune.set_defaults(func=cmd_tune)
     return parser
 
 
