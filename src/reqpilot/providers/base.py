@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Protocol, runtime_checkable
+from typing import Any, Protocol, runtime_checkable
 
-from reqpilot.models import ParsedRequirement, PRDDocument, ReviewIssue
+from reqpilot.models import AgentDecision, ParsedRequirement, PRDDocument, ReviewIssue
 
 
 class ProviderError(RuntimeError):
@@ -14,6 +14,12 @@ class ProviderError(RuntimeError):
 @runtime_checkable
 class LLMProvider(Protocol):
     name: str
+
+    def plan_step(self, messages: list[dict[str, Any]], tools: list[dict[str, Any]]) -> AgentDecision:
+        """Decide the next agent step: which tools to call, or claim completion."""
+
+    def summarize(self, messages: list[dict[str, Any]]) -> str:
+        """Compress older transcript messages; used when the context budget is hit."""
 
     def parse(self, text: str, domain: str) -> ParsedRequirement:
         """Extract a schema-validated ParsedRequirement from raw text."""

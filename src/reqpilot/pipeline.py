@@ -60,6 +60,7 @@ class PipelineState(TypedDict, total=False):
 @dataclass
 class PipelineResult:
     run: AgentRun
+    input_text: str = ""
     parsed: ParsedRequirement | None = None
     prd: PRDDocument | None = None
     issues: list[ReviewIssue] = field(default_factory=list)
@@ -349,6 +350,7 @@ def run_pipeline(
         run.status = "needs_confirmation"
     return PipelineResult(
         run=run,
+        input_text=text,
         parsed=final.get("parsed"),
         prd=final.get("prd"),
         issues=final.get("issues", []),

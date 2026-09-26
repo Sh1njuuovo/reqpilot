@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import uuid
 from datetime import UTC, datetime
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -17,7 +17,8 @@ Severity = Literal["critical", "major", "minor", "suggestion"]
 TaskType = Literal["frontend", "backend", "database", "test"]
 Effort = Literal["S", "M", "L"]
 SourceType = Literal["natural_language", "meeting_notes", "chat_history", "annotation"]
-ProviderName = Literal["mock", "llm"]
+ProviderName = Literal["mock", "llm", "scripted"]
+GoalStatus = Literal["running", "completed", "step_limit", "failed"]
 
 REVIEW_ROLES: tuple[Role, ...] = ("product", "frontend", "backend", "test")
 
@@ -134,6 +135,46 @@ class StepTrace(BaseModel):
     error: str | None = None
 
 
+class ToolCallTrace(BaseModel):
+    """One tool invocation recorded inside an agent loop step."""
+
+    step: int
+    tool: str
+    arguments: dict[str, Any] = Field(default_factory=dict)
+    ok: bool
+    duration_ms: int = 0
+    output_preview: str = ""
+    error: str | None = None
+
+
+class ToolCallRequest(BaseModel):
+    """A tool call the model asked for in one agent step."""
+
+    name: str
+    arguments: dict[str, Any] = Field(default_factory=dict)
+
+
+class AgentDecision(BaseModel):
+    """One step decision returned by an agent provider."""
+
+    thought: str = ""
+    tool_calls: list[ToolCallRequest] = Field(default_factory=list)
+    claim_goal_complete: bool = False
+    truncated: bool = False
+
+
+class AgentGoal(BaseModel):
+    """A long-running objective plus its program-side verification result."""
+
+    text: str
+    status: GoalStatus = "running"
+    max_steps: int = 8
+    steps_used: int = 0
+    completion_claimed: bool = False
+    completion_verified: bool = False
+    checks: list[str] = Field(default_factory=list)
+
+
 class AgentRun(BaseModel):
     """Execution trace and evidence envelope for one pipeline run."""
 
@@ -148,6 +189,8 @@ class AgentRun(BaseModel):
     errors: list[str] = Field(default_factory=list)
     fallbacks: list[str] = Field(default_factory=list)
     fingerprint: str = ""
+    goal: AgentGoal | None = None
+    tool_calls: list[ToolCallTrace] = Field(default_factory=list)
 
     @staticmethod
     def digest(text: str) -> str:
