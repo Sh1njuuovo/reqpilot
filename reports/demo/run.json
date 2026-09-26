@@ -1,16 +1,16 @@
 {
-  "id": "e19e1fb3e35e",
+  "id": "13c9305849a2",
   "status": "succeeded",
   "provider": "llm",
-  "created_at": "2026-08-26T13:06:37.973336Z",
-  "completed_at": "2026-08-26T13:06:55.106643Z",
+  "created_at": "2026-09-26T08:33:15.758240Z",
+  "completed_at": "2026-09-26T08:33:28.749142Z",
   "input_text_hash": "db780052c7c71641",
   "steps": [
     {
       "step": "parse",
       "provider": "llm",
       "ok": true,
-      "duration_ms": 2684,
+      "duration_ms": 2023,
       "fallback_used": false,
       "error": null
     },
@@ -26,7 +26,7 @@
       "step": "review:product",
       "provider": "llm",
       "ok": true,
-      "duration_ms": 6402,
+      "duration_ms": 4442,
       "fallback_used": false,
       "error": null
     },
@@ -34,7 +34,7 @@
       "step": "review:frontend",
       "provider": "llm",
       "ok": true,
-      "duration_ms": 6244,
+      "duration_ms": 5754,
       "fallback_used": false,
       "error": null
     },
@@ -42,7 +42,7 @@
       "step": "review:backend",
       "provider": "llm",
       "ok": true,
-      "duration_ms": 5218,
+      "duration_ms": 5574,
       "fallback_used": false,
       "error": null
     },
@@ -50,7 +50,7 @@
       "step": "review:test",
       "provider": "llm",
       "ok": true,
-      "duration_ms": 6410,
+      "duration_ms": 5539,
       "fallback_used": false,
       "error": null
     },
@@ -58,7 +58,7 @@
       "step": "generate_prd",
       "provider": "llm",
       "ok": true,
-      "duration_ms": 8020,
+      "duration_ms": 5194,
       "fallback_used": false,
       "error": null
     },
@@ -108,5 +108,7 @@
   ],
   "errors": [],
   "fallbacks": [],
-  "fingerprint": "27594d307408e478ad48a1749531d8b6"
+  "fingerprint": "36055b877d34a08eb7b69e654dee94d0",
+  "goal": null,
+  "tool_calls": []
 }

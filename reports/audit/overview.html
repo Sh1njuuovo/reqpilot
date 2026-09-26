@@ -43,17 +43,17 @@
     </section>
 
     <section class="metrics">
-      <div><strong>88</strong><span>Files scanned</span></div>
-      <div><strong>1071017</strong><span>Approx bytes</span></div>
+      <div><strong>111</strong><span>Files scanned</span></div>
+      <div><strong>1309712</strong><span>Approx bytes</span></div>
       <div><strong>1</strong><span>Dependency clues</span></div>
-      <div><strong>13</strong><span>Test clues</span></div>
+      <div><strong>20</strong><span>Test clues</span></div>
     </section>
 
     <section>
       <h2>语言和文件类型</h2>
       <div class="grid two">
-        <div><table><thead><tr><th>Language</th><th>Files</th></tr></thead><tbody><tr><td>Other</td><td>51</td></tr><tr><td>Python</td><td>35</td></tr><tr><td>TOML</td><td>1</td></tr><tr><td>YAML</td><td>1</td></tr></tbody></table></div>
-        <div><table><thead><tr><th>Extension</th><th>Files</th></tr></thead><tbody><tr><td>.py</td><td>35</td></tr><tr><td>.json</td><td>31</td></tr><tr><td>.md</td><td>11</td></tr><tr><td>[no extension]</td><td>4</td></tr><tr><td>.html</td><td>2</td></tr><tr><td>.csv</td><td>2</td></tr><tr><td>.toml</td><td>1</td></tr><tr><td>.lock</td><td>1</td></tr><tr><td>.yml</td><td>1</td></tr></tbody></table></div>
+        <div><table><thead><tr><th>Language</th><th>Files</th></tr></thead><tbody><tr><td>Other</td><td>60</td></tr><tr><td>Python</td><td>49</td></tr><tr><td>TOML</td><td>1</td></tr><tr><td>YAML</td><td>1</td></tr></tbody></table></div>
+        <div><table><thead><tr><th>Extension</th><th>Files</th></tr></thead><tbody><tr><td>.py</td><td>49</td></tr><tr><td>.json</td><td>30</td></tr><tr><td>.md</td><td>16</td></tr><tr><td>[no extension]</td><td>8</td></tr><tr><td>.html</td><td>3</td></tr><tr><td>.csv</td><td>2</td></tr><tr><td>.toml</td><td>1</td></tr><tr><td>.lock</td><td>1</td></tr><tr><td>.yml</td><td>1</td></tr></tbody></table></div>
       </div>
     </section>
 
@@ -70,12 +70,14 @@ reports/smoke/tasks.csv
 reports/smoke/tasks.json
 reports/smoke/tasks.md
 src/reqpilot/tasks.py
-tests/test_tasks.py</td></tr><tr><td>config</td><td>1</td><td>src/reqpilot/config.py</td></tr><tr><td>database_state</td><td>2</td><td>src/reqpilot/models.py
+tests/test_tasks.py</td></tr><tr><td>config</td><td>1</td><td>src/reqpilot/config.py</td></tr><tr><td>database_state</td><td>4</td><td>src/reqpilot/agent/sandbox.py
+src/reqpilot/models.py
+tests/test_agent_sandbox.py
 tests/test_models.py</td></tr><tr><td>devops_deploy</td><td>5</td><td>.github/workflows/ci.yml
 reports/demo/citations.json
 reports/smoke/citations.json
 src/reqpilot/pipeline.py
-tests/test_pipeline.py</td></tr><tr><td>evaluation</td><td>34</td><td>eval/cases/case_001.json
+tests/test_pipeline.py</td></tr><tr><td>evaluation</td><td>37</td><td>eval/cases/case_001.json
 eval/cases/case_002.json
 eval/cases/case_003.json
 eval/cases/case_004.json
@@ -84,9 +86,16 @@ eval/cases/case_006.json
 eval/cases/case_007.json
 eval/cases/case_008.json
 eval/cases/case_009.json
-eval/cases/case_010.json</td></tr><tr><td>frontend_mobile</td><td>3</td><td>src/reqpilot/review/__init__.py
-src/reqpilot/review/dedup.py
-tests/test_review_rules.py</td></tr><tr><td>inference_demo</td><td>14</td><td>reports/demo/citations.json
+eval/cases/case_010.json</td></tr><tr><td>frontend_mobile</td><td>15</td><td>.DS_Store
+reports/.DS_Store
+reports/audit/overview.html
+reports/audit/overview.md
+reports/interview-pack/application_checklist.md
+reports/interview-pack/core_code_walkthrough.md
+reports/interview-pack/demo_script.md
+reports/interview-pack/interview_qa.md
+reports/interview-pack/ppt_prompt.md
+reports/interview-pack/resume_star.md</td></tr><tr><td>inference_demo</td><td>16</td><td>reports/demo/citations.json
 reports/demo/issues.json
 reports/demo/parsed.json
 reports/demo/prd.json
@@ -96,16 +105,18 @@ reports/demo/run.json
 reports/demo/summary.json
 reports/demo/tasks.csv
 reports/demo/tasks.json</td></tr><tr><td>model</td><td>2</td><td>src/reqpilot/models.py
-tests/test_models.py</td></tr><tr><td>testing_quality</td><td>21</td><td>.coverage
-reports/eval/eval_mock_20260826_114005.json
-reports/eval/eval_mock_20260826_114005.md
-reports/eval/eval_mock_20260826_114113.json
-reports/eval/eval_mock_20260826_114113.md
-reports/eval/eval_mock_20260826_114144.json
-reports/eval/eval_mock_20260826_114144.md
-reports/eval/eval_mock_latest.json
-reports/eval/eval_mock_latest.md
-src/reqpilot/providers/mock.py</td></tr></tbody></table>
+tests/test_models.py</td></tr><tr><td>security_auth</td><td>3</td><td>reports/audit/audit.json
+reports/audit/overview.html
+reports/audit/overview.md</td></tr><tr><td>testing_quality</td><td>22</td><td>.coverage
+reports/eval/eval_llm_keyword_latest.json
+reports/eval/eval_llm_keyword_latest.md
+src/reqpilot/providers/mock.py
+tests/test_agent_checks.py
+tests/test_agent_context.py
+tests/test_agent_loop.py
+tests/test_agent_sandbox.py
+tests/test_agent_tools.py
+tests/test_api.py</td></tr></tbody></table>
     </section>
 
     <section class="grid two">
@@ -130,7 +141,7 @@ src/reqpilot/providers/mock.py</td></tr></tbody></table>
       </div>
       <div>
         <h2>Tests</h2>
-        <ul><li><code>reports/eval/eval_mock_latest.json</code></li><li><code>reports/eval/eval_mock_latest.md</code></li><li><code>tests/test_api.py</code></li><li><code>tests/test_cli.py</code></li><li><code>tests/test_dedup.py</code></li><li><code>tests/test_mock_parse.py</code></li><li><code>tests/test_models.py</code></li><li><code>tests/test_pipeline.py</code></li><li><code>tests/test_prd.py</code></li><li><code>tests/test_prototype.py</code></li><li><code>tests/test_rag.py</code></li><li><code>tests/test_review_rules.py</code></li><li><code>tests/test_tasks.py</code></li></ul>
+        <ul><li><code>reports/eval/eval_llm_keyword_latest.json</code></li><li><code>reports/eval/eval_llm_keyword_latest.md</code></li><li><code>tests/test_agent_checks.py</code></li><li><code>tests/test_agent_context.py</code></li><li><code>tests/test_agent_loop.py</code></li><li><code>tests/test_agent_sandbox.py</code></li><li><code>tests/test_agent_tools.py</code></li><li><code>tests/test_api.py</code></li><li><code>tests/test_cli.py</code></li><li><code>tests/test_dedup.py</code></li><li><code>tests/test_llm_agent_step.py</code></li><li><code>tests/test_mcp.py</code></li><li><code>tests/test_mock_parse.py</code></li><li><code>tests/test_models.py</code></li><li><code>tests/test_pipeline.py</code></li><li><code>tests/test_prd.py</code></li><li><code>tests/test_prototype.py</code></li><li><code>tests/test_rag.py</code></li><li><code>tests/test_review_rules.py</code></li><li><code>tests/test_tasks.py</code></li></ul>
       </div>
     </section>
 
@@ -148,17 +159,18 @@ src/reqpilot/providers/mock.py</td></tr></tbody></table>
   reports/
   src/
   tests/
+  .DS_Store
   .coverage
   .gitignore
   .python-version
   LICENSE
   README.md
-  ReqPilot-Agent项目.md
   pyproject.toml
   uv.lock
     workflows/
       ci.yml
     design.md
+    project-story.md
     cases/
     knowledge/
       case_001.json
@@ -174,9 +186,15 @@ src/reqpilot/providers/mock.py</td></tr></tbody></table>
       case_011.json
       case_012.json
       domain.json
+    audit/
     demo/
     eval/
+    interview-pack/
     smoke/
+    .DS_Store
+      audit.json
+      overview.html
+      overview.md
       citations.json
       issues.json
       parsed.json
@@ -188,14 +206,16 @@ src/reqpilot/providers/mock.py</td></tr></tbody></table>
       tasks.csv
       tasks.json
       tasks.md
-      eval_mock_20260826_114005.json
-      eval_mock_20260826_114005.md
-      eval_mock_20260826_114113.json
-      eval_mock_20260826_114113.md
-      eval_mock_20260826_114144.json
-      eval_mock_20260826_114144.md
-      eval_mock_latest.json
-      eval_mock_latest.md
+      eval_llm_keyword_20260826_124248.json
+      eval_llm_keyword_20260826_124248.md
+      eval_llm_keyword_latest.json
+      eval_llm_keyword_latest.md
+      application_checklist.md
+      core_code_walkthrough.md
+      demo_script.md
+      interview_qa.md
+      ppt_prompt.md
+      resume_star.md
       citations.json
       issues.json
       parsed.json
@@ -208,10 +228,13 @@ src/reqpilot/providers/mock.py</td></tr></tbody></table>
       tasks.json
       tasks.md
     reqpilot/
+    .DS_Store
+      agent/
       eval/
       providers/
       rag/
       review/
+      .DS_Store
       __init__.py
       __main__.py
       api.py
@@ -223,9 +246,16 @@ src/reqpilot/providers/mock.py</td></tr></tbody></table>
       prd.py
       prototype.py
       tasks.py
+    test_agent_checks.py
+    test_agent_context.py
+    test_agent_loop.py
+    test_agent_sandbox.py
+    test_agent_tools.py
     test_api.py
     test_cli.py
     test_dedup.py
+    test_llm_agent_step.py
+    test_mcp.py
     test_mock_parse.py
     test_models.py
     test_pipeline.py

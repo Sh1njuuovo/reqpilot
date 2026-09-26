@@ -1,7 +1,7 @@
 {
-  "title": "审批管理系统",
-  "summary": "构建在线审批管理系统，支持审批申请提交、多级审批流转、进度查询、历史记录导出及审批流配置，提升审批效率。",
-  "background": "现有业务审批流程依赖线下沟通，效率低。",
+  "title": "在线审批管理系统 PRD",
+  "summary": "构建一个面向审批管理员与普通业务人员的在线审批管理系统，支持在线提交审批申请、多级审批流转、审批进度查询与历史记录导出，替代低效的线下沟通方式，提升审批效率与可管理性。",
+  "background": "现有业务审批流程依赖线下沟通，效率低。需要建设在线审批系统，实现申请提交、多级审批、进度查询、历史导出及审批流配置等能力，并保证幂等提交与分页加载等约束。",
   "target_users": [
     "审批管理员",
     "普通业务人员"
@@ -10,56 +10,57 @@
     {
       "id": "FR-1",
       "title": "在线提交审批申请",
-      "description": "普通业务人员可在线填写并提交审批申请，包含申请单编号、申请人、金额、审批状态、提交日期等字段。",
+      "description": "普通业务人员可在线填写并提交审批申请，系统生成唯一申请单编号，支持幂等提交防止重复申请。",
       "priority": "P0"
     },
     {
       "id": "FR-2",
       "title": "多级审批流转",
-      "description": "系统支持多级审批流程，根据配置自动流转至相应审批人。",
+      "description": "审批申请按配置的审批流进行多级流转，逐级审批直至完成或驳回。",
       "priority": "P0"
     },
     {
       "id": "FR-3",
       "title": "审批进度查询",
-      "description": "用户可查询自己提交的审批单的当前进度和状态。",
+      "description": "用户可查询自己提交的审批申请进度与当前审批状态。",
       "priority": "P0"
     },
     {
       "id": "FR-4",
       "title": "历史记录导出",
-      "description": "管理员可导出审批历史记录，便于存档和分析。",
+      "description": "用户可导出历史审批记录，用于留存和统计。",
       "priority": "P1"
     },
     {
       "id": "FR-5",
-      "title": "审批流配置",
-      "description": "管理员可配置审批流程，包括审批节点、审批人、条件等，以适应业务变化。",
+      "title": "管理员配置审批流",
+      "description": "审批管理员可配置审批流，适配不同业务场景，配置后生效。",
       "priority": "P0"
     },
     {
       "id": "FR-6",
-      "title": "幂等提交",
-      "description": "系统支持幂等提交，防止重复申请，重复点击提交不会产生重复单据。",
+      "title": "管理员查看全部数据",
+      "description": "审批管理员可查看全部审批数据，统一管理和监控。",
       "priority": "P0"
     },
     {
       "id": "FR-7",
-      "title": "提交失败自动重试",
-      "description": "提交失败时系统自动重试，确保申请提交成功。",
-      "priority": "P1"
+      "title": "普通用户查看自己记录",
+      "description": "普通业务人员只能查看自己提交的审批记录。",
+      "priority": "P0"
     },
     {
       "id": "FR-8",
       "title": "列表分页加载",
-      "description": "列表查询需要分页，超过100条分批加载，提高性能。",
+      "description": "列表查询需要分页，超过 100 条分批加载。",
       "priority": "P1"
     }
   ],
   "non_functional": [
-    "系统必须支持幂等提交，防止重复申请。",
+    "必须支持幂等提交，防止重复申请。",
     "提交失败时自动重试。",
-    "列表查询需要分页，超过100条分批加载。"
+    "列表查询需要分页，超过 100 条分批加载。",
+    "系统应保证审批数据的一致性与可追溯性。"
   ],
   "permissions": [
     "管理员可配置审批流并查看全部数据。",
@@ -67,7 +68,7 @@
   ],
   "data_model": [
     {
-      "name": "审批申请单",
+      "name": "审批申请",
       "fields": [
         {
           "name": "申请单编号",
@@ -116,48 +117,23 @@
         "success"
       ],
       "interactions": [
-        "提交申请",
-        "校验必填字段",
-        "幂等处理"
+        "填写表单",
+        "点击提交",
+        "提交成功提示",
+        "提交失败自动重试"
       ],
       "form_fields": [
         {
-          "name": "applicationNo",
-          "label": "申请单编号",
-          "type": "text",
-          "required": true,
-          "options": []
-        },
-        {
-          "name": "applicant",
+          "name": "申请人",
           "label": "申请人",
           "type": "text",
           "required": true,
           "options": []
         },
         {
-          "name": "amount",
+          "name": "金额",
           "label": "金额",
           "type": "number",
-          "required": true,
-          "options": []
-        },
-        {
-          "name": "status",
-          "label": "审批状态",
-          "type": "select",
-          "required": true,
-          "options": [
-            "待审批",
-            "审批中",
-            "已通过",
-            "已拒绝"
-          ]
-        },
-        {
-          "name": "submitDate",
-          "label": "提交日期",
-          "type": "date",
           "required": true,
           "options": []
         }
@@ -166,7 +142,7 @@
     {
       "id": "page-2",
       "title": "审批进度查询",
-      "description": "用户查询自己提交的审批单进度。",
+      "description": "用户查询自己提交的审批申请进度。",
       "components": [
         "table"
       ],
@@ -176,18 +152,18 @@
         "error"
       ],
       "interactions": [
-        "查询",
-        "分页加载"
+        "分页查询",
+        "查看详情"
       ],
       "form_fields": []
     },
     {
       "id": "page-3",
-      "title": "审批流配置",
-      "description": "管理员配置审批流程。",
+      "title": "历史记录导出",
+      "description": "用户导出历史审批记录。",
       "components": [
-        "form",
-        "table"
+        "table",
+        "form"
       ],
       "states": [
         "default",
@@ -195,30 +171,14 @@
         "error"
       ],
       "interactions": [
-        "添加节点",
-        "编辑节点",
-        "删除节点",
-        "保存配置"
+        "筛选记录",
+        "点击导出"
       ],
       "form_fields": [
         {
-          "name": "nodeName",
-          "label": "节点名称",
-          "type": "text",
-          "required": true,
-          "options": []
-        },
-        {
-          "name": "approver",
-          "label": "审批人",
-          "type": "text",
-          "required": true,
-          "options": []
-        },
-        {
-          "name": "condition",
-          "label": "条件",
-          "type": "text",
+          "name": "提交日期",
+          "label": "提交日期",
+          "type": "date",
           "required": false,
           "options": []
         }
@@ -226,17 +186,54 @@
     },
     {
       "id": "page-4",
-      "title": "历史记录导出",
-      "description": "管理员导出审批历史记录。",
+      "title": "审批流配置",
+      "description": "审批管理员配置审批流。",
       "components": [
-        "button"
+        "form",
+        "table"
       ],
       "states": [
         "default",
+        "error",
+        "success"
+      ],
+      "interactions": [
+        "新增审批节点",
+        "保存配置",
+        "配置生效"
+      ],
+      "form_fields": [
+        {
+          "name": "审批流名称",
+          "label": "审批流名称",
+          "type": "text",
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "审批节点",
+          "label": "审批节点",
+          "type": "textarea",
+          "required": true,
+          "options": []
+        }
+      ]
+    },
+    {
+      "id": "page-5",
+      "title": "全部数据管理",
+      "description": "审批管理员查看全部审批数据。",
+      "components": [
+        "table"
+      ],
+      "states": [
+        "default",
+        "empty",
         "error"
       ],
       "interactions": [
-        "导出"
+        "分页查询",
+        "查看详情"
       ],
       "form_fields": []
     }
@@ -247,8 +244,9 @@
     "重复点击提交不会产生重复单据。"
   ],
   "open_questions": [
-    "审批流配置的具体规则和条件表达式如何定义？",
-    "是否需要支持审批人委派或转交？",
-    "历史记录导出的格式要求是什么？"
+    "审批状态的具体枚举值有哪些？",
+    "多级审批流转的审批人如何指定？",
+    "历史记录导出的格式要求是什么？",
+    "提交失败自动重试的次数与间隔如何设定？"
   ]
 }

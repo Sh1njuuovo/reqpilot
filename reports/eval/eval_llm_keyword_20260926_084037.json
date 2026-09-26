@@ -1,13 +1,13 @@
 {
   "provider": "llm",
   "aggregate": {
-    "success_rate": 1.0,
-    "avg_completeness": 0.9167,
-    "avg_recall": 0.9375,
-    "avg_precision": 0.2273,
-    "avg_dedup_rate": 0.0887,
-    "avg_duration_ms": 14128.4167,
-    "total_duration_ms": 169541,
+    "success_rate": 0.9167,
+    "avg_completeness": 1.0,
+    "avg_recall": 0.925,
+    "avg_precision": 0.2335,
+    "avg_dedup_rate": 0.1126,
+    "avg_duration_ms": 16120.0833,
+    "total_duration_ms": 193441,
     "retriever_backend": "keyword"
   },
   "cases": [
@@ -17,9 +17,9 @@
       "success": true,
       "completeness": 1.0,
       "issue_recall": 1.0,
-      "issue_precision": 0.2222,
-      "dedup_rate": 0.0909,
-      "duration_ms": 12365,
+      "issue_precision": 0.25,
+      "dedup_rate": 0.1667,
+      "duration_ms": 13559,
       "produced": [
         [
           "backend",
@@ -63,15 +63,11 @@
         ],
         [
           "product",
-          "data"
+          "consistency"
         ],
         [
           "product",
           "logic"
-        ],
-        [
-          "product",
-          "permission"
         ],
         [
           "test",
@@ -79,19 +75,15 @@
         ],
         [
           "test",
-          "consistency"
-        ],
-        [
-          "test",
           "data"
         ],
         [
           "test",
-          "logic"
+          "interaction"
         ],
         [
           "test",
-          "permission"
+          "logic"
         ]
       ],
       "golden": [
@@ -112,26 +104,32 @@
           "data"
         ]
       ],
-      "raw_issue_count": 22,
+      "raw_issue_count": 24,
       "final_issue_count": 20,
       "issue_details": [
         {
           "role": "backend",
           "category": "logic",
           "severity": "critical",
-          "title": "幂等提交缺少幂等键定义与实现方案"
+          "title": "幂等提交缺少幂等键与作用域定义"
         },
         {
           "role": "backend",
           "category": "data",
           "severity": "critical",
-          "title": "金额字段类型无法保证精确到分"
+          "title": "金额使用 number 类型无法保证精确到分"
         },
         {
           "role": "frontend",
           "category": "interaction",
           "severity": "critical",
-          "title": "缺少幂等提交的前端防重交互设计"
+          "title": "缺少幂等提交的前端交互设计"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "缺少空/加载/错误状态定义"
         },
         {
           "role": "product",
@@ -141,99 +139,93 @@
         },
         {
           "role": "product",
-          "category": "completeness",
+          "category": "logic",
           "severity": "critical",
-          "title": "审批超时与自动重试缺少可执行参数"
+          "title": "审批超时转人工处理缺少超时阈值与处理规则"
         },
         {
           "role": "test",
           "category": "logic",
           "severity": "critical",
-          "title": "幂等提交缺少幂等键定义，无法验证重复提交"
+          "title": "幂等提交缺少幂等键定义与并发场景用例"
+        },
+        {
+          "role": "backend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "多级审批流转缺少审批层级、审批人与超时规则定义"
         },
         {
           "role": "backend",
           "category": "consistency",
           "severity": "major",
-          "title": "分页约束与导出明细存在数据一致性风险"
+          "title": "批量审核缺少部分失败处理与并发控制定义"
         },
         {
           "role": "backend",
           "category": "permission",
           "severity": "major",
-          "title": "员工编辑权限缺少状态约束"
-        },
-        {
-          "role": "backend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "多级审批流转缺少审批节点与流转规则定义"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "发票附件上传的交互与校验未定义"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "缺少空态、加载态与错误态设计"
+          "title": "权限模型未定义审批状态与编辑权限的边界"
         },
         {
           "role": "frontend",
           "category": "logic",
           "severity": "major",
-          "title": "表单必填校验与金额精度校验未定义"
+          "title": "审批超时转人工处理的前端展示缺失"
+        },
+        {
+          "role": "frontend",
+          "category": "interaction",
+          "severity": "major",
+          "title": "批量审核与导出的交互流程缺失"
         },
         {
           "role": "frontend",
           "category": "permission",
           "severity": "major",
-          "title": "角色差异化列表与操作按钮的展示规则不明确"
+          "title": "角色差异展示与操作权限未细化"
         },
         {
           "role": "product",
-          "category": "permission",
+          "category": "completeness",
           "severity": "major",
-          "title": "员工编辑权限的边界与状态约束缺失"
+          "title": "发票附件上传缺少格式、大小与数量约束"
         },
         {
           "role": "product",
-          "category": "logic",
-          "severity": "major",
-          "title": "幂等提交的判定维度未定义"
-        },
-        {
-          "role": "product",
-          "category": "data",
-          "severity": "major",
-          "title": "必填字段与业务语义不一致"
-        },
-        {
-          "role": "test",
           "category": "consistency",
           "severity": "major",
-          "title": "分页查询缺少排序规则与越界行为定义"
+          "title": "必填字段与业务逻辑存在冲突"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "批量审核与明细导出缺少范围与规则定义"
+        },
+        {
+          "role": "test",
+          "category": "interaction",
+          "severity": "major",
+          "title": "分页参数边界与批量审核/导出的规模边界未定义"
         },
         {
           "role": "test",
           "category": "completeness",
           "severity": "major",
-          "title": "异常流程缺少可验证的触发条件与结果定义"
-        },
-        {
-          "role": "test",
-          "category": "permission",
-          "severity": "major",
-          "title": "权限边界缺少越权访问与批量操作的校验用例定义"
+          "title": "必填/非必填字段与业务语义矛盾，缺少校验用例"
         },
         {
           "role": "test",
           "category": "data",
           "severity": "major",
-          "title": "金额字段缺少精度、范围与边界校验规则"
+          "title": "金额字段缺少精度、范围与边界校验用例"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "minor",
+          "title": "审批超时转人工缺少超时时长与状态流转用例"
         }
       ]
     },
@@ -242,14 +234,14 @@
       "title": "缺少验收标准",
       "success": true,
       "completeness": 1.0,
-      "issue_recall": 1.0,
-      "issue_precision": 0.3333,
+      "issue_recall": 0.6,
+      "issue_precision": 0.2308,
       "dedup_rate": 0.0909,
-      "duration_ms": 20166,
+      "duration_ms": 12359,
       "produced": [
         [
           "backend",
-          "consistency"
+          "completeness"
         ],
         [
           "backend",
@@ -273,10 +265,6 @@
         ],
         [
           "frontend",
-          "interaction"
-        ],
-        [
-          "frontend",
           "logic"
         ],
         [
@@ -289,15 +277,7 @@
         ],
         [
           "product",
-          "consistency"
-        ],
-        [
-          "product",
           "logic"
-        ],
-        [
-          "test",
-          "completeness"
         ],
         [
           "test",
@@ -306,6 +286,10 @@
         [
           "test",
           "logic"
+        ],
+        [
+          "test",
+          "permission"
         ]
       ],
       "golden": [
@@ -335,15 +319,15 @@
       "issue_details": [
         {
           "role": "backend",
-          "category": "logic",
+          "category": "data",
           "severity": "critical",
-          "title": "「提交失败自动重试」未定义重试主体、次数与幂等边界"
+          "title": "工单编号作为必填项由客户端提供，无法保证唯一性"
         },
         {
           "role": "backend",
-          "category": "data",
+          "category": "logic",
           "severity": "critical",
-          "title": "工单编号被设为必填且由提交方提供，与幂等要求冲突"
+          "title": "幂等实现机制未定义，重试场景下可能产生重复工单"
         },
         {
           "role": "frontend",
@@ -355,1151 +339,85 @@
           "role": "product",
           "category": "logic",
           "severity": "critical",
-          "title": "工单编号被设为必填且由用户填写，与系统生成逻辑冲突"
+          "title": "工单编号作为必填项与系统生成逻辑冲突"
         },
         {
           "role": "product",
           "category": "completeness",
           "severity": "critical",
-          "title": "缺少工单状态机与流转规则定义"
+          "title": "缺少派单规则与工单流转状态机定义"
         },
         {
           "role": "test",
           "category": "logic",
           "severity": "critical",
-          "title": "幂等与自动重试冲突，缺少幂等键定义"
+          "title": "幂等键未定义，无法判定重复提交"
         },
         {
           "role": "test",
           "category": "logic",
           "severity": "critical",
-          "title": "自动重试无次数上限、退避策略与失败终态"
-        },
-        {
-          "role": "backend",
-          "category": "consistency",
-          "severity": "major",
-          "title": "分页仅约定每页上限，缺少排序、页码与总数约定"
+          "title": "自动重试与幂等冲突，重试次数/间隔未定义"
         },
         {
           "role": "backend",
           "category": "permission",
           "severity": "major",
-          "title": "权限模型缺少派单权限与越权访问的判定规则"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "major",
-          "title": "状态字段未定义枚举值与状态流转规则"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "未定义列表的空状态、加载状态与错误状态"
-        },
-        {
-          "role": "frontend",
-          "category": "interaction",
-          "severity": "major",
-          "title": "缺少提交中/重试中的状态反馈与防重复点击设计"
-        },
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "major",
-          "title": "角色差异仅描述数据范围，未定义操作按钮的可见性规则"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "异常流程仅覆盖提交重试，缺少重试边界与失败兜底"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "major",
-          "title": "派单规则与派单权限未定义"
-        },
-        {
-          "role": "product",
-          "category": "consistency",
-          "severity": "major",
-          "title": "验收标准不可量化，缺少可验证的判定条件"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "major",
-          "title": "字段级校验规则与分页边界未定义"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "工单编号既为必填又需系统生成，来源未定义"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "状态枚举值未定义，状态流转与关闭规则缺失"
-        },
-        {
-          "role": "frontend",
-          "category": "consistency",
-          "severity": "minor",
-          "title": "分页每页最多 20 条与分页交互细节未定义"
-        }
-      ]
-    },
-    {
-      "case_id": "case-003",
-      "title": "缺少权限模型",
-      "success": true,
-      "completeness": 1.0,
-      "issue_recall": 1.0,
-      "issue_precision": 0.2857,
-      "dedup_rate": 0.1304,
-      "duration_ms": 17011,
-      "produced": [
-        [
-          "backend",
-          "completeness"
-        ],
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "frontend",
-          "completeness"
-        ],
-        [
-          "frontend",
-          "interaction"
-        ],
-        [
-          "frontend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "product",
-          "data"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "test",
-          "completeness"
-        ],
-        [
-          "test",
-          "data"
-        ],
-        [
-          "test",
-          "logic"
-        ]
-      ],
-      "golden": [
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "test",
-          "logic"
-        ]
-      ],
-      "raw_issue_count": 23,
-      "final_issue_count": 20,
-      "issue_details": [
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "critical",
-          "title": "金额字段缺少精度与币种定义，无法保证两位小数"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "审批流转缺少角色、流程与状态定义"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "critical",
-          "title": "幂等键未定义，重复提交判定依据缺失"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "“异常时自动重试”与幂等叠加，缺少重试边界定义"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "幂等键未定义，无法验证“重复提交不生成重复申请”"
-        },
-        {
-          "role": "backend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "分页接口缺少排序、总数与游标约定"
+          "title": "“处理”权限边界未定义，存在越权风险"
         },
         {
           "role": "backend",
           "category": "permission",
           "severity": "major",
-          "title": "审批流转权限与状态机未定义，存在越权与非法流转风险"
+          "title": "权限模型缺少角色与工单归属的数据模型定义"
         },
         {
           "role": "backend",
-          "category": "data",
+          "category": "completeness",
           "severity": "major",
-          "title": "申请编号生成规则与唯一性未定义"
+          "title": "状态枚举与状态流转规则缺失"
         },
         {
-          "role": "backend",
+          "role": "frontend",
           "category": "logic",
           "severity": "major",
-          "title": "自动重试与幂等叠加可能造成重复申请或状态错乱"
+          "title": "状态字段未定义枚举值与流转规则"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "缺少空态、加载态与错误态定义"
         },
         {
           "role": "frontend",
           "category": "permission",
           "severity": "major",
-          "title": "未定义采购员与审批人的角色差异展示"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "缺少列表空态、加载态与错误态设计"
-        },
-        {
-          "role": "frontend",
-          "category": "interaction",
-          "severity": "major",
-          "title": "缺少提交中、重试与幂等反馈的交互状态"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "缺少提交表单的字段校验与错误提示设计"
+          "title": "角色差异仅覆盖列表可见范围，未定义操作级权限"
         },
         {
           "role": "product",
           "category": "logic",
           "severity": "major",
-          "title": "自动重试策略缺失，存在重复提交风险"
+          "title": "客服可见范围与'处理分配给自己的工单'权限边界不清"
         },
         {
           "role": "product",
           "category": "completeness",
           "severity": "major",
-          "title": "验收标准仅覆盖提交，未覆盖审批与分页"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "major",
-          "title": "分页参数与边界行为未定义"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "状态枚举取值与流转规则未定义"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "金额字段缺少边界校验规则（范围、精度、负数、0）"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "minor",
-          "title": "状态字段的枚举值与流转展示未定义"
-        },
-        {
-          "role": "product",
-          "category": "data",
-          "severity": "minor",
-          "title": "字段定义不完整，缺少金额上限与状态取值"
-        }
-      ]
-    },
-    {
-      "case_id": "case-004",
-      "title": "写操作缺少幂等性",
-      "success": true,
-      "completeness": 1.0,
-      "issue_recall": 0.75,
-      "issue_precision": 0.1765,
-      "dedup_rate": 0.0909,
-      "duration_ms": 10339,
-      "produced": [
-        [
-          "backend",
-          "completeness"
-        ],
-        [
-          "backend",
-          "consistency"
-        ],
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "frontend",
-          "completeness"
-        ],
-        [
-          "frontend",
-          "data"
-        ],
-        [
-          "frontend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "product",
-          "data"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "product",
-          "permission"
-        ],
-        [
-          "test",
-          "completeness"
-        ],
-        [
-          "test",
-          "data"
-        ],
-        [
-          "test",
-          "logic"
-        ],
-        [
-          "test",
-          "permission"
-        ]
-      ],
-      "golden": [
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "interaction"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "test",
-          "logic"
-        ]
-      ],
-      "raw_issue_count": 22,
-      "final_issue_count": 20,
-      "issue_details": [
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "critical",
-          "title": "提交失败自动重试缺少幂等设计"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "critical",
-          "title": "金额精度约束缺少存储与校验方案"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "critical",
-          "title": "提交失败自动重试策略未定义"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "缺少空/加载/错误状态设计"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "critical",
-          "title": "异常重试策略未定义，存在重复提交风险"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "缺少审批流程与状态流转定义"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "状态枚举取值与流转规则未定义"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "金额字段缺少边界与精度校验用例"
-        },
-        {
-          "role": "backend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "分页接口缺少排序与总数约定"
-        },
-        {
-          "role": "backend",
-          "category": "consistency",
-          "severity": "major",
-          "title": "状态枚举与状态流转未定义"
-        },
-        {
-          "role": "backend",
-          "category": "permission",
-          "severity": "major",
-          "title": "申请人字段可被伪造，缺少服务端身份绑定"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "major",
-          "title": "申请编号与申请人字段来源不明"
-        },
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "major",
-          "title": "角色差异化列表与操作未具体化"
-        },
-        {
-          "role": "frontend",
-          "category": "data",
-          "severity": "major",
-          "title": "金额校验规则不完整"
-        },
-        {
-          "role": "product",
-          "category": "data",
-          "severity": "major",
-          "title": "字段定义不完整，缺少约束与来源说明"
-        },
-        {
-          "role": "product",
-          "category": "permission",
-          "severity": "major",
-          "title": "角色列表差异与越权访问规则不明确"
+          "title": "异常流程仅覆盖提交重试，缺少关键失败场景"
         },
         {
           "role": "product",
           "category": "completeness",
           "severity": "major",
-          "title": "验收标准过于笼统，缺少可验证条目"
+          "title": "验收标准不可量化，缺少边界与数据校验规则"
         },
         {
           "role": "test",
           "category": "logic",
           "severity": "major",
-          "title": "自动重试策略未定义，存在重复提交风险"
-        },
-        {
-          "role": "test",
-          "category": "permission",
-          "severity": "major",
-          "title": "越权与角色列表隔离缺少校验用例"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "minor",
           "title": "分页边界与排序规则未定义"
-        }
-      ]
-    },
-    {
-      "case_id": "case-005",
-      "title": "缺少数据字段定义",
-      "success": true,
-      "completeness": 1.0,
-      "issue_recall": 1.0,
-      "issue_precision": 0.1765,
-      "dedup_rate": 0.0909,
-      "duration_ms": 10477,
-      "produced": [
-        [
-          "backend",
-          "completeness"
-        ],
-        [
-          "backend",
-          "consistency"
-        ],
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "frontend",
-          "completeness"
-        ],
-        [
-          "frontend",
-          "consistency"
-        ],
-        [
-          "frontend",
-          "interaction"
-        ],
-        [
-          "frontend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "product",
-          "permission"
-        ],
-        [
-          "test",
-          "completeness"
-        ],
-        [
-          "test",
-          "data"
-        ],
-        [
-          "test",
-          "logic"
-        ],
-        [
-          "test",
-          "permission"
-        ]
-      ],
-      "golden": [
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "frontend",
-          "interaction"
-        ],
-        [
-          "product",
-          "logic"
-        ]
-      ],
-      "raw_issue_count": 22,
-      "final_issue_count": 20,
-      "issue_details": [
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "critical",
-          "title": "幂等键缺失，无法实现保存幂等"
-        },
-        {
-          "role": "backend",
-          "category": "permission",
-          "severity": "critical",
-          "title": "权限过滤未定义服务端强制与越权防护"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "幂等键与幂等范围未定义"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "幂等键未定义，无法验证保存幂等性"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "自动重试缺少次数、间隔与幂等约束"
-        },
-        {
-          "role": "backend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "分页参数与排序规则未定义"
-        },
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "major",
-          "title": "查询失败自动重试缺少边界与幂等约束"
-        },
-        {
-          "role": "backend",
-          "category": "consistency",
-          "severity": "major",
-          "title": "验收标准与查询可见性存在时序不一致风险"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "major",
-          "title": "保存幂等缺少前端交互约束"
-        },
-        {
-          "role": "frontend",
-          "category": "interaction",
-          "severity": "major",
-          "title": "查询失败自动重试缺少用户可见反馈与终止条件"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "缺少空状态与加载状态设计"
-        },
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "major",
-          "title": "角色差异展示未定义越权与切换场景"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "列表查询条件与排序规则未定义"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "major",
-          "title": "查询失败自动重试策略缺失"
-        },
-        {
-          "role": "product",
-          "category": "permission",
-          "severity": "major",
-          "title": "角色权限与数据隔离的验收标准缺失"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "major",
-          "title": "分页与查询列表的边界行为未定义"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "字段级校验规则缺失"
-        },
-        {
-          "role": "test",
-          "category": "permission",
-          "severity": "major",
-          "title": "越权与角色边界缺少校验用例定义"
-        },
-        {
-          "role": "frontend",
-          "category": "consistency",
-          "severity": "minor",
-          "title": "保存成功与列表可见性存在时序不一致风险"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "minor",
-          "title": "操作记录字段定义不完整"
-        }
-      ]
-    },
-    {
-      "case_id": "case-006",
-      "title": "缺少异常路径",
-      "success": true,
-      "completeness": 1.0,
-      "issue_recall": 1.0,
-      "issue_precision": 0.2,
-      "dedup_rate": 0.0476,
-      "duration_ms": 10709,
-      "produced": [
-        [
-          "backend",
-          "consistency"
-        ],
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "frontend",
-          "completeness"
-        ],
-        [
-          "frontend",
-          "data"
-        ],
-        [
-          "frontend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "product",
-          "consistency"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "test",
-          "completeness"
-        ],
-        [
-          "test",
-          "data"
-        ],
-        [
-          "test",
-          "logic"
-        ],
-        [
-          "test",
-          "permission"
-        ]
-      ],
-      "golden": [
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "test",
-          "logic"
-        ]
-      ],
-      "raw_issue_count": 21,
-      "final_issue_count": 20,
-      "issue_details": [
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "critical",
-          "title": "运营人员角色权限未定义"
-        },
-        {
-          "role": "product",
-          "category": "consistency",
-          "severity": "critical",
-          "title": "目标用户与权限角色不一致"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "记录编号20位数字校验规则未定义边界与失败处理"
-        },
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "major",
-          "title": "批量导入缺少幂等性与部分失败处理机制"
-        },
-        {
-          "role": "backend",
-          "category": "permission",
-          "severity": "major",
-          "title": "权限模型仅覆盖菜单展示，缺少接口级鉴权"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "major",
-          "title": "记录编号缺少唯一性约束与重复处理策略"
-        },
-        {
-          "role": "frontend",
-          "category": "data",
-          "severity": "major",
-          "title": "状态枚举取值未定义"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "缺少加载态与错误态定义"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "major",
-          "title": "记录编号校验规则未覆盖导入与表单两条路径"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "导出报表需求缺少字段与范围定义"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "批量导入缺少失败处理与结果反馈要求"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "验收标准覆盖不足"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "major",
-          "title": "“导入完成后统计条数正确”缺少可验证的口径"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "分页每页最多50条缺少边界与非法参数处理"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "major",
-          "title": "空态展示未定义触发条件与区分维度"
-        },
-        {
-          "role": "test",
-          "category": "permission",
-          "severity": "major",
-          "title": "角色与权限矩阵存在冲突且缺少越权校验用例"
-        },
-        {
-          "role": "backend",
-          "category": "consistency",
-          "severity": "minor",
-          "title": "分页上限50条未定义排序规则与越界行为"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "minor",
-          "title": "导出报表缺少字段范围、格式与数据量限制"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "minor",
-          "title": "分页上限与总条数展示规则不明确"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "minor",
-          "title": "记录编号约束缺少唯一性与校验时机说明"
-        }
-      ]
-    },
-    {
-      "case_id": "case-007",
-      "title": "表单缺少校验规则",
-      "success": true,
-      "completeness": 1.0,
-      "issue_recall": 0.75,
-      "issue_precision": 0.2308,
-      "dedup_rate": 0.1304,
-      "duration_ms": 13320,
-      "produced": [
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "frontend",
-          "completeness"
-        ],
-        [
-          "frontend",
-          "interaction"
-        ],
-        [
-          "frontend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "product",
-          "data"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "product",
-          "permission"
-        ],
-        [
-          "test",
-          "data"
-        ],
-        [
-          "test",
-          "logic"
-        ],
-        [
-          "test",
-          "permission"
-        ]
-      ],
-      "golden": [
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "interaction"
-        ],
-        [
-          "test",
-          "data"
-        ],
-        [
-          "test",
-          "logic"
-        ]
-      ],
-      "raw_issue_count": 23,
-      "final_issue_count": 20,
-      "issue_details": [
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "critical",
-          "title": "幂等键缺失，无法实现提交幂等"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "审批流程与状态流转未定义"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "幂等与自动重试冲突，缺少幂等键定义"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "major",
-          "title": "单据编号由谁生成、如何保证唯一未定义"
-        },
-        {
-          "role": "backend",
-          "category": "permission",
-          "severity": "major",
-          "title": "员工姓名由客户端提交，存在越权与数据不一致风险"
-        },
-        {
-          "role": "backend",
-          "category": "permission",
-          "severity": "major",
-          "title": "审批权限与状态流转规则未定义"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "major",
-          "title": "金额字段缺少类型约束与精度定义"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "major",
-          "title": "幂等提交缺少前端幂等键与重复提交防护"
-        },
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "major",
-          "title": "按角色展示不同入口缺少具体入口与权限边界说明"
-        },
-        {
-          "role": "frontend",
-          "category": "interaction",
-          "severity": "major",
-          "title": "提交失败自动重试缺少用户可见反馈与终止条件"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "表单字段缺少校验规则与错误提示定义"
-        },
-        {
-          "role": "product",
-          "category": "data",
-          "severity": "major",
-          "title": "字段定义缺少校验规则与来源"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "major",
-          "title": "幂等与自动重试存在冲突风险"
-        },
-        {
-          "role": "product",
-          "category": "permission",
-          "severity": "major",
-          "title": "管理员权限边界与数据范围未明确"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "验收标准过于单薄"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "major",
-          "title": "分页每页最多10条缺少边界与排序定义"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "单据编号生成规则与唯一性未定义"
         },
         {
           "role": "test",
@@ -1511,25 +429,185 @@
           "role": "test",
           "category": "permission",
           "severity": "major",
-          "title": "越权提交与审批权限的校验点未明确"
+          "title": "越权访问与列表过滤的校验规则未定义"
         },
         {
           "role": "frontend",
-          "category": "completeness",
+          "category": "consistency",
           "severity": "minor",
-          "title": "列表分页每页最多 10 条，但缺少空态、加载态和错误态定义"
+          "title": "「客户名称」非必填但无空值展示约定"
         }
       ]
     },
     {
-      "case_id": "case-008",
-      "title": "列表缺少空态与异常态",
+      "case_id": "case-003",
+      "title": "缺少权限模型",
+      "success": false,
+      "completeness": 1.0,
+      "issue_recall": 0.75,
+      "issue_precision": 0.3333,
+      "dedup_rate": 0.1667,
+      "duration_ms": 26333,
+      "produced": [
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "frontend",
+          "completeness"
+        ],
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "frontend",
+          "logic"
+        ],
+        [
+          "frontend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "product",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 18,
+      "final_issue_count": 15,
+      "issue_details": [
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "critical",
+          "title": "幂等键未定义，无法保证重复提交不生成重复申请"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "审批流转流程完全缺失"
+        },
+        {
+          "role": "backend",
+          "category": "permission",
+          "severity": "major",
+          "title": "权限模型缺少数据范围与操作边界"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "状态枚举取值与流转规则未定义"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "major",
+          "title": "自动重试与幂等、3 秒响应存在冲突风险"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "金额精度与校验规则不完整"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "major",
+          "title": "幂等重复提交缺少前端反馈与去重标识"
+        },
+        {
+          "role": "frontend",
+          "category": "interaction",
+          "severity": "major",
+          "title": "提交中与重试过程缺少用户可见状态"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "缺少申请列表页与分页交互设计"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "major",
+          "title": "金额字段校验规则不完整"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "major",
+          "title": "幂等键与重复判定规则未定义"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "状态枚举取值未定义"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "major",
+          "title": "自动重试策略与失败终态未定义"
+        },
+        {
+          "role": "frontend",
+          "category": "permission",
+          "severity": "minor",
+          "title": "未区分采购员与审批人的界面差异"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "minor",
+          "title": "金额校验规则不完整"
+        }
+      ]
+    },
+    {
+      "case_id": "case-004",
+      "title": "写操作缺少幂等性",
       "success": true,
       "completeness": 1.0,
-      "issue_recall": 1.0,
-      "issue_precision": 0.1765,
-      "dedup_rate": 0.0476,
-      "duration_ms": 9723,
+      "issue_recall": 0.75,
+      "issue_precision": 0.2,
+      "dedup_rate": 0.0909,
+      "duration_ms": 17371,
       "produced": [
         [
           "backend",
@@ -1537,7 +615,217 @@
         ],
         [
           "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "frontend",
+          "completeness"
+        ],
+        [
+          "frontend",
           "consistency"
+        ],
+        [
+          "frontend",
+          "data"
+        ],
+        [
+          "frontend",
+          "logic"
+        ],
+        [
+          "frontend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "product",
+          "consistency"
+        ],
+        [
+          "product",
+          "logic"
+        ],
+        [
+          "test",
+          "completeness"
+        ],
+        [
+          "test",
+          "data"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "product",
+          "logic"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 22,
+      "final_issue_count": 20,
+      "issue_details": [
+        {
+          "role": "backend",
+          "category": "permission",
+          "severity": "critical",
+          "title": "“申请人”字段可被客户端伪造，越权提交他人申请"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "critical",
+          "title": "提交失败自动重试缺少幂等设计，会产生重复申请"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "审批流程缺失：管理员审批操作与状态流转未定义"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "critical",
+          "title": "状态枚举值未定义，验收标准无法验证"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "critical",
+          "title": "金额校验规则不完整，缺少边界与非法值用例"
+        },
+        {
+          "role": "backend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "分页接口缺少排序规则、总数与越界处理定义"
+        },
+        {
+          "role": "backend",
+          "category": "permission",
+          "severity": "major",
+          "title": "审批接口缺少角色与状态校验，且未定义审批动作模型"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "金额字段缺少精度、范围与币种约束"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "major",
+          "title": "提交失败自动重试缺少次数与终止条件"
+        },
+        {
+          "role": "frontend",
+          "category": "permission",
+          "severity": "major",
+          "title": "管理员审批入口与普通用户视图差异未定义"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "缺少列表空状态与加载/错误状态定义"
+        },
+        {
+          "role": "frontend",
+          "category": "data",
+          "severity": "major",
+          "title": "金额校验规则不完整（范围、负数、精度提示）"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "major",
+          "title": "提交失败自动重试缺少边界与幂等约束"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "申请编号生成规则与唯一性未定义"
+        },
+        {
+          "role": "product",
+          "category": "consistency",
+          "severity": "major",
+          "title": "金额校验规则与数据字段定义不一致"
+        },
+        {
+          "role": "test",
+          "category": "completeness",
+          "severity": "major",
+          "title": "分页边界与审批权限的异常路径未覆盖"
+        },
+        {
+          "role": "test",
+          "category": "data",
+          "severity": "major",
+          "title": "申请编号与申请人字段的生成与校验规则缺失"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "major",
+          "title": "自动重试策略未定义，存在重复提交风险"
+        },
+        {
+          "role": "frontend",
+          "category": "consistency",
+          "severity": "minor",
+          "title": "状态枚举取值与提交后初始状态未定义"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "minor",
+          "title": "分页规则不完整，缺少排序与总数说明"
+        }
+      ]
+    },
+    {
+      "case_id": "case-005",
+      "title": "缺少数据字段定义",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 0.1765,
+      "dedup_rate": 0.0476,
+      "duration_ms": 17666,
+      "produced": [
+        [
+          "backend",
+          "completeness"
         ],
         [
           "backend",
@@ -1577,7 +865,11 @@
         ],
         [
           "product",
-          "consistency"
+          "data"
+        ],
+        [
+          "product",
+          "interaction"
         ],
         [
           "product",
@@ -1621,121 +913,745 @@
           "role": "backend",
           "category": "permission",
           "severity": "critical",
-          "title": "权限过滤未定义服务端强制约束，存在越权风险"
-        },
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "critical",
-          "title": "角色差异展示缺少前端可见的权限边界说明"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "critical",
-          "title": "记录编号必填与条件查询列表的交互矛盾"
+          "title": "列表查询缺少服务端强制数据隔离"
         },
         {
           "role": "product",
-          "category": "logic",
+          "category": "completeness",
           "severity": "critical",
-          "title": "记录编号必填与条件查询列表自相矛盾"
+          "title": "幂等键的生成与传递规则未定义"
         },
         {
           "role": "test",
           "category": "logic",
           "severity": "critical",
-          "title": "记录编号必填与条件查询列表需求自相矛盾"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "超时自动重试与幂等约束缺少可测参数"
-        },
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "major",
-          "title": "“查询超时自动重试”与“幂等”缺少重试策略与幂等键定义"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "major",
-          "title": "分页缺少排序规则与游标/页码语义，且未定义总数"
+          "title": "幂等键重复返回已有记录时未校验请求内容一致性"
         },
         {
           "role": "backend",
           "category": "completeness",
           "severity": "major",
-          "title": "查询条件与字段校验规则缺失"
+          "title": "分页参数与排序规则未定义"
         },
         {
-          "role": "frontend",
+          "role": "backend",
           "category": "data",
           "severity": "major",
-          "title": "字段校验规则与展示格式未定义"
+          "title": "幂等键缺少唯一性约束与作用域定义"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "major",
+          "title": "查询失败自动重试缺少边界与幂等性说明"
         },
         {
           "role": "frontend",
-          "category": "completeness",
+          "category": "logic",
           "severity": "major",
-          "title": "缺少空态、加载态与错误态定义"
+          "title": "幂等键重复返回已有记录时前端无对应处理"
         },
         {
           "role": "frontend",
           "category": "interaction",
           "severity": "major",
-          "title": "超时自动重试缺少次数、间隔与用户可见反馈"
+          "title": "查询失败自动重试缺少重试上限与失败终态设计"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "缺少保存操作记录的表单/交互设计"
+        },
+        {
+          "role": "frontend",
+          "category": "permission",
+          "severity": "major",
+          "title": "角色差异仅体现在数据范围，未定义前端可见性差异"
+        },
+        {
+          "role": "product",
+          "category": "data",
+          "severity": "major",
+          "title": "操作人字段来源与操作时间语义未明确"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "major",
+          "title": "查询失败自动重试缺少重试策略与终止条件"
         },
         {
           "role": "product",
           "category": "completeness",
           "severity": "major",
-          "title": "异常流程仅覆盖超时重试，缺少其他失败处理"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "缺少分页与排序规则定义"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "验收标准过于笼统，不可验证"
+          "title": "验收标准过于单薄，缺少权限与异常场景验收"
         },
         {
           "role": "test",
           "category": "completeness",
           "severity": "major",
-          "title": "分页与查询结果一致性缺少边界定义"
+          "title": "分页边界与排序规则未定义"
         },
         {
           "role": "test",
           "category": "data",
           "severity": "major",
-          "title": "字段级校验规则缺失"
+          "title": "幂等键作用域与生成规则未定义"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "major",
+          "title": "查询失败自动重试缺少次数、间隔与幂等/超时约束"
         },
         {
           "role": "test",
           "category": "permission",
           "severity": "major",
-          "title": "越权与角色切换场景未定义预期行为"
+          "title": "角色过滤与越权访问缺少字段级/接口级校验用例"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "minor",
+          "title": "记录ID 生成方式与操作时间来源未定义"
+        },
+        {
+          "role": "frontend",
+          "category": "data",
+          "severity": "minor",
+          "title": "列表分页每页最多20条，但缺少分页交互与空态定义"
+        },
+        {
+          "role": "product",
+          "category": "interaction",
+          "severity": "minor",
+          "title": "列表查询缺少筛选、排序与分页交互定义"
+        }
+      ]
+    },
+    {
+      "case_id": "case-006",
+      "title": "缺少异常路径",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 0.2143,
+      "dedup_rate": 0.0952,
+      "duration_ms": 11033,
+      "produced": [
+        [
+          "backend",
+          "consistency"
+        ],
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "frontend",
+          "completeness"
+        ],
+        [
+          "frontend",
+          "consistency"
+        ],
+        [
+          "frontend",
+          "logic"
+        ],
+        [
+          "frontend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "product",
+          "consistency"
+        ],
+        [
+          "product",
+          "logic"
+        ],
+        [
+          "test",
+          "completeness"
+        ],
+        [
+          "test",
+          "data"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 21,
+      "final_issue_count": 19,
+      "issue_details": [
+        {
+          "role": "frontend",
+          "category": "permission",
+          "severity": "critical",
+          "title": "运营人员角色权限未定义，与用户故事冲突"
+        },
+        {
+          "role": "product",
+          "category": "consistency",
+          "severity": "critical",
+          "title": "目标用户与权限角色定义冲突"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "critical",
+          "title": "记录编号校验规则存在歧义，缺少边界与异常用例"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "major",
+          "title": "批量导入缺少事务边界与部分失败语义"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "记录编号唯一性与重复导入处理未定义"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "导入失败与导出失败的错误态未定义"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "导入过程缺少加载态与进度反馈"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "major",
+          "title": "记录编号校验规则缺少错误提示与前端校验时机定义"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "major",
+          "title": "导入异常处理策略未定义（部分失败/重复数据）"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "批量导入缺少文件格式、模板与字段映射规则"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "验收标准过于单薄，缺少关键场景验收"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "major",
+          "title": "分页每页最多 50 条缺少边界与非法值用例"
+        },
+        {
+          "role": "test",
+          "category": "data",
+          "severity": "major",
+          "title": "导入统计条数口径未定义，无法验证“统计条数正确”"
+        },
+        {
+          "role": "test",
+          "category": "completeness",
+          "severity": "major",
+          "title": "角色与权限矩阵不完整，缺少越权与菜单可见性用例"
         },
         {
           "role": "backend",
           "category": "consistency",
           "severity": "minor",
-          "title": "“按角色展示不同记录列表”与权限规则表述重叠且未定义角色来源"
+          "title": "分页上限 50 与导出报表范围关系未说明"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "minor",
+          "title": "字段类型与枚举取值未约束"
+        },
+        {
+          "role": "frontend",
+          "category": "consistency",
+          "severity": "minor",
+          "title": "分页每页最多 50 条但未定义默认值与页码越界处理"
         },
         {
           "role": "product",
-          "category": "consistency",
+          "category": "completeness",
           "severity": "minor",
-          "title": "角色定义与权限描述不一致"
+          "title": "导出报表的范围与字段未定义"
+        },
+        {
+          "role": "test",
+          "category": "completeness",
+          "severity": "minor",
+          "title": "空态展示缺少触发条件与内容定义"
+        }
+      ]
+    },
+    {
+      "case_id": "case-007",
+      "title": "表单缺少校验规则",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 0.2667,
+      "dedup_rate": 0.1667,
+      "duration_ms": 12565,
+      "produced": [
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "frontend",
+          "completeness"
+        ],
+        [
+          "frontend",
+          "data"
+        ],
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "frontend",
+          "logic"
+        ],
+        [
+          "frontend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "product",
+          "data"
+        ],
+        [
+          "product",
+          "interaction"
+        ],
+        [
+          "product",
+          "logic"
+        ],
+        [
+          "test",
+          "completeness"
+        ],
+        [
+          "test",
+          "data"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "test",
+          "data"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 24,
+      "final_issue_count": 20,
+      "issue_details": [
+        {
+          "role": "frontend",
+          "category": "interaction",
+          "severity": "critical",
+          "title": "提交失败自动重试缺少用户可见状态与终止条件"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "critical",
+          "title": "提交幂等缺少前端幂等键生成与复用规则"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "审批流程完全缺失"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "验收标准过于笼统，无法验证"
+        },
+        {
+          "role": "test",
+          "category": "data",
+          "severity": "critical",
+          "title": "金额字段缺少取值边界与精度校验"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "单据编号生成规则与唯一性未定义"
+        },
+        {
+          "role": "backend",
+          "category": "permission",
+          "severity": "major",
+          "title": "审批权限缺少数据范围与越权校验"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "major",
+          "title": "幂等键与自动重试机制未定义，存在重复单据风险"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "状态枚举未定义取值与流转规则"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "金额字段缺少币种、精度与取值范围约束"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "列表分页缺少空态、加载态与错误态定义"
+        },
+        {
+          "role": "frontend",
+          "category": "permission",
+          "severity": "major",
+          "title": "按角色展示不同入口缺少具体入口与路由定义"
+        },
+        {
+          "role": "frontend",
+          "category": "data",
+          "severity": "major",
+          "title": "表单字段缺少校验规则与只读/自动生成说明"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "major",
+          "title": "幂等性与自动重试的交互逻辑未定义"
+        },
+        {
+          "role": "product",
+          "category": "data",
+          "severity": "major",
+          "title": "数据字段定义不完整"
+        },
+        {
+          "role": "product",
+          "category": "interaction",
+          "severity": "major",
+          "title": "角色入口与页面流程未定义"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "major",
+          "title": "“提交失败自动重试”缺少重试策略与终止条件"
+        },
+        {
+          "role": "test",
+          "category": "completeness",
+          "severity": "major",
+          "title": "分页边界与审批相关异常路径缺失"
+        },
+        {
+          "role": "test",
+          "category": "data",
+          "severity": "major",
+          "title": "单据编号与状态的生成规则、枚举值未定义"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "major",
+          "title": "幂等键与幂等窗口未定义，无法验证重复提交"
+        }
+      ]
+    },
+    {
+      "case_id": "case-008",
+      "title": "列表缺少空态与异常态",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 0.2,
+      "dedup_rate": 0.0909,
+      "duration_ms": 15286,
+      "produced": [
+        [
+          "backend",
+          "completeness"
+        ],
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "frontend",
+          "completeness"
+        ],
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "frontend",
+          "logic"
+        ],
+        [
+          "frontend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "product",
+          "interaction"
+        ],
+        [
+          "product",
+          "logic"
+        ],
+        [
+          "test",
+          "completeness"
+        ],
+        [
+          "test",
+          "consistency"
+        ],
+        [
+          "test",
+          "data"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "product",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 22,
+      "final_issue_count": 20,
+      "issue_details": [
+        {
+          "role": "backend",
+          "category": "permission",
+          "severity": "critical",
+          "title": "普通用户查询缺少数据范围强制过滤"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "critical",
+          "title": "记录编号必填与按条件查询列表的交互冲突"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "critical",
+          "title": "记录编号必填与条件查询列表需求冲突"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "验收标准过于笼统，无法验证"
+        },
+        {
+          "role": "test",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "状态枚举取值未定义，筛选用例无法设计"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "critical",
+          "title": "记录编号必填与列表查询语义冲突"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "major",
+          "title": "分页参数与排序规则未定义"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "记录编号必填与列表查询语义冲突"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "major",
+          "title": "超时自动重试缺少边界与幂等保障说明"
+        },
+        {
+          "role": "frontend",
+          "category": "interaction",
+          "severity": "major",
+          "title": "缺少空态、加载态与错误态设计"
+        },
+        {
+          "role": "frontend",
+          "category": "interaction",
+          "severity": "major",
+          "title": "自动重试缺少前端可见反馈与终止条件"
+        },
+        {
+          "role": "frontend",
+          "category": "permission",
+          "severity": "major",
+          "title": "角色差异展示未定义前端可见范围与越权兜底"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "状态枚举取值未定义"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "major",
+          "title": "超时自动重试缺少边界与失败处理"
+        },
+        {
+          "role": "test",
+          "category": "data",
+          "severity": "major",
+          "title": "分页参数与越界行为未定义"
+        },
+        {
+          "role": "test",
+          "category": "consistency",
+          "severity": "major",
+          "title": "幂等要求与权限过滤、重试的交互未说明"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "major",
+          "title": "超时自动重试缺少次数、间隔与终止条件"
+        },
+        {
+          "role": "backend",
+          "category": "completeness",
+          "severity": "minor",
+          "title": "状态枚举取值与筛选语义未定义"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "minor",
+          "title": "分页交互细节未定义"
+        },
+        {
+          "role": "product",
+          "category": "interaction",
+          "severity": "minor",
+          "title": "分页交互细节缺失"
         }
       ]
     },
@@ -1746,639 +1662,13 @@
       "completeness": 1.0,
       "issue_recall": 1.0,
       "issue_precision": 0.2143,
-      "dedup_rate": 0.1667,
-      "duration_ms": 16996,
-      "produced": [
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "frontend",
-          "completeness"
-        ],
-        [
-          "frontend",
-          "data"
-        ],
-        [
-          "frontend",
-          "interaction"
-        ],
-        [
-          "frontend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "product",
-          "consistency"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "test",
-          "completeness"
-        ],
-        [
-          "test",
-          "data"
-        ],
-        [
-          "test",
-          "logic"
-        ]
-      ],
-      "golden": [
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "product",
-          "logic"
-        ]
-      ],
-      "raw_issue_count": 24,
-      "final_issue_count": 20,
-      "issue_details": [
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "critical",
-          "title": "多级审批流程未定义：层级、顺序、驳回与状态机缺失"
-        },
-        {
-          "role": "backend",
-          "category": "permission",
-          "severity": "critical",
-          "title": "审批人可提交申请与角色职责冲突，且权限模型未定义数据范围"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "多级审批流程未定义，缺少审批层级、流转规则与驳回处理"
-        },
-        {
-          "role": "product",
-          "category": "consistency",
-          "severity": "critical",
-          "title": "角色与用户故事错位，审批人职责被写成申请人行为"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "多级审批的层级、顺序与状态流转未定义，无法设计测试用例"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "幂等机制未定义幂等键与重复提交的响应语义"
-        },
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "major",
-          "title": "幂等机制未定义幂等键与作用范围"
-        },
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "major",
-          "title": "异常自动重试缺少边界，存在重复审批与数据不一致风险"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "major",
-          "title": "数据模型缺少关键字段与金额精度定义"
-        },
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "major",
-          "title": "「普通用户」角色定义缺失，与申请人/审批人关系不明"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "多级审批的层级、流转规则与前端展示方式未定义"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "major",
-          "title": "审批人角色被赋予申请人职责，角色职责混淆"
-        },
-        {
-          "role": "frontend",
-          "category": "interaction",
-          "severity": "major",
-          "title": "幂等提交与自动重试缺少前端交互约定，存在重复提交与无反馈风险"
-        },
-        {
-          "role": "frontend",
-          "category": "data",
-          "severity": "major",
-          "title": "状态枚举取值未定义，进度查询与列表筛选无法实现"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "major",
-          "title": "幂等与自动重试规则不明确，存在重复提交风险"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "权限矩阵不完整，缺少数据可见范围与操作权限定义"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "状态枚举未定义取值与流转规则"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "major",
-          "title": "分页与角色列表的排序、越界及权限边界未定义"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "major",
-          "title": "自动重试策略缺失，存在重复提交与无限重试风险"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "金额字段缺少取值范围、精度与边界校验规则"
-        }
-      ]
-    },
-    {
-      "case_id": "case-010",
-      "title": "列表缺少分页上限",
-      "success": true,
-      "completeness": 1.0,
-      "issue_recall": 1.0,
-      "issue_precision": 0.25,
-      "dedup_rate": 0.0476,
-      "duration_ms": 10696,
-      "produced": [
-        [
-          "backend",
-          "completeness"
-        ],
-        [
-          "backend",
-          "consistency"
-        ],
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "frontend",
-          "completeness"
-        ],
-        [
-          "frontend",
-          "data"
-        ],
-        [
-          "frontend",
-          "interaction"
-        ],
-        [
-          "frontend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "product",
-          "permission"
-        ],
-        [
-          "test",
-          "completeness"
-        ],
-        [
-          "test",
-          "data"
-        ],
-        [
-          "test",
-          "logic"
-        ]
-      ],
-      "golden": [
-        [
-          "backend",
-          "consistency"
-        ],
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "test",
-          "logic"
-        ]
-      ],
-      "raw_issue_count": 21,
-      "final_issue_count": 20,
-      "issue_details": [
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "critical",
-          "title": "幂等键与幂等范围未定义"
-        },
-        {
-          "role": "backend",
-          "category": "permission",
-          "severity": "critical",
-          "title": "权限过滤未定义服务端强制与越权防护"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "critical",
-          "title": "查询与提交语义混淆，需求自相矛盾"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "critical",
-          "title": "记录编号必填与批量查询场景冲突"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "「记录编号必填」与「批量查询列表」语义冲突"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "幂等与重试缺少幂等键、重试次数与超时定义"
-        },
-        {
-          "role": "backend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "分页与排序规则缺失"
-        },
-        {
-          "role": "backend",
-          "category": "consistency",
-          "severity": "major",
-          "title": "状态枚举与日期格式未定义"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "major",
-          "title": "记录编号必填与批量查询语义冲突"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "批量查询缺少空/加载/错误状态定义"
-        },
-        {
-          "role": "frontend",
-          "category": "interaction",
-          "severity": "major",
-          "title": "提交幂等与自动重试缺少前端交互反馈"
-        },
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "major",
-          "title": "角色差异展示未定义可见字段与操作差异"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "major",
-          "title": "记录编号必填与批量查询语义冲突"
-        },
-        {
-          "role": "product",
-          "category": "permission",
-          "severity": "major",
-          "title": "权限规则缺少越权与边界场景定义"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "查询流程与筛选规则缺失"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "验收标准过于笼统，不可验证"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "字段级校验规则缺失（金额、状态、日期）"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "major",
-          "title": "权限过滤与「按角色展示不同列表」的判定规则不明确"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "major",
-          "title": "验收标准与异常路径不可测"
-        },
-        {
-          "role": "frontend",
-          "category": "data",
-          "severity": "minor",
-          "title": "字段类型与校验规则不完整"
-        }
-      ]
-    },
-    {
-      "case_id": "case-011",
-      "title": "纯背景描述无功能需求",
-      "success": true,
-      "completeness": 0.0,
-      "issue_recall": 0.75,
-      "issue_precision": 0.2308,
-      "dedup_rate": 0.0,
-      "duration_ms": 12956,
-      "produced": [
-        [
-          "backend",
-          "completeness"
-        ],
-        [
-          "backend",
-          "consistency"
-        ],
-        [
-          "backend",
-          "data"
-        ],
-        [
-          "backend",
-          "logic"
-        ],
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "frontend",
-          "completeness"
-        ],
-        [
-          "frontend",
-          "data"
-        ],
-        [
-          "frontend",
-          "logic"
-        ],
-        [
-          "frontend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "product",
-          "logic"
-        ],
-        [
-          "test",
-          "completeness"
-        ],
-        [
-          "test",
-          "data"
-        ]
-      ],
-      "golden": [
-        [
-          "backend",
-          "permission"
-        ],
-        [
-          "product",
-          "completeness"
-        ],
-        [
-          "test",
-          "completeness"
-        ],
-        [
-          "test",
-          "logic"
-        ]
-      ],
-      "raw_issue_count": 20,
-      "final_issue_count": 20,
-      "issue_details": [
-        {
-          "role": "backend",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "需求解析结果为空，无法进行后端设计审查"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "需求解析结果为空，无法进行前端信息架构与交互审查"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "缺少业务目标与可量化指标"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "缺少用户故事与功能需求"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "缺少目标用户与角色定义"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "未定义审批流程的层级、节点与流转规则，无法验证多级审批"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "critical",
-          "title": "需求仅有背景描述，缺少任何可测试的功能与验收标准"
-        },
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "major",
-          "title": "多级审批链路的流转规则与状态机未定义"
-        },
-        {
-          "role": "backend",
-          "category": "consistency",
-          "severity": "major",
-          "title": "幂等性与并发控制要求缺失"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "major",
-          "title": "数据模型与关键字段未定义"
-        },
-        {
-          "role": "backend",
-          "category": "permission",
-          "severity": "major",
-          "title": "权限模型缺失，无法界定审批人与操作边界"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "major",
-          "title": "多级审批链条未定义状态与流转规则，前端无法设计审批进度展示"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "未定义空/加载/错误状态及异常流程，前端状态设计缺失"
-        },
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "major",
-          "title": "未定义角色与权限，无法设计角色差异展示"
-        },
-        {
-          "role": "frontend",
-          "category": "data",
-          "severity": "major",
-          "title": "缺少数据字段定义，表单校验与列表展示无依据"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "major",
-          "title": "审批流程规则未定义"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "缺少异常流程与验收标准"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "major",
-          "title": "未定义异常与边界路径（驳回、超时、撤回、审批人缺失）"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "未定义数据字段与校验规则，无法进行字段级测试"
-        },
-        {
-          "role": "test",
-          "category": "completeness",
-          "severity": "major",
-          "title": "未定义权限模型，无法验证审批权限与数据可见性"
-        }
-      ]
-    },
-    {
-      "case_id": "case-012",
-      "title": "缺少需求背景",
-      "success": true,
-      "completeness": 1.0,
-      "issue_recall": 1.0,
-      "issue_precision": 0.2308,
       "dedup_rate": 0.1304,
-      "duration_ms": 24783,
+      "duration_ms": 19218,
       "produced": [
+        [
+          "backend",
+          "consistency"
+        ],
         [
           "backend",
           "data"
@@ -2397,7 +1687,7 @@
         ],
         [
           "frontend",
-          "interaction"
+          "consistency"
         ],
         [
           "frontend",
@@ -2435,7 +1725,7 @@
       "golden": [
         [
           "backend",
-          "logic"
+          "data"
         ],
         [
           "product",
@@ -2451,123 +1741,765 @@
       "issue_details": [
         {
           "role": "backend",
-          "category": "data",
-          "severity": "critical",
-          "title": "工单编号由客户端传入且必填，缺少唯一性与生成规则"
-        },
-        {
-          "role": "backend",
           "category": "logic",
           "severity": "critical",
-          "title": "幂等机制未定义幂等键与作用范围"
-        },
-        {
-          "role": "frontend",
-          "category": "permission",
-          "severity": "critical",
-          "title": "角色差异展示缺少前端权限控制与越权防护"
-        },
-        {
-          "role": "product",
-          "category": "logic",
-          "severity": "critical",
-          "title": "幂等机制未定义幂等键与重复提交判定规则"
+          "title": "多级审批流程未定义"
         },
         {
           "role": "product",
           "category": "completeness",
           "severity": "critical",
-          "title": "验收标准过于单薄，无法覆盖核心功能"
-        },
-        {
-          "role": "test",
-          "category": "logic",
-          "severity": "critical",
-          "title": "幂等键未定义，重复提交判定依据缺失"
-        },
-        {
-          "role": "backend",
-          "category": "logic",
-          "severity": "major",
-          "title": "“异常自动重试”与幂等叠加，存在重复创建与重试边界不清风险"
-        },
-        {
-          "role": "backend",
-          "category": "data",
-          "severity": "major",
-          "title": "分页参数与排序规则未定义，且缺少上限校验"
-        },
-        {
-          "role": "backend",
-          "category": "permission",
-          "severity": "major",
-          "title": "列表权限过滤未说明实现层级，存在越权风险"
-        },
-        {
-          "role": "frontend",
-          "category": "completeness",
-          "severity": "major",
-          "title": "列表分页缺少空态、加载态与错误态设计"
-        },
-        {
-          "role": "frontend",
-          "category": "logic",
-          "severity": "major",
-          "title": "创建成功后缺少跳转或列表刷新逻辑"
-        },
-        {
-          "role": "frontend",
-          "category": "interaction",
-          "severity": "major",
-          "title": "工单编号由用户手填，缺少唯一性校验与重复提示"
-        },
-        {
-          "role": "frontend",
-          "category": "interaction",
-          "severity": "major",
-          "title": "提交异常自动重试缺少前端状态反馈与重试上限"
-        },
-        {
-          "role": "product",
-          "category": "completeness",
-          "severity": "major",
-          "title": "工单状态枚举与流转规则未定义"
+          "title": "多级审批流程未定义"
         },
         {
           "role": "product",
           "category": "consistency",
+          "severity": "critical",
+          "title": "审批人角色与提交申请职责矛盾"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "critical",
+          "title": "多级审批流程未定义，无法设计审批路径测试用例"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
           "severity": "major",
-          "title": "工单编号必填但未定义生成规则与唯一性约束"
+          "title": "幂等与自动重试机制未定义"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "数据模型缺少关键字段"
+        },
+        {
+          "role": "backend",
+          "category": "permission",
+          "severity": "major",
+          "title": "权限模型与列表可见范围不明确"
+        },
+        {
+          "role": "frontend",
+          "category": "consistency",
+          "severity": "major",
+          "title": "审批人角色职责与用户故事自相矛盾"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "major",
+          "title": "幂等与自动重试的前端交互未定义"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "缺少状态枚举取值与状态流转定义"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "缺少空态、加载态与错误态设计"
+        },
+        {
+          "role": "frontend",
+          "category": "permission",
+          "severity": "major",
+          "title": "角色可见列表差异未具体化"
         },
         {
           "role": "product",
           "category": "logic",
           "severity": "major",
-          "title": "异常自动重试策略缺失，存在重复创建风险"
+          "title": "异常自动重试缺少边界与幂等键定义"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "状态枚举取值与流转规则缺失"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "验收标准缺少多级审批与权限隔离验证"
         },
         {
           "role": "test",
           "category": "logic",
           "severity": "major",
-          "title": "分页边界与排序规则未定义"
-        },
-        {
-          "role": "test",
-          "category": "data",
-          "severity": "major",
-          "title": "字段级校验规则缺失（长度、格式、枚举值、日期来源）"
+          "title": "幂等机制未定义幂等键与重复提交的判定口径"
         },
         {
           "role": "test",
           "category": "logic",
           "severity": "major",
-          "title": "自动重试策略未定义，无法验证重试边界"
+          "title": "自动重试策略未定义，无法验证重试边界与副作用"
         },
         {
           "role": "test",
           "category": "permission",
           "severity": "major",
-          "title": "越权访问与角色切换的校验用例缺失"
+          "title": "角色与列表可见范围未定义，无法验证越权与数据隔离"
+        },
+        {
+          "role": "test",
+          "category": "data",
+          "severity": "major",
+          "title": "金额字段缺少取值范围与精度边界定义"
+        },
+        {
+          "role": "backend",
+          "category": "consistency",
+          "severity": "minor",
+          "title": "角色定义与用户故事存在矛盾"
+        }
+      ]
+    },
+    {
+      "case_id": "case-010",
+      "title": "列表缺少分页上限",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 0.25,
+      "dedup_rate": 0.0476,
+      "duration_ms": 17747,
+      "produced": [
+        [
+          "backend",
+          "consistency"
+        ],
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "frontend",
+          "completeness"
+        ],
+        [
+          "frontend",
+          "data"
+        ],
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "frontend",
+          "logic"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "product",
+          "data"
+        ],
+        [
+          "product",
+          "logic"
+        ],
+        [
+          "product",
+          "permission"
+        ],
+        [
+          "test",
+          "completeness"
+        ],
+        [
+          "test",
+          "data"
+        ],
+        [
+          "test",
+          "logic"
+        ],
+        [
+          "test",
+          "permission"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "consistency"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "product",
+          "logic"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 21,
+      "final_issue_count": 20,
+      "issue_details": [
+        {
+          "role": "backend",
+          "category": "permission",
+          "severity": "critical",
+          "title": "权限过滤未定义在服务端强制实施"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "批量查询与记录编号必填存在矛盾，未定义批量输入方式"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "“批量查询”的批量语义与输入方式未定义"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "critical",
+          "title": "查询与提交语义矛盾，需求自相矛盾"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "critical",
+          "title": "幂等与自动重试缺少幂等键及重试边界定义"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "critical",
+          "title": "记录编号必填与批量查询语义冲突"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "major",
+          "title": "幂等键与幂等范围未定义"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "批量查询缺少分页与批量上限定义"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "major",
+          "title": "自动重试与幂等的关系及重试策略未定义"
+        },
+        {
+          "role": "frontend",
+          "category": "interaction",
+          "severity": "major",
+          "title": "未定义空态、加载态与错误态展示"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "major",
+          "title": "自动重试未定义次数、间隔与用户可见性"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "major",
+          "title": "角色差异仅描述为“不同列表”，未定义具体差异"
+        },
+        {
+          "role": "product",
+          "category": "permission",
+          "severity": "major",
+          "title": "权限规则与“按角色展示不同列表”的落地方式不明确"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "验收标准过于笼统，不可验证"
+        },
+        {
+          "role": "test",
+          "category": "data",
+          "severity": "major",
+          "title": "字段校验规则缺失（金额、状态、日期、申请人）"
+        },
+        {
+          "role": "test",
+          "category": "permission",
+          "severity": "major",
+          "title": "越权查询缺少字段级与批量场景校验用例"
+        },
+        {
+          "role": "test",
+          "category": "completeness",
+          "severity": "major",
+          "title": "验收标准过于笼统，缺少可测的异常与边界用例"
+        },
+        {
+          "role": "backend",
+          "category": "consistency",
+          "severity": "minor",
+          "title": "记录编号必填与批量查询语义冲突"
+        },
+        {
+          "role": "frontend",
+          "category": "data",
+          "severity": "minor",
+          "title": "字段校验规则缺失（金额、日期、状态）"
+        },
+        {
+          "role": "product",
+          "category": "data",
+          "severity": "minor",
+          "title": "字段定义缺少取值约束与展示规则"
+        }
+      ]
+    },
+    {
+      "case_id": "case-011",
+      "title": "纯背景描述无功能需求",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 0.2667,
+      "dedup_rate": 0.1667,
+      "duration_ms": 18630,
+      "produced": [
+        [
+          "backend",
+          "completeness"
+        ],
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "frontend",
+          "completeness"
+        ],
+        [
+          "frontend",
+          "data"
+        ],
+        [
+          "frontend",
+          "logic"
+        ],
+        [
+          "frontend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "product",
+          "data"
+        ],
+        [
+          "product",
+          "logic"
+        ],
+        [
+          "product",
+          "permission"
+        ],
+        [
+          "test",
+          "completeness"
+        ],
+        [
+          "test",
+          "data"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "test",
+          "completeness"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 24,
+      "final_issue_count": 20,
+      "issue_details": [
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "critical",
+          "title": "审批状态与审批意见字段无法支撑多级审批链路的完整记录"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "原始需求过于笼统，缺少可验证的业务目标与量化指标"
+        },
+        {
+          "role": "backend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "异常流程缺少状态机与超时/离职转派的落地机制"
+        },
+        {
+          "role": "backend",
+          "category": "permission",
+          "severity": "major",
+          "title": "权限模型未定义数据可见范围与越权校验规则"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "major",
+          "title": "缺少幂等与并发控制设计，存在重复审批风险"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "major",
+          "title": "缺少流程定义与流程实例的数据模型"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "列表页缺少空态、加载态与错误态设计"
+        },
+        {
+          "role": "frontend",
+          "category": "permission",
+          "severity": "major",
+          "title": "审批人“转办/加签”缺少人员选择与权限校验规则"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "审批状态枚举未定义，前端无法渲染状态与筛选"
+        },
+        {
+          "role": "frontend",
+          "category": "data",
+          "severity": "major",
+          "title": "附件字段类型与校验规则缺失"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "major",
+          "title": "驳回后重新提交与撤回的交互路径未定义"
+        },
+        {
+          "role": "product",
+          "category": "permission",
+          "severity": "major",
+          "title": "审批人权限边界与转办/加签规则不明确"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "审批类型与流程范围未定义"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "major",
+          "title": "异常流程缺少触发规则与状态定义"
+        },
+        {
+          "role": "test",
+          "category": "data",
+          "severity": "major",
+          "title": "审批状态枚举值未定义，无法校验状态流转"
+        },
+        {
+          "role": "test",
+          "category": "completeness",
+          "severity": "major",
+          "title": "异常流程缺少超时判定与转交规则的可测定义"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "major",
+          "title": "撤回与并发审批的边界条件缺失"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "major",
+          "title": "驳回后重新提交的流程走向未定义"
+        },
+        {
+          "role": "product",
+          "category": "data",
+          "severity": "minor",
+          "title": "数据字段缺少状态枚举与关键业务字段"
+        },
+        {
+          "role": "test",
+          "category": "completeness",
+          "severity": "minor",
+          "title": "字段级校验规则缺失（附件、审批意见、审批单号）"
+        }
+      ]
+    },
+    {
+      "case_id": "case-012",
+      "title": "缺少需求背景",
+      "success": true,
+      "completeness": 1.0,
+      "issue_recall": 1.0,
+      "issue_precision": 0.2,
+      "dedup_rate": 0.0909,
+      "duration_ms": 11674,
+      "produced": [
+        [
+          "backend",
+          "completeness"
+        ],
+        [
+          "backend",
+          "data"
+        ],
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "backend",
+          "permission"
+        ],
+        [
+          "frontend",
+          "completeness"
+        ],
+        [
+          "frontend",
+          "consistency"
+        ],
+        [
+          "frontend",
+          "interaction"
+        ],
+        [
+          "frontend",
+          "logic"
+        ],
+        [
+          "frontend",
+          "permission"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "product",
+          "data"
+        ],
+        [
+          "product",
+          "logic"
+        ],
+        [
+          "test",
+          "consistency"
+        ],
+        [
+          "test",
+          "data"
+        ],
+        [
+          "test",
+          "logic"
+        ]
+      ],
+      "golden": [
+        [
+          "backend",
+          "logic"
+        ],
+        [
+          "product",
+          "completeness"
+        ],
+        [
+          "product",
+          "logic"
+        ]
+      ],
+      "raw_issue_count": 22,
+      "final_issue_count": 20,
+      "issue_details": [
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "critical",
+          "title": "工单编号由客户端提供且必填，缺少唯一性与生成策略"
+        },
+        {
+          "role": "backend",
+          "category": "logic",
+          "severity": "critical",
+          "title": "幂等键未定义，且与自动重试存在冲突风险"
+        },
+        {
+          "role": "product",
+          "category": "logic",
+          "severity": "critical",
+          "title": "幂等键与重试机制未定义，存在重复工单风险"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "critical",
+          "title": "验收标准过于笼统，无法验证"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "critical",
+          "title": "幂等键未定义，无法验证重复提交行为"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "critical",
+          "title": "自动重试缺少次数、间隔与终止条件"
+        },
+        {
+          "role": "backend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "分页参数与排序规则未定义，仅约束每页上限"
+        },
+        {
+          "role": "backend",
+          "category": "permission",
+          "severity": "major",
+          "title": "列表按角色过滤的权限规则未落到查询层，存在越权风险"
+        },
+        {
+          "role": "frontend",
+          "category": "interaction",
+          "severity": "major",
+          "title": "幂等提交缺少前端交互约束"
+        },
+        {
+          "role": "frontend",
+          "category": "completeness",
+          "severity": "major",
+          "title": "缺少空/加载/错误状态定义"
+        },
+        {
+          "role": "frontend",
+          "category": "logic",
+          "severity": "major",
+          "title": "自动重试缺少次数与用户可见反馈"
+        },
+        {
+          "role": "frontend",
+          "category": "permission",
+          "severity": "major",
+          "title": "角色差异展示未定义前端可见性规则"
+        },
+        {
+          "role": "product",
+          "category": "data",
+          "severity": "major",
+          "title": "工单编号必填但未定义生成规则与唯一性"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "状态字段取值与流转未定义"
+        },
+        {
+          "role": "product",
+          "category": "completeness",
+          "severity": "major",
+          "title": "管理员角色缺少用户故事与功能定义"
+        },
+        {
+          "role": "test",
+          "category": "logic",
+          "severity": "major",
+          "title": "分页参数与越界行为未定义"
+        },
+        {
+          "role": "test",
+          "category": "data",
+          "severity": "major",
+          "title": "字段级校验规则缺失（长度、格式、枚举取值）"
+        },
+        {
+          "role": "test",
+          "category": "consistency",
+          "severity": "major",
+          "title": "权限与列表可见性缺少越权与空态验证口径"
+        },
+        {
+          "role": "backend",
+          "category": "data",
+          "severity": "minor",
+          "title": "状态枚举取值与创建日期生成规则未定义"
+        },
+        {
+          "role": "frontend",
+          "category": "consistency",
+          "severity": "minor",
+          "title": "分页每页最多 20 条缺少前端默认值与边界处理"
         }
       ]
     }

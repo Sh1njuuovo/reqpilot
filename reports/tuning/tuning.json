@@ -1,0 +1,39 @@
+{
+  "provider": "llm",
+  "retriever_backend": "keyword",
+  "max_final_issues": 20,
+  "best": "baseline",
+  "reason": "3/3 个变体把每案例问题数控制在 20 条以内，在其中选择问题召回最高的 baseline",
+  "variants": [
+    {
+      "variant": "baseline",
+      "success_rate": 1.0,
+      "avg_recall": 0.9,
+      "avg_precision": 0.2282,
+      "avg_dedup_rate": 0.0907,
+      "avg_final_issues": 19.67,
+      "avg_duration_ms": 13160.2,
+      "eligible": true
+    },
+    {
+      "variant": "evidence_first",
+      "success_rate": 1.0,
+      "avg_recall": 0.8514,
+      "avg_precision": 0.2389,
+      "avg_dedup_rate": 0.0775,
+      "avg_final_issues": 19.33,
+      "avg_duration_ms": 13269.3,
+      "eligible": true
+    },
+    {
+      "variant": "coverage_first",
+      "success_rate": 0.75,
+      "avg_recall": 0.8972,
+      "avg_precision": 0.2665,
+      "avg_dedup_rate": 0.4058,
+      "avg_final_issues": 18.75,
+      "avg_duration_ms": 23147.7,
+      "eligible": true
+    }
+  ]
+}

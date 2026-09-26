@@ -3,7 +3,7 @@
     "id": "T-001",
     "type": "database",
     "title": "核心数据表设计与索引",
-    "description": "根据数据模型建立 审批申请单 相关数据表、字段约束与查询索引。",
+    "description": "根据数据模型建立 审批申请 相关数据表、字段约束与查询索引。",
     "dependencies": [],
     "acceptance_criteria": [
       "表结构覆盖数据模型中全部字段",
@@ -11,7 +11,7 @@
     ],
     "effort": "M",
     "prd_refs": [
-      "审批申请单"
+      "审批申请"
     ]
   },
   {
@@ -221,8 +221,8 @@
   {
     "id": "T-014",
     "type": "backend",
-    "title": "审批流配置：后端接口",
-    "description": "实现 审批流配置 对应的接口、校验与权限控制。",
+    "title": "管理员配置审批流：后端接口",
+    "description": "实现 管理员配置审批流 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
@@ -237,8 +237,8 @@
   {
     "id": "T-015",
     "type": "frontend",
-    "title": "审批流配置：页面实现",
-    "description": "实现 审批流配置 页面及多状态展示。",
+    "title": "管理员配置审批流：页面实现",
+    "description": "实现 管理员配置审批流 页面及多状态展示。",
     "dependencies": [
       "T-014"
     ],
@@ -254,8 +254,8 @@
   {
     "id": "T-016",
     "type": "test",
-    "title": "审批流配置：测试用例",
-    "description": "为 审批流配置 编写功能、边界与异常用例。",
+    "title": "管理员配置审批流：测试用例",
+    "description": "为 管理员配置审批流 编写功能、边界与异常用例。",
     "dependencies": [
       "T-014",
       "T-015"
@@ -272,15 +272,15 @@
   {
     "id": "T-017",
     "type": "backend",
-    "title": "幂等提交：后端接口",
-    "description": "实现 幂等提交 对应的接口、校验与权限控制。",
+    "title": "管理员查看全部数据：后端接口",
+    "description": "实现 管理员查看全部数据 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
     "acceptance_criteria": [
       "FR-6 描述的能力可经 API 调用验证"
     ],
-    "effort": "M",
+    "effort": "S",
     "prd_refs": [
       "FR-6"
     ]
@@ -288,8 +288,8 @@
   {
     "id": "T-018",
     "type": "frontend",
-    "title": "幂等提交：页面实现",
-    "description": "实现 幂等提交 页面及多状态展示。",
+    "title": "管理员查看全部数据：页面实现",
+    "description": "实现 管理员查看全部数据 页面及多状态展示。",
     "dependencies": [
       "T-017"
     ],
@@ -297,7 +297,7 @@
       "页面与原型信息架构一致",
       "空/错误状态可见"
     ],
-    "effort": "M",
+    "effort": "S",
     "prd_refs": [
       "FR-6"
     ]
@@ -305,8 +305,8 @@
   {
     "id": "T-019",
     "type": "test",
-    "title": "幂等提交：测试用例",
-    "description": "为 幂等提交 编写功能、边界与异常用例。",
+    "title": "管理员查看全部数据：测试用例",
+    "description": "为 管理员查看全部数据 编写功能、边界与异常用例。",
     "dependencies": [
       "T-017",
       "T-018"
@@ -315,7 +315,7 @@
       "覆盖正常路径与异常路径",
       "用例通过率达到验收标准"
     ],
-    "effort": "M",
+    "effort": "S",
     "prd_refs": [
       "FR-6"
     ]
@@ -323,8 +323,8 @@
   {
     "id": "T-020",
     "type": "backend",
-    "title": "提交失败自动重试：后端接口",
-    "description": "实现 提交失败自动重试 对应的接口、校验与权限控制。",
+    "title": "普通用户查看自己记录：后端接口",
+    "description": "实现 普通用户查看自己记录 对应的接口、校验与权限控制。",
     "dependencies": [
       "T-001"
     ],
@@ -339,8 +339,8 @@
   {
     "id": "T-021",
     "type": "frontend",
-    "title": "提交失败自动重试：页面实现",
-    "description": "实现 提交失败自动重试 页面及多状态展示。",
+    "title": "普通用户查看自己记录：页面实现",
+    "description": "实现 普通用户查看自己记录 页面及多状态展示。",
     "dependencies": [
       "T-020"
     ],
@@ -356,8 +356,8 @@
   {
     "id": "T-022",
     "type": "test",
-    "title": "提交失败自动重试：测试用例",
-    "description": "为 提交失败自动重试 编写功能、边界与异常用例。",
+    "title": "普通用户查看自己记录：测试用例",
+    "description": "为 普通用户查看自己记录 编写功能、边界与异常用例。",
     "dependencies": [
       "T-020",
       "T-021"
@@ -382,7 +382,7 @@
     "acceptance_criteria": [
       "FR-8 描述的能力可经 API 调用验证"
     ],
-    "effort": "M",
+    "effort": "S",
     "prd_refs": [
       "FR-8"
     ]
@@ -399,7 +399,7 @@
       "页面与原型信息架构一致",
       "空/错误状态可见"
     ],
-    "effort": "M",
+    "effort": "S",
     "prd_refs": [
       "FR-8"
     ]
@@ -417,7 +417,7 @@
       "覆盖正常路径与异常路径",
       "用例通过率达到验收标准"
     ],
-    "effort": "M",
+    "effort": "S",
     "prd_refs": [
       "FR-8"
     ]

@@ -1,30 +1,30 @@
 {
   "name": "reqpilot",
   "repo_path": "/Users/shinjuu/intern/ReqPilot",
-  "generated_at": "2026-08-26T11:42:02.242636+00:00",
+  "generated_at": "2026-09-26T08:26:36.359810+00:00",
   "summary": {
-    "file_count_scanned": 88,
-    "approx_total_bytes": 1071017,
+    "file_count_scanned": 111,
+    "approx_total_bytes": 1309712,
     "top_extensions": [
       [
         ".py",
-        35
+        49
       ],
       [
         ".json",
-        31
+        30
       ],
       [
         ".md",
-        11
+        16
       ],
       [
         "[no extension]",
-        4
+        8
       ],
       [
         ".html",
-        2
+        3
       ],
       [
         ".csv",
@@ -46,11 +46,11 @@
     "language_counts": [
       [
         "Other",
-        51
+        60
       ],
       [
         "Python",
-        35
+        49
       ],
       [
         "TOML",
@@ -71,11 +71,18 @@
   "notebooks": [],
   "docker_files": [],
   "test_files": [
-    "reports/eval/eval_mock_latest.json",
-    "reports/eval/eval_mock_latest.md",
+    "reports/eval/eval_llm_keyword_latest.json",
+    "reports/eval/eval_llm_keyword_latest.md",
+    "tests/test_agent_checks.py",
+    "tests/test_agent_context.py",
+    "tests/test_agent_loop.py",
+    "tests/test_agent_sandbox.py",
+    "tests/test_agent_tools.py",
     "tests/test_api.py",
     "tests/test_cli.py",
     "tests/test_dedup.py",
+    "tests/test_llm_agent_step.py",
+    "tests/test_mcp.py",
     "tests/test_mock_parse.py",
     "tests/test_models.py",
     "tests/test_pipeline.py",
@@ -107,7 +114,9 @@
       "src/reqpilot/config.py"
     ],
     "database_state": [
+      "src/reqpilot/agent/sandbox.py",
       "src/reqpilot/models.py",
+      "tests/test_agent_sandbox.py",
       "tests/test_models.py"
     ],
     "devops_deploy": [
@@ -131,19 +140,22 @@
       "eval/cases/case_011.json",
       "eval/cases/case_012.json",
       "eval/knowledge/domain.json",
-      "reports/eval/eval_mock_20260826_114005.json",
-      "reports/eval/eval_mock_20260826_114005.md",
-      "reports/eval/eval_mock_20260826_114113.json",
-      "reports/eval/eval_mock_20260826_114113.md",
-      "reports/eval/eval_mock_20260826_114144.json",
-      "reports/eval/eval_mock_20260826_114144.md",
-      "reports/eval/eval_mock_latest.json",
-      "reports/eval/eval_mock_latest.md",
+      "reports/eval/eval_llm_keyword_20260826_124248.json",
+      "reports/eval/eval_llm_keyword_20260826_124248.md",
+      "reports/eval/eval_llm_keyword_latest.json",
+      "reports/eval/eval_llm_keyword_latest.md",
       "src/reqpilot/eval/__init__.py",
       "src/reqpilot/eval/runner.py",
+      "tests/test_agent_checks.py",
+      "tests/test_agent_context.py",
+      "tests/test_agent_loop.py",
+      "tests/test_agent_sandbox.py",
+      "tests/test_agent_tools.py",
       "tests/test_api.py",
       "tests/test_cli.py",
       "tests/test_dedup.py",
+      "tests/test_llm_agent_step.py",
+      "tests/test_mcp.py",
       "tests/test_mock_parse.py",
       "tests/test_models.py",
       "tests/test_pipeline.py",
@@ -154,6 +166,18 @@
       "tests/test_tasks.py"
     ],
     "frontend_mobile": [
+      ".DS_Store",
+      "reports/.DS_Store",
+      "reports/audit/overview.html",
+      "reports/audit/overview.md",
+      "reports/interview-pack/application_checklist.md",
+      "reports/interview-pack/core_code_walkthrough.md",
+      "reports/interview-pack/demo_script.md",
+      "reports/interview-pack/interview_qa.md",
+      "reports/interview-pack/ppt_prompt.md",
+      "reports/interview-pack/resume_star.md",
+      "src/.DS_Store",
+      "src/reqpilot/.DS_Store",
       "src/reqpilot/review/__init__.py",
       "src/reqpilot/review/dedup.py",
       "tests/test_review_rules.py"
@@ -170,6 +194,8 @@
       "reports/demo/tasks.csv",
       "reports/demo/tasks.json",
       "reports/demo/tasks.md",
+      "reports/interview-pack/application_checklist.md",
+      "reports/interview-pack/demo_script.md",
       "src/reqpilot/api.py",
       "src/reqpilot/mcp_server.py",
       "tests/test_api.py"
@@ -178,20 +204,26 @@
       "src/reqpilot/models.py",
       "tests/test_models.py"
     ],
+    "security_auth": [
+      "reports/audit/audit.json",
+      "reports/audit/overview.html",
+      "reports/audit/overview.md"
+    ],
     "testing_quality": [
       ".coverage",
-      "reports/eval/eval_mock_20260826_114005.json",
-      "reports/eval/eval_mock_20260826_114005.md",
-      "reports/eval/eval_mock_20260826_114113.json",
-      "reports/eval/eval_mock_20260826_114113.md",
-      "reports/eval/eval_mock_20260826_114144.json",
-      "reports/eval/eval_mock_20260826_114144.md",
-      "reports/eval/eval_mock_latest.json",
-      "reports/eval/eval_mock_latest.md",
+      "reports/eval/eval_llm_keyword_latest.json",
+      "reports/eval/eval_llm_keyword_latest.md",
       "src/reqpilot/providers/mock.py",
+      "tests/test_agent_checks.py",
+      "tests/test_agent_context.py",
+      "tests/test_agent_loop.py",
+      "tests/test_agent_sandbox.py",
+      "tests/test_agent_tools.py",
       "tests/test_api.py",
       "tests/test_cli.py",
       "tests/test_dedup.py",
+      "tests/test_llm_agent_step.py",
+      "tests/test_mcp.py",
       "tests/test_mock_parse.py",
       "tests/test_models.py",
       "tests/test_pipeline.py",
@@ -211,17 +243,18 @@
     "  reports/",
     "  src/",
     "  tests/",
+    "  .DS_Store",
     "  .coverage",
     "  .gitignore",
     "  .python-version",
     "  LICENSE",
     "  README.md",
-    "  ReqPilot-Agent项目.md",
     "  pyproject.toml",
     "  uv.lock",
     "    workflows/",
     "      ci.yml",
     "    design.md",
+    "    project-story.md",
     "    cases/",
     "    knowledge/",
     "      case_001.json",
@@ -237,9 +270,15 @@
     "      case_011.json",
     "      case_012.json",
     "      domain.json",
+    "    audit/",
     "    demo/",
     "    eval/",
+    "    interview-pack/",
     "    smoke/",
+    "    .DS_Store",
+    "      audit.json",
+    "      overview.html",
+    "      overview.md",
     "      citations.json",
     "      issues.json",
     "      parsed.json",
@@ -251,14 +290,16 @@
     "      tasks.csv",
     "      tasks.json",
     "      tasks.md",
-    "      eval_mock_20260826_114005.json",
-    "      eval_mock_20260826_114005.md",
-    "      eval_mock_20260826_114113.json",
-    "      eval_mock_20260826_114113.md",
-    "      eval_mock_20260826_114144.json",
-    "      eval_mock_20260826_114144.md",
-    "      eval_mock_latest.json",
-    "      eval_mock_latest.md",
+    "      eval_llm_keyword_20260826_124248.json",
+    "      eval_llm_keyword_20260826_124248.md",
+    "      eval_llm_keyword_latest.json",
+    "      eval_llm_keyword_latest.md",
+    "      application_checklist.md",
+    "      core_code_walkthrough.md",
+    "      demo_script.md",
+    "      interview_qa.md",
+    "      ppt_prompt.md",
+    "      resume_star.md",
     "      citations.json",
     "      issues.json",
     "      parsed.json",
@@ -271,10 +312,13 @@
     "      tasks.json",
     "      tasks.md",
     "    reqpilot/",
+    "    .DS_Store",
+    "      agent/",
     "      eval/",
     "      providers/",
     "      rag/",
     "      review/",
+    "      .DS_Store",
     "      __init__.py",
     "      __main__.py",
     "      api.py",
@@ -286,9 +330,16 @@
     "      prd.py",
     "      prototype.py",
     "      tasks.py",
+    "    test_agent_checks.py",
+    "    test_agent_context.py",
+    "    test_agent_loop.py",
+    "    test_agent_sandbox.py",
+    "    test_agent_tools.py",
     "    test_api.py",
     "    test_cli.py",
     "    test_dedup.py",
+    "    test_llm_agent_step.py",
+    "    test_mcp.py",
     "    test_mock_parse.py",
     "    test_models.py",
     "    test_pipeline.py",
@@ -299,6 +350,6 @@
     "    test_tasks.py"
   ],
   "readme_samples": {
-    "README.md": "# ReqPilot\n\n> A domain-aware requirements engineering agent: natural language in, structured\n> PRD + multi-role review + interactive prototype + development tasks out.\n\nReqPilot turns meeting notes, chat records, and plain-language requirements into\na structured PRD, a quality-review report produced by product / frontend /\nbackend / test agents, a single-file HTML interactive prototype, and exportable\ndevelopment tasks. It is built around four ideas:\n\n1. **Structured outputs everywhere** — every LLM step returns schema-validated\n   JSON (Pydantic), with one repair attempt and a deterministic safe fallback.\n2. **Observable multi-agent workflow** — the pipeline is a LangGraph state\n   machine with parallel per-role review, deduplication, severity grading, and\n   citation-tracked evidence.\n3. **Domain grounding via RAG** — a pluggable retriever injects domain terms and\n   rules with source citations, reducing hallucinated review issues.\n4. **Local-first, honest evaluation** — the whole pipeline runs without any API\n   key using a rule-based mock provider; an optional OpenAI-compatible provider\n   (DeepSeek etc.) is available, and `reqpilot eval` reports measured numbers.\n\n## Architecture\n\n```mermaid\nflowchart LR\n    IN[\"Requirement text / meeting notes\"] --> P[\"Parse (LLM or mock)\"]\n    P --> R[\"RAG: keyword or vector retriever\"]\n    R --> F[\"Fan-out multi-role review\"]\n    F --> PR[\"Product agent\"]\n    F --> FR[\"Frontend agent\"]\n    F --> BA[\"Backend agent\"]\n    F --> TE[\"Test agent\"]\n    PR --> M[\"Dedup + severity merge\"]\n    FR --> M\n    BA --> M\n    TE --> M\n    M --> PRD[\"Structured PRD\"]\n    PRD --> PROTO[\"Single-file HTML prototype\"]\n    PRD --> TASKS[\"Task split + export\"]\n    M --> RUN[\"AgentRun trace + citations + fingerprint\"]\n```\n\n## Quick start\n\nRequirements: Python 3.11+ and [uv](https://docs.astral.sh/uv/).\n\n```bash\ngit clone https://github.com/Sh1njuuovo/reqpilot.git\ncd reqpilot\nuv sync --extra dev\nuv run reqpilot smoke\nuv run pytest\n```\n\n`reqpilot smoke` runs the built-in sample requirement through the full pipeline\nwith the mock provider (no API key needed) and writes artifacts under\n`reports/smoke/`.\n\n### Optional real-LLM provider\n\n```bash\nexport DEEPSEEK_API_KEY=sk-...\nuv run reqpilot demo --provider llm\n```\n\nAny OpenAI-compatible endpoint works via `REQPILOT_LLM_BASE_URL`,\n`REQPILOT_LLM_MODEL`, or `OPENAI_API_KEY`. Without a key, every step falls back\nto the deterministic mock provider and records the fallback in the run trace.\n\n## CLI\n\n| Command | What it does |\n| --- | --- |\n| `reqpilot smoke` | Run the sample requirement end-to-end (mock), assert success, write artifacts |\n| `reqpilot demo` | Same pipeline, writes a demo bundle (`PRD.md`, `prototype.html`, `tasks.md`) |\n| `reqpilot serve` | Start the FastAPI service (see API below) |\n| `reqpilot eval` | Run the evaluation suite over `eval/cases/`, write measured metrics to `reports/eval/` |\n\n## HTTP API\n\n```bash\nuv run reqpilot serve\n```\n\n- `POST /requirements` — body `{\"tex\n...[truncated]"
+    "README.md": "# ReqPilot\n\n> An LLM-driven requirements engineering agent: natural language in, structured\n> PRD + multi-role review + interactive prototype + development tasks out.\n\nReqPilot turns meeting notes, chat records, and plain-language requirements into\na structured PRD, a quality-review report produced by product / frontend /\nbackend / test agents, a single-file HTML interactive prototype, and exportable\ndevelopment tasks. It is built around four ideas:\n\n1. **LLM-native pipeline** — the whole chain (parse → review → PRD → tasks) runs\n   on an OpenAI-compatible model, orchestrated as a LangGraph state machine.\n2. **Structured outputs with guardrails** — every model call returns\n   schema-validated JSON (Pydantic) with one repair attempt, transient retries,\n   and typed error traces; issues are deduplicated and pruned to the top-N per\n   role so the final list is human-reviewable.\n3. **Domain grounding via RAG** — a pluggable retriever injects domain terms and\n   rules with source citations, reducing hallucinated review findings.\n4. **Evaluation against a human standard** — 12 curated cases with\n   human-reviewer golden labels, measured end-to-end with a real LLM.\n5. **A sandboxed tool-calling loop** — on top of the fixed pipeline, a goal-driven\n   loop works inside a jailed workspace with a small tool set, compresses its own\n   context, and only reports success when a program-side verifier agrees.\n\n## Architecture\n\n```mermaid\nflowchart LR\n    IN[\"Requirement text / meeting notes\"] --> P[\"Parse (LLM)\"]\n    P --> R[\"RAG: keyword or vector retriever\"]\n    R --> F[\"Fan-out multi-role review (Send)\"]\n    F --> PR[\"Product agent\"]\n    F --> FR[\"Frontend agent\"]\n    F --> BA[\"Backend agent\"]\n    F --> TE[\"Test agent\"]\n    PR --> M[\"Dedup + severity pruning\"]\n    FR --> M\n    BA --> M\n    TE --> M\n    M --> PRD[\"Structured PRD\"]\n    PRD --> PROTO[\"Single-file HTML prototype\"]\n    PRD --> TASKS[\"Task split + export\"]\n    M --> RUN[\"AgentRun trace + citations + fingerprint\"]\n\n    PRD --> WS[\"Demo workspace (requirement / PRD / issues / tasks)\"]\n    WS --> AG[\"Agent loop: sandbox + tools + goal verifier\"]\n    AG --> RUN\n```\n\n## Sandboxed agent loop\n\n`reqpilot demo` writes a workspace, and `reqpilot agent` hands that workspace to a\ngoal-driven loop that keeps working until the goal is met or the step budget runs\nout.\n\n```mermaid\nflowchart LR\n    G[\"Goal + workspace\"] --> O[\"Observe: ls / read / grep / find\"]\n    O --> D[\"Model decides tool calls\"]\n    D --> T[\"Execute inside the sandbox\"]\n    T --> C[\"Context budget + compression\"]\n    C --> D\n    D --> V{\"Claims goal complete?\"}\n    V -->|no| O\n    V -->|yes| CHK[\"Program-side verifier reads the workspace\"]\n    CHK -->|pass| DONE[\"completed\"]\n    CHK -->|fail| D\n```\n\n- **Workspace jail** — every path goes through one sandbox object, so `../` and\n  absolute paths outside the workspace raise instead of quietly working.\n- **Read-only shell** — `bash` runs an allowlist of read-only commands without a\n  shell, which \n...[truncated]"
   }
 }

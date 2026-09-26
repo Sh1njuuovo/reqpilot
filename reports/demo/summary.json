@@ -1,10 +1,10 @@
 {
-  "run_id": "e19e1fb3e35e",
+  "run_id": "13c9305849a2",
   "provider": "llm",
   "status": "succeeded",
-  "duration_ms": 17133,
+  "duration_ms": 12990,
   "input_hash": "db780052c7c71641",
-  "fingerprint": "27594d307408e478ad48a1749531d8b6",
+  "fingerprint": "36055b877d34a08eb7b69e654dee94d0",
   "citations": 5,
   "parsed": {
     "functional_requirements": 8,
@@ -15,24 +15,23 @@
     "acceptance_criteria": 3
   },
   "issues": {
-    "total": 18,
-    "raw": 20,
-    "dedup_removed": 2,
+    "total": 20,
+    "raw": 24,
+    "dedup_removed": 4,
     "by_severity": {
-      "critical": 3,
-      "major": 12,
-      "minor": 3
+      "critical": 5,
+      "major": 15
     },
     "by_role": {
-      "backend": 4,
-      "product": 5,
+      "backend": 5,
       "frontend": 5,
-      "test": 4
+      "product": 5,
+      "test": 5
     }
   },
   "prd": {
-    "title": "审批管理系统",
-    "pages": 4
+    "title": "在线审批管理系统 PRD",
+    "pages": 5
   },
   "tasks": {
     "total": 25,
